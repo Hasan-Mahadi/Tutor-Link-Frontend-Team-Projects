@@ -1,21 +1,50 @@
 "use client"
 
-import { signIn } from "next-auth/react"
-import { AlFacebookOriginal, AlGoogleOriginal } from "@/components/lib/icon"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { signIn } from "next-auth/react";
+import { AlFacebookOriginal, AlGoogleOriginal } from "@/components/lib/icon";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
+import { loginUser } from "@/utils/actions/loginUser";
+import { useRouter } from "next/navigation";
+
+export type FormValues ={
+    email:string;
+    password:string;
+}
 
 const SingInForm = () => {
+
+    const { register, handleSubmit, formState:{errors}} = useForm<FormValues>();
+
+    const router = useRouter();
+
+    const onSubmit = async (data: FormValues)=>{
+        try {
+            const res = await loginUser(data);
+            if(res.accessToken){
+                alert(res.message);
+                localStorage.setItem('accessToken', res.accessToken);
+                router.push("/")
+            }
+        } catch (err:any) {
+            console.error(err.message);
+            throw new Error(err.message);
+        }
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
             <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
                 <p className="text-3xl text-center mb-6 font-bold">Sign In</p>
-                <form action="">
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
-                        placeholder="Enter your phone number or email"
+                        {...register('email')}
+                        placeholder="Enter your email"
                         className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6"
                     />
                     <Input
+                        {...register('password')}
                         type="password"
                         placeholder="Enter your password"
                         className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6 mt-6"
