@@ -3,7 +3,8 @@
 import { AlFacebookOriginal, AlGoogleOriginal } from "@/components/lib/icon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation"
+import { registerUser } from "@/utils/actions/registerUser";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export type UserData = {
@@ -14,21 +15,42 @@ export type UserData = {
 
 const RegisterForm = () => {
 
-    const { register, handleSubmit, formState: {errors}} = useForm<UserData>()
+    const { register, handleSubmit, formState: {errors}} = useForm<UserData>();
+
+    const router = useRouter();
     
 
     const onSubmit = async (data: UserData) =>{
-        console.log(data)
+        // console.log(data);
+        try {
+            const res = await registerUser(data);
+            if(res.success){
+                alert(res.message);
+                router.push("/login");
+            }
+        } catch (err:any) {
+            console.log(err.message);
+            throw new Error(err.message)
+        }
        
     }
 
     return (
         <div>
             <p className="text-2xl text-start mb-3 font-bold">Register</p>
-            <form action="">
-                <Input placeholder="Please enter your name" className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6" />
-                <Input placeholder="Please enter your phone number or email" className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6 mt-6" />
-                <Input type="password" placeholder="Please enter your password" className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6 mt-6" />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Input 
+                {...register("username")}
+                placeholder="Please enter your name" 
+                className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6" />
+                <Input 
+                {...register("email")}
+                placeholder="Please enter your email" 
+                className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6 mt-6" />
+                <Input
+                {...register("password")}
+                 type="password" placeholder="Please enter your password" 
+                 className="outline-primary shadow-none focus-visible:border-primary focus-visible:ring-0 py-6 mt-6" />
 
                 <p className="text-accent text-center mt-10 flex items-center gap-4">
                     <span className="block w-full h-px bg-[rgba(0,0,0,0.43)]"></span>
