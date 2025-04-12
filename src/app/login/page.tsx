@@ -58,7 +58,6 @@ const SingInForm = () => {
                         <span className="shrink-0">Or, Login With</span>
                         <span className="block w-full h-px bg-gray-300"></span>
                     </div>
-
                     <div className="flex justify-between gap-5 mt-5">
                         <button
                             onClick={() => signIn("google", {
