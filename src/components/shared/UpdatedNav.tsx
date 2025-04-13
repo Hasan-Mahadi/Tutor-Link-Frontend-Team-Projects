@@ -45,19 +45,16 @@ export default function Navigation() {
             Find Tutors
           </Link>
           <Link
-            href="/how-it-works"
+            href="/my-profile"
             className="text-gray-700 hover:text-indigo-600"
           >
-            How It Works
-          </Link>
-          <Link
-            href="/subjects"
-            className="text-gray-700 hover:text-indigo-600"
-          >
-            Subjects
+            My Profile
           </Link>
           <Link href="/about" className="text-gray-700 hover:text-indigo-600">
             About Us
+          </Link>
+          <Link href="/faq" className="text-gray-700 hover:text-indigo-600">
+            FAQ
           </Link>
         </div>
 
@@ -103,18 +100,11 @@ export default function Navigation() {
               Find Tutors
             </Link>
             <Link
-              href="/how-it-works"
+              href="/my-profile"
               className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
               onClick={() => setMobileMenuOpen(false)}
             >
-              How It Works
-            </Link>
-            <Link
-              href="/subjects"
-              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Subjects
+              My Profile
             </Link>
             <Link
               href="/about"
@@ -122,6 +112,13 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen(false)}
             >
               About Us
+            </Link>
+            <Link
+              href="/faq"
+              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              FAQ
             </Link>
             <div className="flex space-x-3 pt-2">
               <Link
