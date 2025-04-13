@@ -14,7 +14,7 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav className="bg-white shadow-md py-4 px-4 sm:px-6 w-full fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-white shadow-md py-4 px-4 sm:px-6 w-full sticky top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo/Brand */}
         <div className="text-xl sm:text-2xl font-bold text-indigo-600">
