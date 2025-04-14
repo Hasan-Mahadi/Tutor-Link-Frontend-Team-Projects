@@ -1,16 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import TutorCard from "@/components/AlTutors/TutorCard";
 import Filters from "@/components/AlTutors/Filters";
 import Pagination from "@/components/AlTutors/Pagination";
 import AllTutorHeroSection from "@/components/AlTutors/AllTutorHeroSection/AllTutorHeroSection";
+import { SortBy } from "@/components/AlTutors/SortBy";
 
 export default function TutorsPage() {
   return (
@@ -36,27 +28,7 @@ export default function TutorsPage() {
                 </span>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-300 mr-2">
-                    Sort by:
-                  </span>
-                  <Select>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Relevance" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="relevance">Relevance</SelectItem>
-
-                      <SelectItem value="price-low">
-                        Price (Low to High)
-                      </SelectItem>
-                      <SelectItem value="price-high">
-                        Price (High to Low)
-                      </SelectItem>
-                      <SelectItem value="newest">Newest First</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <SortBy></SortBy>
               </div>
             </div>
 
