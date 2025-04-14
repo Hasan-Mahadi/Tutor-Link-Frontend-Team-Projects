@@ -8,6 +8,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const Districts = [
   "bagerhat",
@@ -76,16 +77,21 @@ export const Districts = [
   "thakurgaon",
 ];
 
-const initialFilters = {
-  subjects: "",
-  rating: 0,
-  priceRange: 1000,
-  availability: false,
-  location: "",
-};
-
 export default function Filters() {
-  const [filters, setFilters] = useState(initialFilters);
+  // Add this near the top inside the Filters component
+  const [price, setPrice] = useState<number>(0);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleSearchQuery = (
+    query: string,
+    value: string | number | boolean
+  ) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(query, value.toString());
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 sticky top-4">
@@ -94,62 +100,58 @@ export default function Filters() {
         <Button
           variant="link"
           className="text-primary hover:underline p-0 h-auto"
-          onClick={() => setFilters(initialFilters)}
+          onClick={() => router.push(`${pathname}`, { scroll: false })}
         >
           Reset All
         </Button>
       </div>
 
-      {/* Subjects Filter */}
+      {/* Subjects Filter (Single Selection) */}
       <FilterSection title="Subjects">
-        <div className="relative">
-          <Input
-            type="text"
-            placeholder="Search subjects..."
-            className="w-full mb-2"
-          />
-        </div>
-        <div className="space-y-2">
+        <RadioGroup
+          onValueChange={(value) => handleSearchQuery("subject", value)}
+          className="space-y-2"
+        >
           {[
+            "Physics",
             "Mathematics",
-            "Science",
-            "English",
-            "History",
-            "Programming",
-            "Art & Design",
-            "Music",
+            "Higher Mathematics",
+            "Chemistry",
+            "Biology",
+            "Statistics",
+            "Logic",
+            "Sociology",
+            "Psychology",
+            "Islamic History",
+            "Islamic Studies",
+            "Computer Science",
+            "Bangla 1st Paper (HSC)",
+            "Bangla 2nd Paper (HSC)",
+            "English 1st Paper (HSC)",
+            "English 2nd Paper (HSC)",
+            "Accounting (HSC)",
+            "Management",
+            "Marketing",
+            "Finance, Banking & Insurance",
           ].map((subject) => (
-            <div key={subject} className="flex items-center">
-              <Checkbox
-                id={`subject-${subject}`}
-                checked={filters.subjects === subject}
-                onCheckedChange={(checked) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    subjects: checked ? subject : "",
-                  }))
-                }
-                className="mr-2"
-              />
+            <div key={subject} className="flex items-center space-x-2">
+              <RadioGroupItem value={subject} id={`subject-${subject}`} />
               <Label htmlFor={`subject-${subject}`} className="text-sm">
                 {subject}
               </Label>
             </div>
           ))}
-        </div>
+        </RadioGroup>
       </FilterSection>
 
       {/* Rating Filter */}
       <FilterSection title="Rating">
         <RadioGroup
-          value={filters.rating.toString()}
-          onValueChange={(value) =>
-            setFilters({ ...filters, rating: Number(value) })
-          }
+          onValueChange={(value) => handleSearchQuery("rating", Number(value))}
           className="space-y-2"
         >
           {[4.5, 4.0, 3.0].map((val) => (
-            <div key={val} className="flex items-center   space-x-2">
+            <div key={val} className="flex items-center space-x-2">
               <RadioGroupItem value={val.toString()} id={`rating-${val}`} />
               <Label htmlFor={`rating-${val}`} className="text-sm">
                 {"★".repeat(Math.floor(val)) + "☆".repeat(5 - Math.floor(val))}{" "}
@@ -168,22 +170,22 @@ export default function Filters() {
           <Input
             type="number"
             className="w-20"
-            value={filters.priceRange}
-            onChange={(e) =>
-              setFilters({
-                ...filters,
-                priceRange: Number(e.target.value),
-              })
-            }
+            value={price}
+            onChange={(e) => {
+              const val = Number(e.target.value);
+              setPrice(val);
+              handleSearchQuery("priceRange", val);
+            }}
           />
         </div>
         <Slider
-          value={[0, filters.priceRange]}
-          onValueChange={([_, max]) =>
-            setFilters({ ...filters, priceRange: max })
-          }
+          value={[price]}
+          onValueChange={([val]) => {
+            setPrice(val);
+            handleSearchQuery("hourlyRate", val);
+          }}
           min={0}
-          max={2000}
+          max={5000}
           step={5}
         />
       </FilterSection>
@@ -193,9 +195,8 @@ export default function Filters() {
         <div className="flex items-center">
           <Checkbox
             id="avail-now"
-            checked={filters.availability}
             onCheckedChange={(checked) =>
-              setFilters({ ...filters, availability: !!checked })
+              handleSearchQuery("availability", !!checked)
             }
             className="mr-2"
           />
@@ -205,32 +206,28 @@ export default function Filters() {
         </div>
       </FilterSection>
 
-      {/* Location Filter */}
+      {/* Location Filter (Single Selection) */}
       <FilterSection title="Location">
-        <div className="space-y-2 max-h-48 overflow-y-auto">
+        <RadioGroup
+          onValueChange={(value) => handleSearchQuery("searchTerm", value)}
+          className="space-y-2 max-h-48 overflow-y-auto"
+        >
           {Districts.map((option) => (
-            <div key={option} className="flex items-center">
-              <Checkbox
-                id={`loc-${option}`}
-                checked={filters.location === option}
-                onCheckedChange={(checked) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    location: checked ? option : "",
-                  }));
-                }}
-                className="mr-2"
-              />
+            <div key={option} className="flex items-center space-x-2">
+              <RadioGroupItem value={option} id={`loc-${option}`} />
               <Label htmlFor={`loc-${option}`} className="text-sm capitalize">
                 {option}
               </Label>
             </div>
           ))}
-        </div>
+        </RadioGroup>
       </FilterSection>
 
       {/* Console Log Button */}
-      <Button className="mt-4 w-full" onClick={() => console.log(filters)}>
+      <Button
+        className="mt-4 w-full"
+        onClick={() => console.log(searchParams.toString())}
+      >
         Apply Filters
       </Button>
     </div>

@@ -47,7 +47,7 @@ const AllTutorHeroSection = () => {
             <div className="flex shadow-lg rounded-lg overflow-hidden">
               <Input
                 type="text"
-                placeholder="Search by subject, tutor name, or keyword"
+                placeholder="Search by tutor name"
                 className="flex-grow bg-white px-4 py-3 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-none border-0 text-gray-800"
               />
               <Select>
