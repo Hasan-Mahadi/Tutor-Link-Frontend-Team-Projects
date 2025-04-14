@@ -27,7 +27,7 @@ const RegisterForm = () => {
                 toast.success(res?.message)
             }
             else{
-                toast.error(err?.message)
+                toast.error(res?.message)
             }
         } catch (err:any) {
             console.error(err)

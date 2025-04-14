@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { registerUser } from "@/services/AuthService";
+import { loginUser, registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 
@@ -19,12 +19,12 @@ const LoginForm = () => {
 
     const onSubmit:SubmitHandler<FieldValues> =async(data)=>{
         try {
-            const res = await registerUser(data);
+            const res = await loginUser(data);
             if(res?.success){
                 toast.success(res?.message)
             }
             else{
-                toast.error(err?.message)
+                toast.error(res?.message)
             }
         } catch (err:any) {
             console.error(err)
