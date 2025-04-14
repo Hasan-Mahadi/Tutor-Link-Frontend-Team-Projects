@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
- const subjects = [
+const subjects = [
   "Physics",
   "Mathematics",
   "Higher Mathematics",
@@ -38,33 +39,28 @@ export function HeroSection() {
   const [selectedGrade, setSelectedGrade] = useState("");
   const [tutorName, setTutorName] = useState("");
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const handleSearch = () => {
-    const query = new URLSearchParams({
-      subject: selectedSubject,
-      grade: selectedGrade,
-      name: tutorName,
-    });
+    const params = new URLSearchParams(searchParams.toString());
 
-    console.log("Selected Subject:", selectedSubject);
-    console.log("Selected Grade:", selectedGrade);
-    console.log("Tutor Name:", tutorName);
+    if (selectedSubject) params.set("subject", selectedSubject);
+    else params.delete("subject");
 
-    // Example: navigating to search results or calling an API
-    // If using Next.js router:
-    // router.push(`/search?${query.toString()}`);
+    if (selectedGrade) params.set("grade", selectedGrade);
+    else params.delete("grade");
 
-    // For API call:
-    // fetch(`/api/search-tutors?${query.toString()}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log("Search Results:", data);
-    //   });
+    if (tutorName) params.set("name", tutorName);
+    else params.delete("name");
+
+    router.push(`/browseTutor?${params.toString()}`, { scroll: false });
   };
 
   return (
     <div className="relative h-[70vh] sm:h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80')] bg-cover bg-center flex flex-col justify-center items-center text-center">
       <div className="absolute inset-0 bg-black/50" />
-
       <div className="relative z-10 px-4 w-full max-w-4xl">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
           Find the Perfect Tutor Anytime, Anywhere
@@ -137,18 +133,16 @@ export function HeroSection() {
             <span className="text-sm mt-1 text-gray-500">
               Popular Searches:
             </span>
-            <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs sm:text-sm">
-              Math Tutor
-            </span>
-            <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs sm:text-sm">
-              Physics Tutor
-            </span>
-            <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs sm:text-sm">
-              History
-            </span>
-            <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs sm:text-sm">
-              Chemistry
-            </span>
+            {["Math Tutor", "Physics Tutor", "History", "Chemistry"].map(
+              (item, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs sm:text-sm"
+                >
+                  {item}
+                </span>
+              )
+            )}
           </div>
         </div>
       </div>
