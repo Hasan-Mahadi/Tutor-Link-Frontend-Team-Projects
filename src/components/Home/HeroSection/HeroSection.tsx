@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const subjects = [
+ const subjects = [
   "Physics",
   "Mathematics",
   "Higher Mathematics",

@@ -41,7 +41,7 @@ export default function Navigation() {
           <Link href="/" className="text-gray-700 hover:text-indigo-600">
             Home
           </Link>
-          <Link href="/tutors" className="text-gray-700 hover:text-indigo-600">
+          <Link href="/browseTutor" className="text-gray-700 hover:text-indigo-600">
             Find Tutors
           </Link>
           <Link
@@ -93,7 +93,7 @@ export default function Navigation() {
               Home
             </Link>
             <Link
-              href="/tutors"
+              href="/browseTutor"
               className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
               onClick={() => setMobileMenuOpen(false)}
             >
