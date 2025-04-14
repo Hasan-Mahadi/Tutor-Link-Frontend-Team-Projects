@@ -77,24 +77,15 @@ export const Districts = [
 ];
 
 const initialFilters = {
-  subjects: [] as string[],
-  rating: "",
-  priceRange: [0, 1000] as [number, number],
-  availability: [] as string[],
-  location: [] as string[],
+  subjects: "",
+  rating: 0,
+  priceRange: 1000,
+  availability: false,
+  location: "",
 };
 
 export default function Filters() {
   const [filters, setFilters] = useState(initialFilters);
-
-  const toggleSubject = (subject: string) => {
-    setFilters((prev) => ({
-      ...prev,
-      subjects: prev.subjects.includes(subject)
-        ? prev.subjects.filter((s) => s !== subject)
-        : [...prev.subjects, subject],
-    }));
-  };
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 sticky top-4">
@@ -118,7 +109,7 @@ export default function Filters() {
             className="w-full mb-2"
           />
         </div>
-        <div className="max-h-48 overflow-y-auto space-y-2">
+        <div className="space-y-2">
           {[
             "Mathematics",
             "Science",
@@ -131,8 +122,13 @@ export default function Filters() {
             <div key={subject} className="flex items-center">
               <Checkbox
                 id={`subject-${subject}`}
-                checked={filters.subjects.includes(subject)}
-                onCheckedChange={() => toggleSubject(subject)}
+                checked={filters.subjects === subject}
+                onCheckedChange={(checked) =>
+                  setFilters((prev) => ({
+                    ...prev,
+                    subjects: checked ? subject : "",
+                  }))
+                }
                 className="mr-2"
               />
               <Label htmlFor={`subject-${subject}`} className="text-sm">
@@ -146,28 +142,21 @@ export default function Filters() {
       {/* Rating Filter */}
       <FilterSection title="Rating">
         <RadioGroup
-          value={filters.rating}
-          onValueChange={(value) => setFilters({ ...filters, rating: value })}
+          value={filters.rating.toString()}
+          onValueChange={(value) =>
+            setFilters({ ...filters, rating: Number(value) })
+          }
           className="space-y-2"
         >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="4.5" id="rating5" />
-            <Label htmlFor="rating5" className="text-sm">
-              <span className="text-yellow-400">★★★★★</span> 4.5 & up
-            </Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="4.0" id="rating4" />
-            <Label htmlFor="rating4" className="text-sm">
-              <span className="text-yellow-400">★★★★☆</span> 4.0 & up
-            </Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="3.0" id="rating3" />
-            <Label htmlFor="rating3" className="text-sm">
-              <span className="text-yellow-400">★★★☆☆</span> 3.0 & up
-            </Label>
-          </div>
+          {[4.5, 4.0, 3.0].map((val) => (
+            <div key={val} className="flex items-center   space-x-2">
+              <RadioGroupItem value={val.toString()} id={`rating-${val}`} />
+              <Label htmlFor={`rating-${val}`} className="text-sm">
+                {"★".repeat(Math.floor(val)) + "☆".repeat(5 - Math.floor(val))}{" "}
+                {val} & up
+              </Label>
+            </div>
+          ))}
         </RadioGroup>
       </FilterSection>
 
@@ -179,19 +168,19 @@ export default function Filters() {
           <Input
             type="number"
             className="w-20"
-            value={filters.priceRange[1]}
+            value={filters.priceRange}
             onChange={(e) =>
               setFilters({
                 ...filters,
-                priceRange: [0, Number(e.target.value)],
+                priceRange: Number(e.target.value),
               })
             }
           />
         </div>
         <Slider
-          value={[0, filters.priceRange[1]]}
+          value={[0, filters.priceRange]}
           onValueChange={([_, max]) =>
-            setFilters({ ...filters, priceRange: [0, max] })
+            setFilters({ ...filters, priceRange: max })
           }
           min={0}
           max={2000}
@@ -201,27 +190,18 @@ export default function Filters() {
 
       {/* Availability Filter */}
       <FilterSection title="Availability">
-        <div className="space-y-2">
-          {["Available Now"].map((option) => (
-            <div key={option} className="flex items-center">
-              <Checkbox
-                id={`avail-${option}`}
-                checked={filters.availability.includes(option)}
-                onCheckedChange={(checked) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    availability: checked
-                      ? [...prev.availability, option]
-                      : prev.availability.filter((a) => a !== option),
-                  }));
-                }}
-                className="mr-2"
-              />
-              <Label htmlFor={`avail-${option}`} className="text-sm">
-                {option}
-              </Label>
-            </div>
-          ))}
+        <div className="flex items-center">
+          <Checkbox
+            id="avail-now"
+            checked={filters.availability}
+            onCheckedChange={(checked) =>
+              setFilters({ ...filters, availability: !!checked })
+            }
+            className="mr-2"
+          />
+          <Label htmlFor="avail-now" className="text-sm">
+            Available Now
+          </Label>
         </div>
       </FilterSection>
 
@@ -232,11 +212,11 @@ export default function Filters() {
             <div key={option} className="flex items-center">
               <Checkbox
                 id={`loc-${option}`}
-                checked={filters.location.includes(option)}
+                checked={filters.location === option}
                 onCheckedChange={(checked) => {
                   setFilters((prev) => ({
                     ...prev,
-                    location: checked ? [option] : [],
+                    location: checked ? option : "",
                   }));
                 }}
                 className="mr-2"
