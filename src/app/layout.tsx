@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Navbar from "@/components/shared/Navbar";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Navigation from "@/components/shared/UpdatedNav";
 
 const geistSans = Geist({
