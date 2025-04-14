@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-import React from 'react';
 
-const Footer = () => {
-    return (
-        <div>
-            <h1>This is footer component</h1>
-        </div>
-    );
-};
-
-export default Footer;
-=======
 import Link from "next/link";
 
 export const Footer = () => {
@@ -170,4 +158,3 @@ export const Footer = () => {
     </footer>
   );
 };
->>>>>>> c8603bbe13aa6f975e7e3be5389aae6de7943640
