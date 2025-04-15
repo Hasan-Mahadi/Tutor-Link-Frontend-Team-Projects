@@ -1,9 +1,10 @@
-import TutorCard, { TTutors } from "@/components/AlTutors/TutorCard";
-import Filters from "@/components/AlTutors/Filters";
-import Pagination from "@/components/AlTutors/Pagination";
-import AllTutorHeroSection from "@/components/AlTutors/AllTutorHeroSection/AllTutorHeroSection";
-import { SortBy } from "@/components/AlTutors/SortBy";
-import { getAllTutors } from "@/services/tutiors";
+import TutorCard, { TTutors } from '@/components/AlTutors/TutorCard';
+import Filters from '@/components/AlTutors/Filters';
+import Pagination from '@/components/AlTutors/Pagination';
+import AllTutorHeroSection from '@/components/AlTutors/AllTutorHeroSection/AllTutorHeroSection';
+import { SortBy } from '@/components/AlTutors/SortBy';
+import { getAllTutors } from '@/services/tutiors';
+
 
 type SearchParams = { [key: string]: string[] | undefined };
 

@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Slider } from "@/components/ui/slider";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { Label } from "@/components/ui/label";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Slider } from '@/components/ui/slider';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Label } from '@/components/ui/label';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const Districts = [
-  "bagerhat",
-  "bandarban",
-  "barisal",
-  "barguna",
-  "bhola",
-  "bogura",
-  "brahmanbaria",
-  "chapai nawabganj",
-  "chandpur",
-  "chattogram",
-  "chuadanga",
+  'bagerhat',
+  'bandarban',
+  'barisal',
+  'barguna',
+  'bhola',
+  'bogura',
+  'brahmanbaria',
+  'chapai nawabganj',
+  'chandpur',
+  'chattogram',
+  'chuadanga',
   "cox's bazar",
   "cumilla",
   "dinajpur",
@@ -77,6 +77,7 @@ export const Districts = [
   "thakurgaon",
 ]; 
 
+
 export default function Filters() {
   // Add this near the top inside the Filters component
   const [price, setPrice] = useState<number>(0);
@@ -86,7 +87,7 @@ export default function Filters() {
 
   const handleSearchQuery = (
     query: string,
-    value: string | number | boolean
+    value: string | number | boolean,
   ) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(query, value.toString());
@@ -109,30 +110,30 @@ export default function Filters() {
       {/* Subjects Filter (Single Selection) */}
       <FilterSection title="Subjects">
         <RadioGroup
-          onValueChange={(value) => handleSearchQuery("subject", value)}
+          onValueChange={(value) => handleSearchQuery('subject', value)}
           className="space-y-2"
         >
           {[
-            "Physics",
-            "Mathematics",
-            "Higher Mathematics",
-            "Chemistry",
-            "Biology",
-            "Statistics",
-            "Logic",
-            "Sociology",
-            "Psychology",
-            "Islamic History",
-            "Islamic Studies",
-            "Computer Science",
-            "Bangla 1st Paper (HSC)",
-            "Bangla 2nd Paper (HSC)",
-            "English 1st Paper (HSC)",
-            "English 2nd Paper (HSC)",
-            "Accounting (HSC)",
-            "Management",
-            "Marketing",
-            "Finance, Banking & Insurance",
+            'Physics',
+            'Mathematics',
+            'Higher Mathematics',
+            'Chemistry',
+            'Biology',
+            'Statistics',
+            'Logic',
+            'Sociology',
+            'Psychology',
+            'Islamic History',
+            'Islamic Studies',
+            'Computer Science',
+            'Bangla 1st Paper (HSC)',
+            'Bangla 2nd Paper (HSC)',
+            'English 1st Paper (HSC)',
+            'English 2nd Paper (HSC)',
+            'Accounting (HSC)',
+            'Management',
+            'Marketing',
+            'Finance, Banking & Insurance',
           ].map((subject) => (
             <div key={subject} className="flex items-center space-x-2">
               <RadioGroupItem value={subject} id={`subject-${subject}`} />
@@ -147,14 +148,14 @@ export default function Filters() {
       {/* Rating Filter */}
       <FilterSection title="Rating">
         <RadioGroup
-          onValueChange={(value) => handleSearchQuery("rating", Number(value))}
+          onValueChange={(value) => handleSearchQuery('rating', Number(value))}
           className="space-y-2"
         >
           {[4.5, 4.0, 3.0].map((val) => (
             <div key={val} className="flex items-center space-x-2">
               <RadioGroupItem value={val.toString()} id={`rating-${val}`} />
               <Label htmlFor={`rating-${val}`} className="text-sm">
-                {"★".repeat(Math.floor(val)) + "☆".repeat(5 - Math.floor(val))}{" "}
+                {'★'.repeat(Math.floor(val)) + '☆'.repeat(5 - Math.floor(val))}{' '}
                 {val} & up
               </Label>
             </div>
@@ -174,7 +175,7 @@ export default function Filters() {
             onChange={(e) => {
               const val = Number(e.target.value);
               setPrice(val);
-              handleSearchQuery("priceRange", val);
+              handleSearchQuery('priceRange', val);
             }}
           />
         </div>
@@ -182,7 +183,7 @@ export default function Filters() {
           value={[price]}
           onValueChange={([val]) => {
             setPrice(val);
-            handleSearchQuery("hourlyRate", val);
+            handleSearchQuery('hourlyRate', val);
           }}
           min={0}
           max={5000}
@@ -196,7 +197,7 @@ export default function Filters() {
           <Checkbox
             id="avail-now"
             onCheckedChange={(checked) =>
-              handleSearchQuery("availability", !!checked)
+              handleSearchQuery('availability', !!checked)
             }
             className="mr-2"
           />
@@ -209,7 +210,7 @@ export default function Filters() {
       {/* Location Filter (Single Selection) */}
       <FilterSection title="Location">
         <RadioGroup
-          onValueChange={(value) => handleSearchQuery("searchTerm", value)}
+          onValueChange={(value) => handleSearchQuery('searchTerm', value)}
           className="space-y-2 max-h-48 overflow-y-auto"
         >
           {Districts.map((option) => (
