@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 
 export const registerUser = async (userData:FieldValues)=>{
     try {
-        const res = await fetch(`${process.env.BACKEND_URL}/user`,{
+        const res = await fetch(`${process.env.BACKEND_URL}/create-student`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -26,7 +26,7 @@ export const registerUser = async (userData:FieldValues)=>{
 
 export const loginUser = async (userData:FieldValues)=>{
     try {
-        const res = await fetch(`${process.env.BACKEND_URL}/auth/login`,{
+        const res = await fetch(`${process.env.BACKEND_URL}/login`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
