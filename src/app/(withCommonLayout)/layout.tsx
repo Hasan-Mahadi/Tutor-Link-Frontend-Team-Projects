@@ -1,6 +1,6 @@
-import { Footer } from "@/components/shared/Footer";
-import Navigation from "@/components/shared/UpdatedNav";
-import React, { ReactNode } from "react";
+import { Footer } from '@/components/shared/Footer';
+import Navigation from '@/components/shared/UpdatedNav';
+import React, { ReactNode } from 'react';
 
 const CommonLayout = ({ children }: { children: ReactNode }) => {
   return (

@@ -2,21 +2,21 @@ export const HowItWorks = () => {
   const steps = [
     {
       number: 1,
-      title: "Find Your Tutor",
+      title: 'Find Your Tutor',
       description:
-        "Search our database of qualified tutors and filter by subject, availability, price, and ratings.",
+        'Search our database of qualified tutors and filter by subject, availability, price, and ratings.',
     },
     {
       number: 2,
-      title: "Connect & Schedule",
+      title: 'Connect & Schedule',
       description:
-        "Message tutors directly and schedule sessions at times that work for you.",
+        'Message tutors directly and schedule sessions at times that work for you.',
     },
     {
       number: 3,
-      title: "Start Learning",
+      title: 'Start Learning',
       description:
-        "Meet online or in-person and begin your learning journey with expert guidance.",
+        'Meet online or in-person and begin your learning journey with expert guidance.',
     },
   ];
 

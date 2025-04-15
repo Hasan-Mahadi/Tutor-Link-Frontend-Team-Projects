@@ -1,35 +1,35 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import React from "react";
+} from '@/components/ui/select';
+import React from 'react';
 
 const subjects = [
-  "Physics",
-  "Mathematics",
-  "Higher Mathematics",
-  "Chemistry",
-  "Biology",
-  "Statistics",
-  "Logic",
-  "Sociology",
-  "Psychology",
-  "Islamic History",
-  "Islamic Studies",
-  "Computer Science",
-  "Bangla 1st Paper (HSC)",
-  "Bangla 2nd Paper (HSC)",
-  "English 1st Paper (HSC)",
-  "English 2nd Paper (HSC)",
-  "Accounting (HSC)",
-  "Management",
-  "Marketing",
-  "Finance, Banking & Insurance",
+  'Physics',
+  'Mathematics',
+  'Higher Mathematics',
+  'Chemistry',
+  'Biology',
+  'Statistics',
+  'Logic',
+  'Sociology',
+  'Psychology',
+  'Islamic History',
+  'Islamic Studies',
+  'Computer Science',
+  'Bangla 1st Paper (HSC)',
+  'Bangla 2nd Paper (HSC)',
+  'English 1st Paper (HSC)',
+  'English 2nd Paper (HSC)',
+  'Accounting (HSC)',
+  'Management',
+  'Marketing',
+  'Finance, Banking & Insurance',
 ];
 
 const AllTutorHeroSection = () => {

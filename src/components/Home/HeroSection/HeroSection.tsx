@@ -1,42 +1,42 @@
-"use client";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+'use client';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
- const subjects = [
-  "Physics",
-  "Mathematics",
-  "Higher Mathematics",
-  "Chemistry",
-  "Biology",
-  "Statistics",
-  "Logic",
-  "Sociology",
-  "Psychology",
-  "Islamic History",
-  "Islamic Studies",
-  "Computer Science",
-  "Bangla 1st Paper (HSC)",
-  "Bangla 2nd Paper (HSC)",
-  "English 1st Paper (HSC)",
-  "English 2nd Paper (HSC)",
-  "Accounting (HSC)",
-  "Management",
-  "Marketing",
-  "Finance, Banking & Insurance",
+const subjects = [
+  'Physics',
+  'Mathematics',
+  'Higher Mathematics',
+  'Chemistry',
+  'Biology',
+  'Statistics',
+  'Logic',
+  'Sociology',
+  'Psychology',
+  'Islamic History',
+  'Islamic Studies',
+  'Computer Science',
+  'Bangla 1st Paper (HSC)',
+  'Bangla 2nd Paper (HSC)',
+  'English 1st Paper (HSC)',
+  'English 2nd Paper (HSC)',
+  'Accounting (HSC)',
+  'Management',
+  'Marketing',
+  'Finance, Banking & Insurance',
 ];
 
 export function HeroSection() {
-  const [selectedSubject, setSelectedSubject] = useState("");
-  const [selectedGrade, setSelectedGrade] = useState("");
-  const [tutorName, setTutorName] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState('');
+  const [selectedGrade, setSelectedGrade] = useState('');
+  const [tutorName, setTutorName] = useState('');
 
   const handleSearch = () => {
     const query = new URLSearchParams({
@@ -45,9 +45,9 @@ export function HeroSection() {
       name: tutorName,
     });
 
-    console.log("Selected Subject:", selectedSubject);
-    console.log("Selected Grade:", selectedGrade);
-    console.log("Tutor Name:", tutorName);
+    console.log('Selected Subject:', selectedSubject);
+    console.log('Selected Grade:', selectedGrade);
+    console.log('Tutor Name:', tutorName);
 
     // Example: navigating to search results or calling an API
     // If using Next.js router:
