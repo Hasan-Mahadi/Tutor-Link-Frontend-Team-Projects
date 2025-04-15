@@ -3,12 +3,7 @@
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -32,11 +27,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 export default function TutorProfile() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
+  const router = useRouter();
 
   const timeSlots = [
     "9:00 AM - 10:00 AM",
@@ -64,8 +61,9 @@ export default function TutorProfile() {
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* Header with back button */}
       <div className="mb-6">
-        <Button variant="link" className="px-0">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Tutors
+        <Button variant="link" className="px-0" onClick={() => router.back()}>
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Tutors
         </Button>
       </div>
 

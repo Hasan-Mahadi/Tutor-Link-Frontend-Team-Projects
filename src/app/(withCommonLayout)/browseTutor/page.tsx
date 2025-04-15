@@ -1,10 +1,21 @@
-import TutorCard from "@/components/AlTutors/TutorCard";
+import TutorCard, { TTutors } from "@/components/AlTutors/TutorCard";
 import Filters from "@/components/AlTutors/Filters";
 import Pagination from "@/components/AlTutors/Pagination";
 import AllTutorHeroSection from "@/components/AlTutors/AllTutorHeroSection/AllTutorHeroSection";
 import { SortBy } from "@/components/AlTutors/SortBy";
+import { getAllTutors } from "@/services/tutiors";
 
-export default function TutorsPage() {
+type SearchParams = { [key: string]: string[] | undefined };
+
+export default async function TutorsPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  // console.log(await searchParams, "search");
+  const query = await searchParams;
+  const { data: tutors } = await getAllTutors(query);
+  console.log(tutors);
   return (
     <div className="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
       {/* Hero Section */}
@@ -24,7 +35,7 @@ export default function TutorsPage() {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
               <div className="mb-4 sm:mb-0">
                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Showing 24 tutors
+                  Showing {tutors.length} tutors
                 </span>
               </div>
               <div className="flex items-center space-x-4">
@@ -34,35 +45,17 @@ export default function TutorsPage() {
 
             {/* Tutor Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <TutorCard
-                name="Dr. Sarah Johnson"
-                title="PhD in Mathematics"
-                rating={4.7}
-                reviews={132}
-                subjects={["Calculus", "Algebra", "Statistics"]}
-                description="Experienced math tutor with 10+ years helping students achieve their academic goals. Specializing in high school and college-level mathematics."
-                price={45}
-                location="Online or In-person"
-                availability="Available Today"
-                imageUrl="https://randomuser.me/api/portraits/women/44.jpg"
-                bgColor="from-blue-100 to-blue-200"
-                isFavorite={false}
-              />
-
-              <TutorCard
-                name="Michael Chen"
-                title="Computer Science Instructor"
-                rating={5.0}
-                reviews={87}
-                subjects={["Python", "JavaScript", "Web Dev"]}
-                description="Full-stack developer turned educator. I make complex programming concepts easy to understand with real-world examples."
-                price={35}
-                location="Online Only"
-                availability="Online Now"
-                imageUrl="https://randomuser.me/api/portraits/men/32.jpg"
-                bgColor="from-purple-100 to-purple-200"
-                isFavorite={true}
-              />
+              {tutors.length ? (
+                tutors.map((tutor: TTutors) => (
+                  <TutorCard key={tutor._id} tutor={tutor}></TutorCard>
+                ))
+              ) : (
+                <>
+                  <div className="text-3xl text-center col-span-6 font-semibold">
+                    No Tutor Found
+                  </div>
+                </>
+              )}
 
               {/* Add more TutorCard components as needed */}
             </div>

@@ -75,7 +75,7 @@ export const Districts = [
   "sylhet",
   "tangail",
   "thakurgaon",
-];
+]; 
 
 export default function Filters() {
   // Add this near the top inside the Filters component

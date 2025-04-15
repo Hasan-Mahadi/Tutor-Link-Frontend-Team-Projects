@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getAllTutors } from "@/services/tutiors";
 
 const subjects = [
   "Physics",
@@ -42,6 +43,32 @@ export function HeroSection() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [tutors, setTutors] = useState([]);
+
+  useEffect(() => {
+    const query: { [key: string]: string[] } = {};
+
+    // Convert searchParams to object format
+    searchParams.forEach((value, key) => {
+      if (query[key]) {
+        query[key].push(value);
+      } else {
+        query[key] = [value];
+      }
+    });
+
+    // Fetch tutors
+    const fetchTutors = async () => {
+      try {
+        const { data } = await getAllTutors(query);
+        setTutors(data);
+      } catch (error) {
+        console.error("Error fetching tutors:", error);
+      }
+    };
+
+    fetchTutors();
+  }, [searchParams]);
 
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams.toString());
