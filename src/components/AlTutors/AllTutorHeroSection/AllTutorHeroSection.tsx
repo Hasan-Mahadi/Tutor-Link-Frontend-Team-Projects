@@ -6,6 +6,32 @@ import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
+
+
+
+const subjects = [
+  'Physics',
+  'Mathematics',
+  'Higher Mathematics',
+  'Chemistry',
+  'Biology',
+  'Statistics',
+  'Logic',
+  'Sociology',
+  'Psychology',
+  'Islamic History',
+  'Islamic Studies',
+  'Computer Science',
+  'Bangla 1st Paper (HSC)',
+  'Bangla 2nd Paper (HSC)',
+  'English 1st Paper (HSC)',
+  'English 2nd Paper (HSC)',
+  'Accounting (HSC)',
+  'Management',
+  'Marketing',
+  'Finance, Banking & Insurance',
+];
+
 const AllTutorHeroSection = () => {
   const [nameQuery, setNameQuery] = useState("");
   const router = useRouter();

@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+// Removed duplicate import
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Heart } from "lucide-react";
 import Link from "next/link";
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export interface TTutors {
   grade: any[];
@@ -92,6 +93,7 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
                 tutor.averageRating > 4
                   ? "fill-red-500 text-red-500"
                   : "text-gray-400"
+              
               }`}
             />
           </Button>

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+'use client';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,33 +13,35 @@ import {
 } from "@/components/ui/select";
 import { getAllTutors } from "@/services/tutiors";
 
+
+
 const subjects = [
-  "Physics",
-  "Mathematics",
-  "Higher Mathematics",
-  "Chemistry",
-  "Biology",
-  "Statistics",
-  "Logic",
-  "Sociology",
-  "Psychology",
-  "Islamic History",
-  "Islamic Studies",
-  "Computer Science",
-  "Bangla 1st Paper (HSC)",
-  "Bangla 2nd Paper (HSC)",
-  "English 1st Paper (HSC)",
-  "English 2nd Paper (HSC)",
-  "Accounting (HSC)",
-  "Management",
-  "Marketing",
-  "Finance, Banking & Insurance",
+  'Physics',
+  'Mathematics',
+  'Higher Mathematics',
+  'Chemistry',
+  'Biology',
+  'Statistics',
+  'Logic',
+  'Sociology',
+  'Psychology',
+  'Islamic History',
+  'Islamic Studies',
+  'Computer Science',
+  'Bangla 1st Paper (HSC)',
+  'Bangla 2nd Paper (HSC)',
+  'English 1st Paper (HSC)',
+  'English 2nd Paper (HSC)',
+  'Accounting (HSC)',
+  'Management',
+  'Marketing',
+  'Finance, Banking & Insurance',
 ];
 
 export function HeroSection() {
-  const [selectedSubject, setSelectedSubject] = useState("");
-  const [selectedGrade, setSelectedGrade] = useState("");
-  const [tutorName, setTutorName] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState('');
+  const [selectedGrade, setSelectedGrade] = useState('');
+  const [tutorName, setTutorName] = useState('');
 
   const router = useRouter();
   const pathname = usePathname();
@@ -66,6 +69,9 @@ export function HeroSection() {
         console.error("Error fetching tutors:", error);
       }
     };
+    console.log('Selected Subject:', selectedSubject);
+    console.log('Selected Grade:', selectedGrade);
+    console.log('Tutor Name:', tutorName);
 
     fetchTutors();
   }, [searchParams]);
