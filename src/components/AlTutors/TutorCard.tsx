@@ -74,7 +74,11 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
         </div>
         <div className="absolute -bottom-8 left-4">
           <Avatar className="h-16 w-16 border-4 border-white">
-            <AvatarImage src={tutor.profileImg} alt={tutor.name} />
+            <AvatarImage
+              className="object-cover"
+              src={tutor.profileImg}
+              alt={tutor.name}
+            />
           </Avatar>
         </div>
         <div className="absolute top-2 right-2">

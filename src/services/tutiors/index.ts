@@ -1,5 +1,5 @@
 "use server";
-// get all products
+// get all tutors
 export const getAllTutors = async (query?: {
   [key: string]: string | string[] | undefined;
 }) => {
@@ -34,6 +34,24 @@ export const getAllTutors = async (query?: {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/teachers?${params}`,
+      {
+        next: {
+          tags: ["TUTOR"],
+        },
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+
+// get single product
+export const getSingleTutor = async (teacherId: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/teachers/${teacherId}`,
       {
         next: {
           tags: ["TUTOR"],

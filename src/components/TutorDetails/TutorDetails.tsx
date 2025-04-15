@@ -17,7 +17,6 @@ import {
   Home,
   Phone,
   Cake,
-  ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import {
@@ -28,12 +27,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { TTutors } from "../AlTutors/TutorCard";
 
-export default function TutorProfile() {
+export default function TutorProfile({ tutor }: { tutor: TTutors }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
   const router = useRouter();
+
+  console.log("Tutor Details", tutor);
 
   const timeSlots = [
     "9:00 AM - 10:00 AM",
@@ -57,6 +60,15 @@ export default function TutorProfile() {
     },
   ];
 
+  const handleMessage = () => {
+    toast.warning("This is for Future Development");
+  };
+
+  const dateOfBirth = new Date(tutor.dateOfBirth).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* Header with back button */}
@@ -70,21 +82,26 @@ export default function TutorProfile() {
       {/* Main Profile Card */}
       <Card>
         {/* Cover Image */}
-        <div className="h-48 bg-gray-200 relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <div className=" md:h-[400px] bg-gray-200 relative">
+          <img
+            src={tutor.coverImg}
+            alt={tutor.name}
+            className="h-full w-full"
+          />
         </div>
 
         {/* Profile Header */}
         <div className="md:flex px-6 pb-6 relative">
           {/* Tutor Image */}
-          <div className="md:w-1/4 flex justify-center md:justify-start -mt-16">
+          <div className="md:w-1/5 flex justify-center md:justify-start -mt-28 md:mt-2">
             <div className="relative">
-              <Avatar className="w-32 h-32 border-4 border-white shadow-lg">
+              <Avatar className="w-48 h-48 md:rounded-none  border-4 border-green-200 shadow-lg">
                 <AvatarImage
-                  src="https://example.com/images/rahim-profile.jpg"
-                  alt="Karim Uddin"
+                  src={tutor.profileImg}
+                  alt={tutor.name}
+                  className="object-cover"
                 />
-                <AvatarFallback>KU</AvatarFallback>
+                <AvatarFallback>{tutor.name}</AvatarFallback>
               </Avatar>
               <div className="absolute bottom-0 right-0  text-white rounded-full p-2">
                 <div className="h-4 w-4 flex items-center justify-center">
@@ -109,39 +126,40 @@ export default function TutorProfile() {
             <div className="flex justify-between items-start">
               <div>
                 <h1 className="text-3xl font-bold text-gray-800">
-                  Karim Uddin
+                  {tutor.name}
                 </h1>
-                <p className="text-gray-600 mt-1">
-                  Senior Lecturer, 10+ years teaching experience
-                </p>
+                <p className="text-gray-600 mt-1">{tutor.designation}</p>
               </div>
               <div className="flex items-center">
                 <Badge
                   variant="secondary"
                   className="bg-yellow-100 text-yellow-800"
                 >
-                  <span className="font-bold">4.5</span>
+                  <span className="font-bold">{tutor.averageRating}</span>
                   <Star className="ml-1 h-4 w-4 text-yellow-500 fill-yellow-500" />
-                  <span className="ml-1 text-sm">(2 reviews)</span>
+                  <span className="ml-1 text-sm">{tutor.reviews.length}</span>
                 </Badge>
               </div>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge variant="outline" className="bg-blue-100 text-blue-800">
-                <MapPin className="mr-1 h-4 w-4" /> Dhaka
+                <MapPin className="mr-1 h-4 w-4" />{" "}
+                <span className="capitalize">{tutor.district}</span>
               </Badge>
               <Badge variant="outline" className="bg-green-100 text-green-800">
-                <span className="mr-1">♂</span> Male
+                <span className="mr-1">♂</span>{" "}
+                <span className="capitalize ">{tutor.gender}</span>
               </Badge>
               <Badge
                 variant="outline"
                 className="bg-purple-100 text-purple-800"
               >
-                <span className="mr-1">🩸</span> O+ Blood Group
+                <span className="mr-1">🩸</span> <span>{tutor.bloodGroup}</span>{" "}
+                Blood Group
               </Badge>
               <Badge variant="outline" className="bg-amber-100 text-amber-800">
-                <Clock className="mr-1 h-4 w-4" /> BDT 250/hour
+                <Clock className="mr-1 h-4 w-4" /> BDT {tutor.hourlyRate}/hour
               </Badge>
             </div>
 
@@ -149,7 +167,7 @@ export default function TutorProfile() {
               <Button onClick={() => setActiveTab("book")}>
                 <BookOpen className="mr-2 h-4 w-4" /> Book a Session
               </Button>
-              <Button variant="outline">
+              <Button onClick={handleMessage} variant="outline">
                 <Mail className="mr-2 h-4 w-4" /> Message
               </Button>
             </div>
@@ -171,10 +189,7 @@ export default function TutorProfile() {
                 About Me
               </h2>
               <div className="text-gray-700 leading-relaxed space-y-4">
-                <p>
-                  Passionate physics teacher with over 10 years of experience in
-                  guiding students towards academic excellence.
-                </p>
+                <p>{tutor.bio}</p>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-2">
@@ -183,15 +198,15 @@ export default function TutorProfile() {
                     <ul className="text-gray-700 space-y-2">
                       <li className="flex items-center">
                         <Cake className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Date of Birth: June 15, 1985</span>
+                        <span>Date of Birth: {dateOfBirth}</span>
                       </li>
                       <li className="flex items-center">
                         <Phone className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Contact: 01712345678</span>
+                        <span>Contact: {tutor.contactNo}</span>
                       </li>
                       <li className="flex items-center">
                         <Phone className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Emergency: 01898765432</span>
+                        <span>Emergency: {tutor.emergencyContactNo}</span>
                       </li>
                     </ul>
                   </div>
@@ -202,16 +217,11 @@ export default function TutorProfile() {
                     <ul className="text-gray-700 space-y-2">
                       <li className="flex items-center">
                         <Home className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>
-                          Present: House #10, Road #5, Dhanmondi, Dhaka
-                        </span>
+                        <span>Present: {tutor.presentAddress}</span>
                       </li>
                       <li className="flex items-center">
                         <Home className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>
-                          Permanent: Village: Charigram, Upazila: Singair,
-                          District: Manikganj
-                        </span>
+                        <span>Permanent: {tutor.permanentAddress}</span>
                       </li>
                     </ul>
                   </div>
@@ -232,22 +242,24 @@ export default function TutorProfile() {
                   <div>
                     <h3 className="font-semibold text-gray-800">Subjects</h3>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      <Badge variant="outline">Physics</Badge>
-                      <Badge variant="outline">Mathematics</Badge>
-                      <Badge variant="outline">Higher Mathematics</Badge>
+                      {tutor.subjects.map((subject) => (
+                        <Badge variant="outline">{subject}</Badge>
+                      ))}
                     </div>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Designation</h3>
-                    <p className="mt-1 text-gray-700">Senior Lecturer</p>
+                    <p className="mt-1 text-gray-700">{tutor.designation}</p>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">District</h3>
-                    <p className="mt-1 text-gray-700">Dhaka</p>
+                    <p className="mt-1 text-gray-700">{tutor.district}</p>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Hourly Rate</h3>
-                    <p className="mt-1 text-gray-700">BDT 250 per hour</p>
+                    <p className="mt-1 text-gray-700">
+                      BDT {tutor.hourlyRate} per hour
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -259,37 +271,51 @@ export default function TutorProfile() {
                     <Star className="text-yellow-500 mr-2 h-5 w-5 fill-yellow-500" />
                     Student Reviews
                     <span className="ml-2 text-gray-600 text-sm font-normal">
-                      (Average: 4.5/5)
+                      {tutor.averageRating}
                     </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {reviews.slice(0, 2).map((review, index) => (
-                    <Card key={index} className="border">
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start">
-                          <div className="flex items-center">
-                            <div className="flex text-yellow-400 mr-2">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`h-4 w-4 ${
-                                    i < review.rating
-                                      ? "fill-current"
-                                      : "fill-none"
-                                  }`}
-                                />
-                              ))}
+                  {tutor.reviews.length ? (
+                    <>
+                    //! ekhane update kora lagbe
+                      {" "}
+                      {reviews.slice(0, 2).map((review, index) => (
+                        <Card key={index} className="border">
+                          <CardContent className="p-4">
+                            <div className="flex justify-between items-start">
+                              <div className="flex items-center">
+                                <div className="flex text-yellow-400 mr-2">
+                                  {[...Array(5)].map((_, i) => (
+                                    <Star
+                                      key={i}
+                                      className={`h-4 w-4 ${
+                                        i < review.rating
+                                          ? "fill-current"
+                                          : "fill-none"
+                                      }`}
+                                    />
+                                  ))}
+                                </div>
+                                <span className="text-sm text-gray-500">
+                                  {review.date}
+                                </span>
+                              </div>
                             </div>
-                            <span className="text-sm text-gray-500">
-                              {review.date}
-                            </span>
-                          </div>
-                        </div>
-                        <p className="mt-2 text-gray-700">{review.comment}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
+                            <p className="mt-2 text-gray-700">
+                              {review.comment}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-3xl font-semibold text-center">
+                        No Reviews
+                      </div>
+                    </>
+                  )}
 
                   <div className="mt-4 text-center">
                     <Button
