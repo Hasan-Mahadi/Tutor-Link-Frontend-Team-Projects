@@ -1,19 +1,16 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
 'use client';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { getAllTutors } from "@/services/tutiors";
-
-
+} from '@/components/ui/select';
+import { getAllTutors } from '@/services/tutiors';
 
 const subjects = [
   'Physics',
@@ -66,7 +63,7 @@ export function HeroSection() {
         const { data } = await getAllTutors(query);
         setTutors(data);
       } catch (error) {
-        console.error("Error fetching tutors:", error);
+        console.error('Error fetching tutors:', error);
       }
     };
     console.log('Selected Subject:', selectedSubject);
@@ -79,14 +76,14 @@ export function HeroSection() {
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (selectedSubject) params.set("subject", selectedSubject);
-    else params.delete("subject");
+    if (selectedSubject) params.set('subject', selectedSubject);
+    else params.delete('subject');
 
-    if (selectedGrade) params.set("grade", selectedGrade);
-    else params.delete("grade");
+    if (selectedGrade) params.set('grade', selectedGrade);
+    else params.delete('grade');
 
-    if (tutorName) params.set("name", tutorName);
-    else params.delete("name");
+    if (tutorName) params.set('name', tutorName);
+    else params.delete('name');
 
     router.push(`/browseTutor?${params.toString()}`, { scroll: false });
   };
@@ -166,7 +163,7 @@ export function HeroSection() {
             <span className="text-sm mt-1 text-gray-500">
               Popular Searches:
             </span>
-            {["Math Tutor", "Physics Tutor", "History", "Chemistry"].map(
+            {['Math Tutor', 'Physics Tutor', 'History', 'Chemistry'].map(
               (item, i) => (
                 <span
                   key={i}
