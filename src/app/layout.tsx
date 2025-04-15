@@ -38,10 +38,9 @@ export default async function RootLayout({
         >
           <Toaster position="top-center" />
           {children}
-          <Toaster position="top-center" richColors />
         </body>
       </Providers>
-    
+      <Toaster position="top-center" richColors />
     </html>
   );
 }
