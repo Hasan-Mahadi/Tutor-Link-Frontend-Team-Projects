@@ -1,9 +1,9 @@
-"use client";
-import { useState, useEffect } from "react";
+'use client';
+import { useState, useEffect } from 'react';
 
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,7 +41,10 @@ export default function Navigation() {
           <Link href="/" className="text-gray-700 hover:text-indigo-600">
             Home
           </Link>
-          <Link href="/browseTutor" className="text-gray-700 hover:text-indigo-600">
+          <Link
+            href="/browseTutor"
+            className="text-gray-700 hover:text-indigo-600"
+          >
             Find Tutors
           </Link>
           <Link
@@ -80,8 +83,8 @@ export default function Navigation() {
         <div
           className={`md:hidden bg-white shadow-lg w-full absolute left-0 transition-all duration-300 ease-in-out ${
             mobileMenuOpen
-              ? "top-full opacity-100 visible"
-              : "top-0 opacity-0 invisible"
+              ? 'top-full opacity-100 visible'
+              : 'top-0 opacity-0 invisible'
           }`}
         >
           <div className="px-4 pt-2 pb-4 space-y-2">

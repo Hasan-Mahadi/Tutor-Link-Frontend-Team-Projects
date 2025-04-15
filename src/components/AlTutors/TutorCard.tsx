@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Heart } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Heart } from 'lucide-react';
 
 interface TutorCardProps {
   name: string;
@@ -70,7 +70,7 @@ export default function TutorCard({
           >
             <Heart
               className={`h-4 w-4 ${
-                isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"
+                isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400'
               }`}
             />
           </Button>

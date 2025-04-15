@@ -1,16 +1,16 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import TutorCard from "@/components/AlTutors/TutorCard";
-import Filters from "@/components/AlTutors/Filters";
-import Pagination from "@/components/AlTutors/Pagination";
-import AllTutorHeroSection from "@/components/AlTutors/AllTutorHeroSection/AllTutorHeroSection";
+} from '@/components/ui/select';
+import TutorCard from '@/components/AlTutors/TutorCard';
+import Filters from '@/components/AlTutors/Filters';
+import Pagination from '@/components/AlTutors/Pagination';
+import AllTutorHeroSection from '@/components/AlTutors/AllTutorHeroSection/AllTutorHeroSection';
 
 export default function TutorsPage() {
   return (
@@ -67,7 +67,7 @@ export default function TutorsPage() {
                 title="PhD in Mathematics"
                 rating={4.7}
                 reviews={132}
-                subjects={["Calculus", "Algebra", "Statistics"]}
+                subjects={['Calculus', 'Algebra', 'Statistics']}
                 description="Experienced math tutor with 10+ years helping students achieve their academic goals. Specializing in high school and college-level mathematics."
                 price={45}
                 location="Online or In-person"
@@ -82,7 +82,7 @@ export default function TutorsPage() {
                 title="Computer Science Instructor"
                 rating={5.0}
                 reviews={87}
-                subjects={["Python", "JavaScript", "Web Dev"]}
+                subjects={['Python', 'JavaScript', 'Web Dev']}
                 description="Full-stack developer turned educator. I make complex programming concepts easy to understand with real-world examples."
                 price={35}
                 location="Online Only"

@@ -1,18 +1,18 @@
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
 const subjects = [
-  { emoji: "➕➖", name: "Mathematics" },
-  { emoji: "🧪", name: "Science" },
-  { emoji: "📚", name: "English" },
-  { emoji: "🌍", name: "History" },
-  { emoji: "🇪🇸", name: "Spanish" },
-  { emoji: "💻", name: "Computer Science" },
-  { emoji: "🎨", name: "Art" },
-  { emoji: "🎵", name: "Music" },
-  { emoji: "📝", name: "Writing" },
-  { emoji: "🧮", name: "SAT/ACT Prep" },
-  { emoji: "🔬", name: "AP Courses" },
-  { emoji: "💡", name: "And Many More..." },
+  { emoji: '➕➖', name: 'Mathematics' },
+  { emoji: '🧪', name: 'Science' },
+  { emoji: '📚', name: 'English' },
+  { emoji: '🌍', name: 'History' },
+  { emoji: '🇪🇸', name: 'Spanish' },
+  { emoji: '💻', name: 'Computer Science' },
+  { emoji: '🎨', name: 'Art' },
+  { emoji: '🎵', name: 'Music' },
+  { emoji: '📝', name: 'Writing' },
+  { emoji: '🧮', name: 'SAT/ACT Prep' },
+  { emoji: '🔬', name: 'AP Courses' },
+  { emoji: '💡', name: 'And Many More...' },
 ];
 
 export const SubjectsCoverSection = () => {
