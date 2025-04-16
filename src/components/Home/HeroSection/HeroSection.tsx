@@ -169,7 +169,7 @@ export function HeroSection() {
                 >
                   {item}
                 </span>
-              )
+              ),
             )}
           </div>
         </div>

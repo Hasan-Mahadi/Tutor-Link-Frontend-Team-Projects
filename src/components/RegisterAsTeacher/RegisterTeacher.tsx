@@ -488,8 +488,8 @@ export function TeacherRegistrationForm() {
                                           ])
                                         : field.onChange(
                                             field.value?.filter(
-                                              (value) => value !== grade.id
-                                            )
+                                              (value) => value !== grade.id,
+                                            ),
                                           );
                                     }}
                                     className="text-indigo-600 focus:ring-indigo-500"
@@ -541,8 +541,8 @@ export function TeacherRegistrationForm() {
                                           ])
                                         : field.onChange(
                                             field.value?.filter(
-                                              (value) => value !== subject.id
-                                            )
+                                              (value) => value !== subject.id,
+                                            ),
                                           );
                                     }}
                                     className="text-indigo-600 focus:ring-indigo-500"

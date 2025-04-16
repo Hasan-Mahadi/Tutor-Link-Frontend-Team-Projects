@@ -67,6 +67,9 @@ export default function Navigation() {
           <Link href="/faq" className={navLinkClass('/faq')}>
             FAQ
           </Link>
+          <Link href="/blog" className={navLinkClass('/blog')}>
+            Blog
+          </Link>
         </div>
 
         {/* Desktop Auth Buttons */}
@@ -130,6 +133,14 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen(false)}
             >
               FAQ
+            </Link>
+
+            <Link
+              href="/blog"
+              className={navMobileLinkClass('/blog')}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Blog
             </Link>
 
             <div className="flex space-x-3 pt-2">
