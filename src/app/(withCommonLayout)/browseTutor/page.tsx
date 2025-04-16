@@ -5,7 +5,6 @@ import AllTutorHeroSection from '@/components/AlTutors/AllTutorHeroSection/AllTu
 import { SortBy } from '@/components/AlTutors/SortBy';
 import { getAllTutors } from '@/services/tutiors';
 
-
 type SearchParams = { [key: string]: string[] | undefined };
 
 export default async function TutorsPage({
@@ -63,7 +62,7 @@ export default async function TutorsPage({
 
             {/* Pagination */}
             <div className="flex justify-center mt-10">
-              <Pagination />
+              {/* <Pagination /> */}
             </div>
           </div>
         </div>
