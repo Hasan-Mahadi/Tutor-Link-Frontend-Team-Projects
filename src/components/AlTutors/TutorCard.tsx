@@ -70,8 +70,8 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       <div className="relative">
-        <div className={`h-40`}>
-          <img src={tutor.coverImg} alt="" />
+        <div className={`h-48`}>
+          <img src={tutor.coverImg} className="h-48 w-full object-cover" alt="" />
         </div>
         <div className="absolute -bottom-8 left-4">
           <Avatar className="h-16 w-16 border-4 border-white">

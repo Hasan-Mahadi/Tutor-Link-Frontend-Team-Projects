@@ -90,7 +90,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
           <img
             src={tutor?.coverImg}
             alt={tutor?.name}
-            className="h-full w-full"
+            className="h-full w-full object-cover object-center"
           />
         </div>
 
