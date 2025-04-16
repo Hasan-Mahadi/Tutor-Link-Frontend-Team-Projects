@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useState } from 'react';
+import { Calendar } from '@/components/ui/calendar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import {
   Star,
   ArrowLeft,
@@ -18,56 +18,59 @@ import {
   Phone,
   Cake,
   ChevronRight,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { TTutors } from "../AlTutors/TutorCard";
+} from '@/components/ui/select';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { TTutors } from '../AlTutors/TutorCard';
+import ReviewCard from '../AlTutors/ReviewCard/ReviewCard';
+import { FeedbackModal } from '../AlTutors/CreateReview/CreateReview';
+import { BookingComponent } from '../BookingsComponent/BookingsComponent';
 
 export default function TutorProfile({ tutor }: { tutor: TTutors }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState('overview');
   const router = useRouter();
 
-  console.log("Tutor Details", tutor);
+  console.log('Tutor Details', tutor);
 
   const timeSlots = [
-    "9:00 AM - 10:00 AM",
-    "10:00 AM - 11:00 AM",
-    "2:00 PM - 3:00 PM",
-    "4:00 PM - 5:00 PM",
-    "5:00 PM - 6:00 PM",
-    "7:00 PM - 8:00 PM",
+    '9:00 AM - 10:00 AM',
+    '10:00 AM - 11:00 AM',
+    '2:00 PM - 3:00 PM',
+    '4:00 PM - 5:00 PM',
+    '5:00 PM - 6:00 PM',
+    '7:00 PM - 8:00 PM',
   ];
 
   const reviews = [
     {
       rating: 5,
-      date: "April 9, 2025",
-      comment: "Great tutor! 2nd reviews",
+      date: 'April 9, 2025',
+      comment: 'Great tutor! 2nd reviews',
     },
     {
       rating: 4,
-      date: "April 9, 2025",
-      comment: "Great tutor! 2nd reviews",
+      date: 'April 9, 2025',
+      comment: 'Great tutor! 2nd reviews',
     },
   ];
 
   const handleMessage = () => {
-    toast.warning("This is for Future Development");
+    toast.warning('This is for Future Development');
   };
 
-  const dateOfBirth = new Date(tutor.dateOfBirth).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const dateOfBirth = new Date(tutor.dateOfBirth).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -144,18 +147,18 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
 
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge variant="outline" className="bg-blue-100 text-blue-800">
-                <MapPin className="mr-1 h-4 w-4" />{" "}
+                <MapPin className="mr-1 h-4 w-4" />{' '}
                 <span className="capitalize">{tutor.district}</span>
               </Badge>
               <Badge variant="outline" className="bg-green-100 text-green-800">
-                <span className="mr-1">♂</span>{" "}
+                <span className="mr-1">♂</span>{' '}
                 <span className="capitalize ">{tutor.gender}</span>
               </Badge>
               <Badge
                 variant="outline"
                 className="bg-purple-100 text-purple-800"
               >
-                <span className="mr-1">🩸</span> <span>{tutor.bloodGroup}</span>{" "}
+                <span className="mr-1">🩸</span> <span>{tutor.bloodGroup}</span>{' '}
                 Blood Group
               </Badge>
               <Badge variant="outline" className="bg-amber-100 text-amber-800">
@@ -164,7 +167,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             </div>
 
             <div className="mt-6 flex gap-4">
-              <Button onClick={() => setActiveTab("book")}>
+              <Button onClick={() => setActiveTab('book')}>
                 <BookOpen className="mr-2 h-4 w-4" /> Book a Session
               </Button>
               <Button onClick={handleMessage} variant="outline">
@@ -242,8 +245,10 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                   <div>
                     <h3 className="font-semibold text-gray-800">Subjects</h3>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {tutor.subjects.map((subject) => (
-                        <Badge variant="outline">{subject}</Badge>
+                      {tutor.subjects.map((subject, index) => (
+                        <Badge key={index} variant="outline">
+                          {subject}
+                        </Badge>
                       ))}
                     </div>
                   </div>
@@ -278,35 +283,8 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                 <CardContent className="space-y-4">
                   {tutor.reviews.length ? (
                     <>
-                    //! ekhane update kora lagbe
-                      {" "}
-                      {reviews.slice(0, 2).map((review, index) => (
-                        <Card key={index} className="border">
-                          <CardContent className="p-4">
-                            <div className="flex justify-between items-start">
-                              <div className="flex items-center">
-                                <div className="flex text-yellow-400 mr-2">
-                                  {[...Array(5)].map((_, i) => (
-                                    <Star
-                                      key={i}
-                                      className={`h-4 w-4 ${
-                                        i < review.rating
-                                          ? "fill-current"
-                                          : "fill-none"
-                                      }`}
-                                    />
-                                  ))}
-                                </div>
-                                <span className="text-sm text-gray-500">
-                                  {review.date}
-                                </span>
-                              </div>
-                            </div>
-                            <p className="mt-2 text-gray-700">
-                              {review.comment}
-                            </p>
-                          </CardContent>
-                        </Card>
+                      {tutor.reviews.slice(0, 2).map((review, index) => (
+                        <ReviewCard key={index} review={review}></ReviewCard>
                       ))}
                     </>
                   ) : (
@@ -321,7 +299,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                     <Button
                       variant="link"
                       className="text-blue-600"
-                      onClick={() => setActiveTab("reviews")}
+                      onClick={() => setActiveTab('reviews')}
                     >
                       View all reviews <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
@@ -337,30 +315,27 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
               All Reviews
             </h2>
             <div className="space-y-4">
-              {reviews.map((review, index) => (
-                <Card key={index} className="border">
-                  <CardContent className="p-4">
-                    <div className="flex justify-between items-start">
-                      <div className="flex items-center">
-                        <div className="flex text-yellow-400 mr-2">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`h-4 w-4 ${
-                                i < review.rating ? "fill-current" : "fill-none"
-                              }`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-sm text-gray-500">
-                          {review.date}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="mt-2 text-gray-700">{review.comment}</p>
-                  </CardContent>
-                </Card>
-              ))}
+              {tutor.reviews.length ? (
+                <>
+                  {[...tutor.reviews]
+                    .sort(
+                      (a, b) =>
+                        new Date(b.createdAt).getTime() -
+                        new Date(a.createdAt).getTime()
+                    )
+                    .map((review, index) => (
+                      <ReviewCard key={index} review={review} />
+                    ))}
+                </>
+              ) : (
+                <div className="text-3xl font-semibold text-center">
+                  No Reviews
+                </div>
+              )}
+            </div>
+            {/* create review option */}
+            <div className="mt-4 flex justify-center items-center">
+              <FeedbackModal></FeedbackModal>
             </div>
           </TabsContent>
 
@@ -368,96 +343,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Book a Session
             </h2>
-            <Card>
-              <CardContent className="p-2 md:p-6">
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* Calendar */}
-                  <div className="md:w-1/2 h-[500px]  flex">
-                    <div className="flex-grow flex items-center justify-center">
-                      <div>
-                        <Calendar
-                          mode="single"
-                          selected={date}
-                          onSelect={setDate}
-                          fromDate={new Date()}
-                          className="rounded-md "
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Time Slots and Booking Form */}
-                  <div className="md:w-1/2">
-                    <h3 className="font-bold text-gray-800 mb-4">
-                      Available Time Slots
-                    </h3>
-                    <div className="grid grid-cols-2 gap-3 mb-6">
-                      {timeSlots.map((slot) => (
-                        <Button
-                          key={slot}
-                          variant={
-                            selectedTimeSlot === slot ? "default" : "outline"
-                          }
-                          onClick={() => setSelectedTimeSlot(slot)}
-                        >
-                          {slot}
-                        </Button>
-                      ))}
-                    </div>
-
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Session Details</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div>
-                          <label className="block text-gray-700 text-sm font-medium mb-1">
-                            Subject
-                          </label>
-                          <Select>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select subject" />
-                            </SelectTrigger>
-                            <SelectContent className="w-full">
-                              <SelectItem value="physics">Physics</SelectItem>
-                              <SelectItem value="math">Mathematics</SelectItem>
-                              <SelectItem value="higher-math">
-                                Higher Mathematics
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div>
-                          <label className="block text-gray-700 text-sm font-medium mb-1">
-                            Duration
-                          </label>
-                          <Select>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select duration" />
-                            </SelectTrigger>
-                            <SelectContent className="w-full">
-                              <SelectItem value="1">
-                                1 hour (BDT 250)
-                              </SelectItem>
-                              <SelectItem value="1.5">
-                                1.5 hours (BDT 375)
-                              </SelectItem>
-                              <SelectItem value="2">
-                                2 hours (BDT 500)
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <Button className="w-full">
-                          Confirm Booking (BDT 250)
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <BookingComponent></BookingComponent>
           </TabsContent>
         </Tabs>
       </Card>
@@ -474,7 +360,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
         <Button
           variant="secondary"
           className="text-blue-600"
-          onClick={() => setActiveTab("book")}
+          onClick={() => setActiveTab('book')}
         >
           <BookOpen className="mr-2 h-4 w-4" /> Book Now
         </Button>
