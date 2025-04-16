@@ -59,6 +59,7 @@ export function StudentRegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
