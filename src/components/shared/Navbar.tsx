@@ -1,6 +1,8 @@
-import { Button } from '../ui/button';
-import { LogOut } from 'lucide-react';
-import Link from 'next/link';
+"use client";
+
+import { Button } from "../ui/button";
+import { LogOut } from "lucide-react";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +22,7 @@ type UserProps = {
   };
 };
 
-export default function Navbar({ session }: { session: UserProps | null }) {
+const Navbar = ({ session }: { session: UserProps | null }) => {
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
@@ -28,7 +30,7 @@ export default function Navbar({ session }: { session: UserProps | null }) {
         <div className="max-w-md flex-grow">
           <input
             type="text"
-            placeholder="Search for products"
+            placeholder="Search for tutors"
             className="w-full max-w-6xl border border-gray-300 rounded-full py-2 px-5"
           />
         </div>
@@ -41,17 +43,13 @@ export default function Navbar({ session }: { session: UserProps | null }) {
           </Link>
           {session?.user ? (
             <>
-              <Link href="/create-shop">
+              <Link href="/become-tutor">
                 <Button className="rounded-full">Become a Tutor</Button>
               </Link>
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar>
-                    <AvatarImage
-                      src={
-                        session.user.image || 'https://github.com/shadcn.png'
-                      }
-                    />
+                    <AvatarImage src={session.user.image || "https://github.com/shadcn.png"} />
                     <AvatarFallback>User</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
@@ -64,7 +62,8 @@ export default function Navbar({ session }: { session: UserProps | null }) {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="bg-red-500 cursor-pointer">
                     <Button onClick={() => signOut()}>
-                      <LogOut /> <span>Log Out</span>
+                      <LogOut />
+                      <span>Log Out</span>
                     </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -81,4 +80,6 @@ export default function Navbar({ session }: { session: UserProps | null }) {
       </div>
     </header>
   );
-}
+};
+
+export default Navbar;

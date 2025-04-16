@@ -1,10 +1,26 @@
-'use client';
-import { useState } from 'react';
+"use client";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+
+import React, { useState } from 'react';
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+
+
+
+
+
 
 const subjects = [
   'Physics',
@@ -41,7 +57,9 @@ const AllTutorHeroSection = () => {
   ) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(query, value.toString());
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    router.push(`${pathname}?${params.toString()}`,
+    //  { scroll: false }
+    );
   };
 
   const handleSearch = () => {
