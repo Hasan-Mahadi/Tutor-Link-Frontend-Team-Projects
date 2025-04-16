@@ -1,15 +1,10 @@
-<<<<<<< HEAD
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Heart } from 'lucide-react';
-=======
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Heart } from "lucide-react";
 import Link from "next/link";
->>>>>>> 3a29245305a41c0382ce4953e9b648b7ecc7bc2f
+
 
 export interface TTutors {
   grade: any[];
@@ -92,13 +87,11 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
           >
             <Heart
               className={`h-4 w-4 ${
-<<<<<<< HEAD
-                isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400'
-=======
+
                 tutor.averageRating > 4
                   ? "fill-red-500 text-red-500"
                   : "text-gray-400"
->>>>>>> 3a29245305a41c0382ce4953e9b648b7ecc7bc2f
+
               }`}
             />
           </Button>
