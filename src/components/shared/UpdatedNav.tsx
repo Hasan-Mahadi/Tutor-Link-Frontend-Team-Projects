@@ -1,17 +1,10 @@
-<<<<<<<<< Temporary merge branch 1
-"use client";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
-=========
 'use client';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import Link from 'next/link';
->>>>>>>>> Temporary merge branch 2
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -61,14 +54,7 @@ export default function Navigation() {
           <Link href="/" className={navLinkClass('/')}>
             Home
           </Link>
-<<<<<<<<< Temporary merge branch 1
-          <Link href="/browseTutor" className={navLinkClass("/browseTutor")}>
-=========
-          <Link
-            href="/browseTutor"
-            className="text-gray-700 hover:text-indigo-600"
-          >
->>>>>>>>> Temporary merge branch 2
+          <Link href="/browseTutor" className={navLinkClass('/browseTutor')}>
             Find Tutors
           </Link>
 

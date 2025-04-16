@@ -48,9 +48,13 @@ export default async function TutorsPage({
             {/* Sort and View Options */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
               <div className="mb-4 sm:mb-0">
+                {/* <span className="text-sm text-gray-600 dark:text-gray-300"> */}
+                  {/* Showing {tutors.length} tutors */}
+                {/* </span> */}
                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Showing {tutors.length} tutors
-                </span>
+                    Showing {tutors?.length || 0} tutors
+                 </span>
+
               </div>
               <div className="flex items-center space-x-4">
                 <SortBy></SortBy>
