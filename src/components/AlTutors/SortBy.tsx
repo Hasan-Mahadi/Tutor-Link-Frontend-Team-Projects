@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+} from '../ui/select';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const SortBy = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ export const SortBy = () => {
 
   const handleSearchQuery = (
     query: string,
-    value: string | number | boolean
+    value: string | number | boolean,
   ) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(query, value.toString());
@@ -28,7 +28,7 @@ export const SortBy = () => {
       <span className="text-sm text-gray-600 dark:text-gray-300 mr-2">
         Sort by:
       </span>
-      <Select onValueChange={(value) => handleSearchQuery("sortBy", value)}>
+      <Select onValueChange={(value) => handleSearchQuery('sortBy', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Relevance" />
         </SelectTrigger>

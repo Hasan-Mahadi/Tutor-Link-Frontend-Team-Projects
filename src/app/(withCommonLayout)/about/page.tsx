@@ -135,21 +135,29 @@ export default function AboutPage() {
 
   return (
     <div className="bg-white">
-      
       <section
         className="relative bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-20"
         data-aos="fade-down"
       >
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-6">About TutorLink</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+          <h1
+            className="text-5xl font-bold mb-6"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            About TutorLink
+          </h1>
+          <p
+            className="text-xl max-w-3xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
             Revolutionizing education through seamless tutor-student connections
             with cutting-edge technology.
           </p>
         </div>
       </section>
 
-      
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
@@ -193,7 +201,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-   
       <section className="py-16 bg-white">
         <div className="container mx-auto px-30">
           <h2
@@ -227,7 +234,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-    
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-30">
           <h2
@@ -244,7 +250,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-   
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2

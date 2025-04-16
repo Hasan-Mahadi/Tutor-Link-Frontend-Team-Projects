@@ -322,7 +322,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                     .sort(
                       (a, b) =>
                         new Date(b.createdAt).getTime() -
-                        new Date(a.createdAt).getTime()
+                        new Date(a.createdAt).getTime(),
                     )
                     .map((review, index) => (
                       <ReviewCard key={index} review={review} />
