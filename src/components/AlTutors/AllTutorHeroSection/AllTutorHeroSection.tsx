@@ -10,9 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+
+
 import React, { useState } from 'react';
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+
+
+
 
 const subjects = [
   'Physics',

@@ -1,10 +1,10 @@
 
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Heart } from "lucide-react";
 import Link from "next/link";
-
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export interface TTutors {
   grade: any[];
@@ -76,7 +76,11 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
         </div>
         <div className="absolute -bottom-8 left-4">
           <Avatar className="h-16 w-16 border-4 border-white">
-            <AvatarImage src={tutor.profileImg} alt={tutor.name} />
+            <AvatarImage
+              className="object-cover"
+              src={tutor.profileImg}
+              alt={tutor.name}
+            />
           </Avatar>
         </div>
         <div className="absolute top-2 right-2">

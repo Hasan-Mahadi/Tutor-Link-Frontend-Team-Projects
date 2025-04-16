@@ -1,8 +1,17 @@
+<<<<<<<<< Temporary merge branch 1
 "use client";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+=========
+'use client';
+import { useState, useEffect } from 'react';
+
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+
+import Link from 'next/link';
+>>>>>>>>> Temporary merge branch 2
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,14 +25,12 @@ export default function Navigation() {
 
   const navLinkClass = (href: string) =>
     `${
-      pathname === href ? "text-indigo-500 " : "text-gray-700"
+      pathname === href ? 'text-indigo-500 ' : 'text-gray-700'
     } hover:text-indigo-600`;
 
   const navMobileLinkClass = (href: string) =>
     `${
-      pathname === href
-        ? "text-indigo-600  bg-indigo-50"
-        : "text-gray-700"
+      pathname === href ? 'text-indigo-600  bg-indigo-50' : 'text-gray-700'
     } block py-2 px-2 hover:text-indigo-600 hover:bg-indigo-50 rounded`;
 
   return (
@@ -51,19 +58,27 @@ export default function Navigation() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 lg:space-x-8">
-          <Link href="/" className={navLinkClass("/")}>
+          <Link href="/" className={navLinkClass('/')}>
             Home
           </Link>
+<<<<<<<<< Temporary merge branch 1
           <Link href="/browseTutor" className={navLinkClass("/browseTutor")}>
+=========
+          <Link
+            href="/browseTutor"
+            className="text-gray-700 hover:text-indigo-600"
+          >
+>>>>>>>>> Temporary merge branch 2
             Find Tutors
           </Link>
-          <Link href="/my-profile" className={navLinkClass("/my-profile")}>
+
+          <Link href="/my-profile" className={navLinkClass('/my-profile')}>
             My Profile
           </Link>
-          <Link href="/about" className={navLinkClass("/about")}>
+          <Link href="/about" className={navLinkClass('/about')}>
             About Us
           </Link>
-          <Link href="/faq" className={navLinkClass("/faq")}>
+          <Link href="/faq" className={navLinkClass('/faq')}>
             FAQ
           </Link>
         </div>
@@ -97,35 +112,35 @@ export default function Navigation() {
           <div className="px-4 pt-2 pb-4 space-y-2">
             <Link
               href="/"
-              className={navMobileLinkClass("/")}
+              className={navMobileLinkClass('/')}
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/browseTutor"
-              className={navMobileLinkClass("/browseTutor")}
+              className={navMobileLinkClass('/browseTutor')}
               onClick={() => setMobileMenuOpen(false)}
             >
               Find Tutors
             </Link>
             <Link
               href="/my-profile"
-              className={navMobileLinkClass("/my-profile")}
+              className={navMobileLinkClass('/my-profile')}
               onClick={() => setMobileMenuOpen(false)}
             >
               My Profile
             </Link>
             <Link
               href="/about"
-              className={navMobileLinkClass("/about")}
+              className={navMobileLinkClass('/about')}
               onClick={() => setMobileMenuOpen(false)}
             >
               About Us
             </Link>
             <Link
               href="/faq"
-              className={navMobileLinkClass("/faq")}
+              className={navMobileLinkClass('/faq')}
               onClick={() => setMobileMenuOpen(false)}
             >
               FAQ

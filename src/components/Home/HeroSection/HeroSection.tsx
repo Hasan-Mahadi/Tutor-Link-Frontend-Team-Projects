@@ -64,7 +64,7 @@ export function HeroSection() {
         const { data } = await getAllTutors(query);
         setTutors(data);
       } catch (error) {
-        console.error("Error fetching tutors:", error);
+        console.error('Error fetching tutors:', error);
       }
     };
 
@@ -74,14 +74,14 @@ export function HeroSection() {
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (selectedSubject) params.set("subject", selectedSubject);
-    else params.delete("subject");
+    if (selectedSubject) params.set('subject', selectedSubject);
+    else params.delete('subject');
 
-    if (selectedGrade) params.set("grade", selectedGrade);
-    else params.delete("grade");
+    if (selectedGrade) params.set('grade', selectedGrade);
+    else params.delete('grade');
 
-    if (tutorName) params.set("name", tutorName);
-    else params.delete("name");
+    if (tutorName) params.set('name', tutorName);
+    else params.delete('name');
 
     router.push(`/browseTutor?${params.toString()}`, { scroll: false });
   };
@@ -161,7 +161,7 @@ export function HeroSection() {
             <span className="text-sm mt-1 text-gray-500">
               Popular Searches:
             </span>
-            {["Math Tutor", "Physics Tutor", "History", "Chemistry"].map(
+            {['Math Tutor', 'Physics Tutor', 'History', 'Chemistry'].map(
               (item, i) => (
                 <span
                   key={i}
