@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Providers from '@/providers/Providers';
 import ClientToaster from '@/components/ClientToaster/ClientToaster';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,7 +37,6 @@ export default async function RootLayout({
         >
           {children}
           <Toaster position="top-center" richColors />
-
         </body>
       </Providers>
     </html>

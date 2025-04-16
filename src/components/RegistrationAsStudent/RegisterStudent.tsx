@@ -24,8 +24,9 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
-import { registerStudent } from '@/services/AuthService';
 import { toast } from 'sonner';
+import { registerStudent } from '@/services/AuthService';
+import { useRouter } from 'next/navigation';
 
 // Define form schema
 const formSchema = z.object({
@@ -50,12 +51,13 @@ const formSchema = z.object({
       .min(1, { message: 'Permanent address is required' }),
     profileImg: z.string().url({ message: 'Invalid URL' }),
     coverImg: z.string().url({ message: 'Invalid URL' }),
-    isDeleted:z.boolean()
+    isDeleted: z.boolean(),
   }),
 });
 
 export function StudentRegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -73,20 +75,24 @@ export function StudentRegistrationForm() {
         permanentAddress: '',
         profileImg: '',
         coverImg: '',
-        isDeleted:false
+        isDeleted: false,
       },
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    
+
+    console.log(values);
     // Here you would typically send the data to your API
     const res = await registerStudent(values);
-    if(res.success){
-      toast.success(res?.data.message)
-    }else{
-      toast.error(res?.data.message);
+    console.log(res);
+    if (res.success) {
+      setIsSubmitting(false);
+      toast.success(res?.message);
+      router.push('/login-user');
+    } else {
+      toast.error(res?.message);
     }
     setTimeout(() => {
       setIsSubmitting(false);
