@@ -20,7 +20,6 @@ export default function FAQPage() {
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
 
   useEffect(() => {
-    
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
