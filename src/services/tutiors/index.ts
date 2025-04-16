@@ -51,7 +51,7 @@ export const getAllTutors = async (query?: {
 export const getSingleTutor = async (teacherId: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/teachers/${teacherId}`,
+      `${process.env.BACKEND_URL}/teachers/${teacherId}`,
       {
         next: {
           tags: ['TUTOR'],

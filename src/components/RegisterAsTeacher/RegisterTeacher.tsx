@@ -25,6 +25,9 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
+import { registerTeacher } from '@/services/AuthService';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 // Define form schema
 const formSchema = z.object({
@@ -74,29 +77,98 @@ const grades = [
 ];
 
 const subjects = [
-  { id: 'Mathematics', label: 'Mathematics' },
   { id: 'Physics', label: 'Physics' },
+  { id: 'Mathematics', label: 'Mathematics' },
+  { id: 'Higher Mathematics', label: 'Higher Mathematics' },
   { id: 'Chemistry', label: 'Chemistry' },
   { id: 'Biology', label: 'Biology' },
-  { id: 'English', label: 'English' },
-  { id: 'Bangla', label: 'Bangla' },
-  { id: 'History', label: 'History' },
+  { id: 'Statistics', label: 'Statistics' },
+  { id: 'Logic', label: 'Logic' },
+  { id: 'Sociology', label: 'Sociology' },
+  { id: 'Psychology', label: 'Psychology' },
+  { id: 'Islamic History', label: 'Islamic History' },
+  { id: 'Islamic Studies', label: 'Islamic Studies' },
+  { id: 'Computer Science', label: 'Computer Science' },
+  { id: 'Bangla 1st Paper (HSC)', label: 'Bangla 1st Paper (HSC)' },
+  { id: 'Bangla 2nd Paper (HSC)', label: 'Bangla 2nd Paper (HSC)' },
+  { id: 'English 1st Paper (HSC)', label: 'English 1st Paper (HSC)' },
+  { id: 'English 2nd Paper (HSC)', label: 'English 2nd Paper (HSC)' },
+  { id: 'Accounting (HSC)', label: 'Accounting (HSC)' },
+  { id: 'Management', label: 'Management' },
+  { id: 'Marketing', label: 'Marketing' },
+  { id: 'Finance, Banking & Insurance', label: 'Finance, Banking & Insurance' },
 ];
 
 const districts = [
-  'Dhaka',
-  'Chittagong',
-  'Sylhet',
-  'Khulna',
-  'Barishal',
-  'Rajshahi',
-  'Rangpur',
-  'Mymensingh',
-  'Comilla',
+  'bagerhat',
+  'bandarban',
+  'barisal',
+  'barguna',
+  'bhola',
+  'bogura',
+  'brahmanbaria',
+  'chapai nawabganj',
+  'chandpur',
+  'chattogram',
+  'chuadanga',
+  "cox's bazar",
+  'cumilla',
+  'dinajpur',
+  'dhaka',
+  'faridpur',
+  'feni',
+  'gaibandha',
+  'gazipur',
+  'gopalganj',
+  'habiganj',
+  'jamalpur',
+  'jashore',
+  'jhenaidah',
+  'jhalokathi',
+  'joypurhat',
+  'khagrachari',
+  'khulna',
+  'kishoreganj',
+  'kurigram',
+  'kushtia',
+  'lakshmipur',
+  'lalmonirhat',
+  'madaripur',
+  'magura',
+  'manikganj',
+  'meherpur',
+  'moulvibazar',
+  'munshiganj',
+  'mymensingh',
+  'naogaon',
+  'narail',
+  'narayanganj',
+  'narsingdi',
+  'natore',
+  'netrokona',
+  'nilphamari',
+  'noakhali',
+  'pabna',
+  'panchagarh',
+  'patuakhali',
+  'pirojpur',
+  'rajbari',
+  'rajshahi',
+  'rangamati',
+  'rangpur',
+  'satkhira',
+  'shariatpur',
+  'sherpur',
+  'sirajganj',
+  'sunamganj',
+  'sylhet',
+  'tangail',
+  'thakurgaon',
 ];
 
 export function TeacherRegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -126,13 +198,25 @@ export function TeacherRegistrationForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     console.log('Form submitted with values:', values);
     // Here you would typically send the data to your API
-    setTimeout(() => {
+    try {
+      const res = await registerTeacher(values);
+      console.log('response from register teacher', res);
+      if (res.success) {
+        setIsSubmitting(false);
+        toast.success(res.message);
+        router.push('/login-user');
+      }
+    } catch (error) {
+      console.log(error);
       setIsSubmitting(false);
-    }, 2000);
+    }
+    // setTimeout(() => {
+    //   setIsSubmitting(false);
+    // }, 2000);
   }
 
   return (
@@ -414,8 +498,14 @@ export function TeacherRegistrationForm() {
                         type="number"
                         placeholder="500"
                         {...field}
-                        onChange={(e) =>
-                          field.onChange(parseInt(e.target.value))
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          field.onChange(val === '' ? '' : parseInt(val));
+                        }}
+                        value={
+                          field.value === undefined || isNaN(field.value)
+                            ? ''
+                            : field.value
                         }
                         className="focus:ring-indigo-500"
                       />
