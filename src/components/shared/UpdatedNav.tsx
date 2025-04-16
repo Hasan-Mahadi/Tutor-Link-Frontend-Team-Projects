@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import Link from 'next/link';
+import { ThemeToggle } from '../theme-toggle';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -86,6 +87,10 @@ export default function Navigation() {
           >
             Sign Up
           </Link>
+          <div className="-pt-2">
+            {' '}
+            <ThemeToggle />
+          </div>
         </div>
       </div>
 
@@ -158,6 +163,10 @@ export default function Navigation() {
               >
                 Sign Up
               </Link>
+              <div className="-pt-2">
+                {' '}
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>

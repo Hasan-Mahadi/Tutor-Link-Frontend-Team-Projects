@@ -284,9 +284,11 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                 <CardContent className="space-y-4">
                   {tutor?.reviews?.length ? (
                     <>
-                      {tutor?.reviews?.slice(0, 2).map((review, index) => (
-                        <ReviewCard key={index} review={review}></ReviewCard>
-                      ))}
+                      {tutor?.reviews
+                        ?.slice(0, 2)
+                        .map((review, index) => (
+                          <ReviewCard key={index} review={review}></ReviewCard>
+                        ))}
                     </>
                   ) : (
                     <>
