@@ -24,6 +24,8 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
+import { registerStudent } from '@/services/AuthService';
+import { toast } from 'sonner';
 
 // Define form schema
 const formSchema = z.object({
@@ -48,6 +50,7 @@ const formSchema = z.object({
       .min(1, { message: 'Permanent address is required' }),
     profileImg: z.string().url({ message: 'Invalid URL' }),
     coverImg: z.string().url({ message: 'Invalid URL' }),
+    isDeleted:z.boolean()
   }),
 });
 
@@ -70,14 +73,21 @@ export function StudentRegistrationForm() {
         permanentAddress: '',
         profileImg: '',
         coverImg: '',
+        isDeleted:false
       },
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    console.log('Form submitted with values:', values);
+    
     // Here you would typically send the data to your API
+    const res = await registerStudent(values);
+    if(res.success){
+      toast.success(res?.data.message)
+    }else{
+      toast.error(res?.data.message);
+    }
     setTimeout(() => {
       setIsSubmitting(false);
     }, 2000);

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema } from "./registerValidation";
-import { registerUser } from "@/services/AuthService";
+// import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 
 const RegisterForm = () => {
@@ -21,17 +21,17 @@ const RegisterForm = () => {
     const passwordConfirm = form.watch("passwordConfirm");
 
     const onSubmit:SubmitHandler<FieldValues> =async(data)=>{
-        try {
-            const res = await registerUser(data);
-            if(res?.success){
-                toast.success(res?.message)
-            }
-            else{
-                toast.error(res?.message)
-            }
-        } catch (err:any) {
-            console.error(err)
-        }
+        // try {
+        //     // const res = await registerUser(data);
+        //     if(res?.success){
+        //         toast.success(res?.message)
+        //     }
+        //     else{
+        //         toast.error(res?.message)
+        //     }
+        // } catch (err:any) {
+        //     console.error(err)
+        // }
     }
     return (
         <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-md w-full p-5">
