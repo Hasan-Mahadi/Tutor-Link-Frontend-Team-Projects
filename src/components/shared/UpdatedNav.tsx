@@ -1,4 +1,5 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
@@ -9,9 +10,21 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
+  const pathname = usePathname();
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const navLinkClass = (href: string) =>
+    `${
+      pathname === href ? 'text-indigo-500 ' : 'text-gray-700'
+    } hover:text-indigo-600`;
+
+  const navMobileLinkClass = (href: string) =>
+    `${
+      pathname === href ? 'text-indigo-600  bg-indigo-50' : 'text-gray-700'
+    } block py-2 px-2 hover:text-indigo-600 hover:bg-indigo-50 rounded`;
 
   return (
     <nav className="bg-white shadow-md py-4 px-4 sm:px-6 w-full sticky top-0 left-0 right-0 z-50">
@@ -21,7 +34,7 @@ export default function Navigation() {
           <Link href="/">TutorConnect</Link>
         </div>
 
-        {/* Mobile menu button - ALWAYS VISIBLE on mobile/tablet */}
+        {/* Mobile menu button */}
         <button
           id="mobile-menu-button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -36,32 +49,27 @@ export default function Navigation() {
           )}
         </button>
 
-        {/* Desktop Menu - hidden on mobile */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 lg:space-x-8">
-          <Link href="/" className="text-gray-700 hover:text-indigo-600">
+          <Link href="/" className={navLinkClass('/')}>
             Home
           </Link>
-          <Link
-            href="/browseTutor"
-            className="text-gray-700 hover:text-indigo-600"
-          >
+          <Link href="/browseTutor" className={navLinkClass('/browseTutor')}>
             Find Tutors
           </Link>
-          <Link
-            href="/my-profile"
-            className="text-gray-700 hover:text-indigo-600"
-          >
+
+          <Link href="/my-profile" className={navLinkClass('/my-profile')}>
             My Profile
           </Link>
-          <Link href="/about" className="text-gray-700 hover:text-indigo-600">
+          <Link href="/about" className={navLinkClass('/about')}>
             About Us
           </Link>
-          <Link href="/faq" className="text-gray-700 hover:text-indigo-600">
+          <Link href="/faq" className={navLinkClass('/faq')}>
             FAQ
           </Link>
         </div>
 
-        {/* Desktop Auth Buttons - hidden on mobile */}
+        {/* Desktop Auth Buttons */}
         <div className="hidden md:flex space-x-3 sm:space-x-4">
           <Link
             href="/login"
@@ -78,7 +86,7 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu - appears below navbar */}
+      {/* Mobile Menu */}
       {isMounted && (
         <div
           className={`md:hidden bg-white shadow-lg w-full absolute left-0 transition-all duration-300 ease-in-out ${
@@ -90,39 +98,40 @@ export default function Navigation() {
           <div className="px-4 pt-2 pb-4 space-y-2">
             <Link
               href="/"
-              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
+              className={navMobileLinkClass('/')}
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/browseTutor"
-              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
+              className={navMobileLinkClass('/browseTutor')}
               onClick={() => setMobileMenuOpen(false)}
             >
               Find Tutors
             </Link>
             <Link
               href="/my-profile"
-              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
+              className={navMobileLinkClass('/my-profile')}
               onClick={() => setMobileMenuOpen(false)}
             >
               My Profile
             </Link>
             <Link
               href="/about"
-              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
+              className={navMobileLinkClass('/about')}
               onClick={() => setMobileMenuOpen(false)}
             >
               About Us
             </Link>
             <Link
               href="/faq"
-              className="block py-2 px-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded"
+              className={navMobileLinkClass('/faq')}
               onClick={() => setMobileMenuOpen(false)}
             >
               FAQ
             </Link>
+
             <div className="flex space-x-3 pt-2">
               <Link
                 href="/login"

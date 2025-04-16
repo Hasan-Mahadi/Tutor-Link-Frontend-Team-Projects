@@ -1,41 +1,56 @@
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Heart } from 'lucide-react';
 
-interface TutorCardProps {
+
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Heart } from "lucide-react";
+import Link from "next/link";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
+export interface TTutors {
+  grade: any[];
+  _id: string;
   name: string;
-  title: string;
-  rating: number;
-  reviews: number;
+  email: string;
+  gender: string;
+  dateOfBirth: string;
+  user: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloodGroup: string;
+  district: string;
+  designation: string;
+  bio: string;
   subjects: string[];
-  description: string;
-  price: number;
-  location: string;
-  availability?: string;
-  imageUrl: string;
-  bgColor: string;
-  isFavorite: boolean;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg: string;
+  coverImg: string;
+  hourlyRate: number;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  availability: boolean;
+  reviews: Review[];
+  id: string;
+  averageRating: number;
 }
 
-export default function TutorCard({
-  name,
-  title,
-  rating,
-  reviews,
-  subjects,
-  description,
-  price,
-  location,
-  availability,
-  imageUrl,
-  bgColor,
-  isFavorite,
-}: TutorCardProps) {
+export interface Review {
+  _id: string;
+  teacher: string;
+  student: string;
+  comment: string;
+  rating: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+export default function TutorCard({ tutor }: { tutor: TTutors }) {
   const renderStars = () => {
     const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
+    const fullStars = Math.floor(tutor.averageRating);
+    const hasHalfStar = tutor.averageRating % 1 >= 0.5;
 
     for (let i = 0; i < fullStars; i++) {
       stars.push(<span key={i}>★</span>);
@@ -56,10 +71,16 @@ export default function TutorCard({
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       <div className="relative">
-        <div className={`h-40 bg-gradient-to-r ${bgColor}`}></div>
+        <div className={`h-40`}>
+          <img src={tutor.coverImg} alt="" />
+        </div>
         <div className="absolute -bottom-8 left-4">
           <Avatar className="h-16 w-16 border-4 border-white">
-            <AvatarImage src={imageUrl} alt={name} />
+            <AvatarImage
+              className="object-cover"
+              src={tutor.profileImg}
+              alt={tutor.name}
+            />
           </Avatar>
         </div>
         <div className="absolute top-2 right-2">
@@ -70,7 +91,11 @@ export default function TutorCard({
           >
             <Heart
               className={`h-4 w-4 ${
-                isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400'
+
+                tutor.averageRating > 4
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-400"
+
               }`}
             />
           </Button>
@@ -79,15 +104,17 @@ export default function TutorCard({
       <div className="pt-10 px-4 pb-4">
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="font-bold text-lg">{name}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300">{title}</p>
+            <h3 className="font-bold text-lg">{tutor.name}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              {tutor.bio}
+            </p>
           </div>
-          {availability && (
+          {tutor.availability && (
             <Badge
               variant="secondary"
               className="bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-200"
             >
-              {availability}
+              {tutor.availability}
             </Badge>
           )}
         </div>
@@ -95,13 +122,13 @@ export default function TutorCard({
         <div className="flex items-center mt-2">
           <div className="flex text-yellow-400">{renderStars()}</div>
           <span className="text-sm text-gray-600 dark:text-gray-300 ml-1">
-            {rating.toFixed(1)} ({reviews} reviews)
+            {tutor.averageRating?.toFixed(1)} ({tutor.reviews.length} reviews)
           </span>
         </div>
 
         <div className="mt-3">
           <div className="flex flex-wrap gap-1">
-            {subjects.map((subject, index) => (
+            {tutor.subjects?.map((subject, index) => (
               <Badge key={index} variant="outline" className="text-xs">
                 {subject}
               </Badge>
@@ -110,17 +137,22 @@ export default function TutorCard({
         </div>
 
         <p className="text-sm text-gray-600 dark:text-gray-300 mt-3 line-clamp-2">
-          {description}
+          {/* {tutor.} */}
         </p>
 
         <div className="flex justify-between items-center mt-4">
           <div>
-            <span className="font-bold text-primary">${price}/hr</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
-              {location}
+            <span className="font-bold text-primary">
+              BDT {tutor.hourlyRate}/hr
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 ml-1 capitalize">
+              {tutor.district}
             </span>
           </div>
-          <Button size="sm">View Profile</Button>
+          <Link href={`/browseTutor/${tutor._id}`}>
+            {" "}
+            <Button size="sm">View Profile</Button>
+          </Link>
         </div>
       </div>
     </div>

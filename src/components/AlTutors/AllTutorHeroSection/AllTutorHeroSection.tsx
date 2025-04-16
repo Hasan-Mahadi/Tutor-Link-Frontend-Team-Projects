@@ -1,3 +1,6 @@
+"use client";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -7,7 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import React from 'react';
+
+
+import React, { useState } from 'react';
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+
+
+
 
 const subjects = [
   'Physics',
@@ -33,6 +44,34 @@ const subjects = [
 ];
 
 const AllTutorHeroSection = () => {
+  const [nameQuery, setNameQuery] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleSearchQuery = (
+    query: string,
+    value: string | number | boolean
+  ) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(query, value.toString());
+    router.push(`${pathname}?${params.toString()}`,
+    //  { scroll: false }
+    );
+  };
+
+  const handleSearch = () => {
+    if (nameQuery.trim() !== "") {
+      handleSearchQuery("name", nameQuery.trim());
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,26 +82,17 @@ const AllTutorHeroSection = () => {
           <p className="text-xl mb-8">
             Connect with expert tutors in any subject, online or in-person
           </p>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <div className="flex shadow-lg rounded-lg overflow-hidden">
               <Input
                 type="text"
+                value={nameQuery}
+                onChange={(e) => setNameQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="Search by tutor name"
                 className="flex-grow bg-white px-4 py-3 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-none border-0 text-gray-800"
               />
-              <Select>
-                <SelectTrigger className="border-l border-gray-300 px-4 py-3 bg-white text-gray-700 focus:ring-0 focus:ring-offset-0 rounded-none border-y-0 border-r-0 w-[180px]">
-                  <SelectValue placeholder="All Subjects" />
-                </SelectTrigger>
-                <SelectContent>
-                  {subjects?.map((subject, index) => (
-                    <SelectItem key={index} value={subject}>
-                      {subject}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Button className="px-6 py-3 rounded-none">
+              <Button className="px-6 py-3 rounded-none" onClick={handleSearch}>
                 <i className="fas fa-search mr-2"></i> Search
               </Button>
             </div>
