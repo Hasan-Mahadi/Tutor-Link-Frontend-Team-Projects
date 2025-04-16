@@ -25,8 +25,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { registerStudent } from '@/services/AuthService';
 import { useRouter } from 'next/navigation';
+import { registerStudent } from '@/services/AuthService';
 
 // Define form schema
 const formSchema = z.object({
@@ -58,6 +58,7 @@ const formSchema = z.object({
 export function StudentRegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

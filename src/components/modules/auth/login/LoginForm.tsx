@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginUser, registerUser } from '@/services/AuthService';
+import { loginUser } from '@/services/AuthService';
 import { toast } from 'sonner';
 import { loginSchema } from './loginValidation';
 

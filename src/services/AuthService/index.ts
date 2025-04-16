@@ -4,9 +4,10 @@ import { cookies } from 'next/headers';
 import { FieldValues } from 'react-hook-form';
 import { jwtDecode } from 'jwt-decode';
 
-export const registerUser = async (userData: FieldValues) => {
+export const registerStudent = async (userData: FieldValues) => {
+  console.log(userData);
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/create-student`, {
+    const res = await fetch(`${process.env.BACKEND_URL}/users/create-student`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -14,9 +15,28 @@ export const registerUser = async (userData: FieldValues) => {
       body: JSON.stringify(userData),
     });
     const result = await res.json();
-    if (result.success) {
-      (await cookies()).set('accessToken', result.data.accessToken);
-    }
+    // if (result.success) {
+    //   (await cookies()).set('accessToken', result.data.accessToken);
+    // }
+
+    return result;
+  } catch (err: any) {
+    return Error(err);
+  }
+};
+export const registerTeacher = async (userData: FieldValues) => {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/users/create-teacher`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+    const result = await res.json();
+    // if (result.success) {
+    //   (await cookies()).set('accessToken', result.data.accessToken);
+    // }
 
     return result;
   } catch (err: any) {
@@ -26,7 +46,7 @@ export const registerUser = async (userData: FieldValues) => {
 
 export const loginUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/login`, {
+    const res = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
