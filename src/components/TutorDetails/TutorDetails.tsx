@@ -40,7 +40,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
   const router = useRouter();
 
   console.log('Tutor Details', tutor);
-  const { hourlyRate } = tutor;
+  const hourlyRate = tutor?.hourlyRate;
 
   const timeSlots = [
     '9:00 AM - 10:00 AM',
@@ -68,7 +68,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
     toast.warning('This is for Future Development');
   };
 
-  const dateOfBirth = new Date(tutor.dateOfBirth).toLocaleDateString('en-US', {
+  const dateOfBirth = new Date(tutor?.dateOfBirth).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -88,8 +88,8 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
         {/* Cover Image */}
         <div className=" md:h-[400px] bg-gray-200 relative">
           <img
-            src={tutor.coverImg}
-            alt={tutor.name}
+            src={tutor?.coverImg}
+            alt={tutor?.name}
             className="h-full w-full"
           />
         </div>
@@ -101,11 +101,11 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <div className="relative">
               <Avatar className="w-48 h-48 md:rounded-none  border-4 border-green-200 shadow-lg">
                 <AvatarImage
-                  src={tutor.profileImg}
-                  alt={tutor.name}
+                  src={tutor?.profileImg}
+                  alt={tutor?.name}
                   className="object-cover"
                 />
-                <AvatarFallback>{tutor.name}</AvatarFallback>
+                <AvatarFallback>{tutor?.name}</AvatarFallback>
               </Avatar>
               <div className="absolute bottom-0 right-0  text-white rounded-full p-2">
                 <div className="h-4 w-4 flex items-center justify-center">
@@ -130,18 +130,18 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <div className="flex justify-between items-start">
               <div>
                 <h1 className="text-3xl font-bold text-gray-800">
-                  {tutor.name}
+                  {tutor?.name}
                 </h1>
-                <p className="text-gray-600 mt-1">{tutor.designation}</p>
+                <p className="text-gray-600 mt-1">{tutor?.designation}</p>
               </div>
               <div className="flex items-center">
                 <Badge
                   variant="secondary"
                   className="bg-yellow-100 text-yellow-800"
                 >
-                  <span className="font-bold">{tutor.averageRating}</span>
+                  <span className="font-bold">{tutor?.averageRating}</span>
                   <Star className="ml-1 h-4 w-4 text-yellow-500 fill-yellow-500" />
-                  <span className="ml-1 text-sm">{tutor.reviews.length}</span>
+                  <span className="ml-1 text-sm">{tutor?.reviews?.length}</span>
                 </Badge>
               </div>
             </div>
@@ -149,21 +149,21 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge variant="outline" className="bg-blue-100 text-blue-800">
                 <MapPin className="mr-1 h-4 w-4" />{' '}
-                <span className="capitalize">{tutor.district}</span>
+                <span className="capitalize">{tutor?.district}</span>
               </Badge>
               <Badge variant="outline" className="bg-green-100 text-green-800">
                 <span className="mr-1">♂</span>{' '}
-                <span className="capitalize ">{tutor.gender}</span>
+                <span className="capitalize ">{tutor?.gender}</span>
               </Badge>
               <Badge
                 variant="outline"
                 className="bg-purple-100 text-purple-800"
               >
-                <span className="mr-1">🩸</span> <span>{tutor.bloodGroup}</span>{' '}
-                Blood Group
+                <span className="mr-1">🩸</span>{' '}
+                <span>{tutor?.bloodGroup}</span> Blood Group
               </Badge>
               <Badge variant="outline" className="bg-amber-100 text-amber-800">
-                <Clock className="mr-1 h-4 w-4" /> BDT {tutor.hourlyRate}/hour
+                <Clock className="mr-1 h-4 w-4" /> BDT {tutor?.hourlyRate}/hour
               </Badge>
             </div>
 
@@ -193,7 +193,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                 About Me
               </h2>
               <div className="text-gray-700 leading-relaxed space-y-4">
-                <p>{tutor.bio}</p>
+                <p>{tutor?.bio}</p>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-2">
@@ -206,11 +206,11 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                       </li>
                       <li className="flex items-center">
                         <Phone className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Contact: {tutor.contactNo}</span>
+                        <span>Contact: {tutor?.contactNo}</span>
                       </li>
                       <li className="flex items-center">
                         <Phone className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Emergency: {tutor.emergencyContactNo}</span>
+                        <span>Emergency: {tutor?.emergencyContactNo}</span>
                       </li>
                     </ul>
                   </div>
@@ -221,11 +221,11 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                     <ul className="text-gray-700 space-y-2">
                       <li className="flex items-center">
                         <Home className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Present: {tutor.presentAddress}</span>
+                        <span>Present: {tutor?.presentAddress}</span>
                       </li>
                       <li className="flex items-center">
                         <Home className="text-blue-500 mr-2 h-5 w-5" />
-                        <span>Permanent: {tutor.permanentAddress}</span>
+                        <span>Permanent: {tutor?.permanentAddress}</span>
                       </li>
                     </ul>
                   </div>
@@ -246,7 +246,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                   <div>
                     <h3 className="font-semibold text-gray-800">Subjects</h3>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {tutor.subjects.map((subject, index) => (
+                      {tutor?.subjects?.map((subject, index) => (
                         <Badge key={index} variant="outline">
                           {subject}
                         </Badge>
@@ -255,16 +255,16 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Designation</h3>
-                    <p className="mt-1 text-gray-700">{tutor.designation}</p>
+                    <p className="mt-1 text-gray-700">{tutor?.designation}</p>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">District</h3>
-                    <p className="mt-1 text-gray-700">{tutor.district}</p>
+                    <p className="mt-1 text-gray-700">{tutor?.district}</p>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Hourly Rate</h3>
                     <p className="mt-1 text-gray-700">
-                      BDT {tutor.hourlyRate} per hour
+                      BDT {tutor?.hourlyRate} per hour
                     </p>
                   </div>
                 </CardContent>
@@ -277,16 +277,18 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                     <Star className="text-yellow-500 mr-2 h-5 w-5 fill-yellow-500" />
                     Student Reviews
                     <span className="ml-2 text-gray-600 text-sm font-normal">
-                      {tutor.averageRating}
+                      {tutor?.averageRating}
                     </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {tutor.reviews.length ? (
+                  {tutor?.reviews?.length ? (
                     <>
-                      {tutor.reviews.slice(0, 2).map((review, index) => (
-                        <ReviewCard key={index} review={review}></ReviewCard>
-                      ))}
+                      {tutor?.reviews
+                        ?.slice(0, 2)
+                        .map((review, index) => (
+                          <ReviewCard key={index} review={review}></ReviewCard>
+                        ))}
                     </>
                   ) : (
                     <>
@@ -316,9 +318,9 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
               All Reviews
             </h2>
             <div className="space-y-4">
-              {tutor.reviews.length ? (
+              {tutor?.reviews?.length ? (
                 <>
-                  {[...tutor.reviews]
+                  {[...tutor?.reviews]
                     .sort(
                       (a, b) =>
                         new Date(b.createdAt).getTime() -
