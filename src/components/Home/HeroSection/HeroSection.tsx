@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
@@ -171,7 +172,7 @@ export function HeroSection() {
                 >
                   {item}
                 </span>
-              )
+              ),
             )}
           </div>
         </div>

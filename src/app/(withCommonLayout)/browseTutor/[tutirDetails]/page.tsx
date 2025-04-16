@@ -1,6 +1,6 @@
-import TutorProfile from "@/components/TutorDetails/TutorDetails";
-import { getSingleTutor } from "@/services/tutiors";
-import React from "react";
+import TutorProfile from '@/components/TutorDetails/TutorDetails';
+import { getSingleTutor } from '@/services/tutiors';
+import React from 'react';
 
 const TutorDetailsPage = async ({
   params,

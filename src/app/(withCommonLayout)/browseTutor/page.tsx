@@ -5,7 +5,6 @@ import AllTutorHeroSection from '@/components/AlTutors/AllTutorHeroSection/AllTu
 import { SortBy } from '@/components/AlTutors/SortBy';
 import { getAllTutors } from '@/services/tutiors';
 
-
 type SearchParams = { [key: string]: string[] | undefined };
 
 export default async function TutorsPage({

@@ -20,7 +20,7 @@ export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
 
   const timeSlots = [
     '9:00 AM',
-    '11:00 AM', 
+    '11:00 AM',
     '1:00 PM',
     '3:00 PM',
     '5:00 PM',
@@ -54,10 +54,14 @@ export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
   const getDurationLabel = (durationValue: string) => {
     const price = calculatePrice(Number(durationValue));
     switch (durationValue) {
-      case '1': return `1 hour (BDT ${price})`;
-      case '1.5': return `1.5 hours (BDT ${price})`;
-      case '2': return `2 hours (BDT ${price})`;
-      default: return `Select duration`;
+      case '1':
+        return `1 hour (BDT ${price})`;
+      case '1.5':
+        return `1.5 hours (BDT ${price})`;
+      case '2':
+        return `2 hours (BDT ${price})`;
+      default:
+        return `Select duration`;
     }
   };
 
@@ -128,15 +132,11 @@ export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
                       <SelectValue placeholder="Select duration" />
                     </SelectTrigger>
                     <SelectContent className="w-full">
-                      <SelectItem value="1">
-                        {getDurationLabel('1')}
-                      </SelectItem>
+                      <SelectItem value="1">{getDurationLabel('1')}</SelectItem>
                       <SelectItem value="1.5">
                         {getDurationLabel('1.5')}
                       </SelectItem>
-                      <SelectItem value="2">
-                        {getDurationLabel('2')}
-                      </SelectItem>
+                      <SelectItem value="2">{getDurationLabel('2')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -145,7 +145,6 @@ export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
                   className="w-full"
                   onClick={handleBookSession}
                   disabled={!date || !selectedTimeSlot || !subject || !duration}
-
                 >
                   Confirm Booking ({formatPrice(duration)})
                 </Button>
