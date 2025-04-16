@@ -33,7 +33,7 @@ export const getAllTutors = async (query?: {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/teachers?${params}`,
+      `${process.env.BACKEND_URL}/teachers?${params}`,
       {
         next: {
           tags: ['TUTOR'],
