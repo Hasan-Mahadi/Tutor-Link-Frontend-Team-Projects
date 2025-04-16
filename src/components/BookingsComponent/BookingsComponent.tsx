@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export function BookingComponent() {
+export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
   const [subject, setSubject] = useState<string>('');
@@ -20,7 +20,7 @@ export function BookingComponent() {
 
   const timeSlots = [
     '9:00 AM',
-    '11:00 AM',
+    '11:00 AM', 
     '1:00 PM',
     '3:00 PM',
     '5:00 PM',
@@ -32,24 +32,32 @@ export function BookingComponent() {
       date: date?.toLocaleDateString(),
       timeSlot: selectedTimeSlot,
       subject,
-      duration,
-      price: calculatePrice(duration),
+      duration: `${duration} hour${duration === '1' ? '' : 's'}`,
+      price: calculatePrice(Number(duration)),
+      total: `BDT ${calculatePrice(Number(duration))}`,
     };
 
     console.log('Booking Data:', bookingData);
     // Here you would typically send this data to your API
   };
 
-  const calculatePrice = (duration: string) => {
-    switch (duration) {
-      case '1':
-        return 'BDT 250';
-      case '1.5':
-        return 'BDT 375';
-      case '2':
-        return 'BDT 500';
-      default:
-        return 'BDT 0';
+  const calculatePrice = (duration: number) => {
+    return duration * hourlyRate;
+  };
+
+  const formatPrice = (duration: string) => {
+    if (!duration) return 'BDT 0';
+    const price = calculatePrice(Number(duration));
+    return `BDT ${price}`;
+  };
+
+  const getDurationLabel = (durationValue: string) => {
+    const price = calculatePrice(Number(durationValue));
+    switch (durationValue) {
+      case '1': return `1 hour (BDT ${price})`;
+      case '1.5': return `1.5 hours (BDT ${price})`;
+      case '2': return `2 hours (BDT ${price})`;
+      default: return `Select duration`;
     }
   };
 
@@ -120,9 +128,15 @@ export function BookingComponent() {
                       <SelectValue placeholder="Select duration" />
                     </SelectTrigger>
                     <SelectContent className="w-full">
-                      <SelectItem value="1">1 hour (BDT 250)</SelectItem>
-                      <SelectItem value="1.5">1.5 hours (BDT 375)</SelectItem>
-                      <SelectItem value="2">2 hours (BDT 500)</SelectItem>
+                      <SelectItem value="1">
+                        {getDurationLabel('1')}
+                      </SelectItem>
+                      <SelectItem value="1.5">
+                        {getDurationLabel('1.5')}
+                      </SelectItem>
+                      <SelectItem value="2">
+                        {getDurationLabel('2')}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -131,8 +145,9 @@ export function BookingComponent() {
                   className="w-full"
                   onClick={handleBookSession}
                   disabled={!date || !selectedTimeSlot || !subject || !duration}
+
                 >
-                  Confirm Booking ({calculatePrice(duration)})
+                  Confirm Booking ({formatPrice(duration)})
                 </Button>
               </CardContent>
             </Card>

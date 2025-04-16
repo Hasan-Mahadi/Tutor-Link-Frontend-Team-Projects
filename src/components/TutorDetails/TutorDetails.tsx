@@ -40,6 +40,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
   const router = useRouter();
 
   console.log('Tutor Details', tutor);
+  const { hourlyRate } = tutor;
 
   const timeSlots = [
     '9:00 AM - 10:00 AM',
@@ -343,7 +344,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Book a Session
             </h2>
-            <BookingComponent></BookingComponent>
+            <BookingComponent hourlyRate={hourlyRate}></BookingComponent>
           </TabsContent>
         </Tabs>
       </Card>
