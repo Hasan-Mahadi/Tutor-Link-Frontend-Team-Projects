@@ -45,7 +45,7 @@ export const registerTeacher = async (userData:FieldValues)=>{
 
 export const loginUser = async (userData:FieldValues)=>{
     try {
-        const res = await fetch(`${process.env.BACKEND_URL}/login`,{
+        const res = await fetch(`${process.env.BACKEND_URL}/auth/login`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",

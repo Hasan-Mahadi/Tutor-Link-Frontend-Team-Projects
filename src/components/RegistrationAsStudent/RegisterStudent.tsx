@@ -88,9 +88,6 @@ export function StudentRegistrationForm() {
     }else{
       toast.error(res?.data.message);
     }
-    setTimeout(() => {
-      setIsSubmitting(false);
-    }, 2000);
   }
 
   return (
