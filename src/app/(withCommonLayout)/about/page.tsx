@@ -180,7 +180,7 @@ export default function AboutPage() {
                 className="bg-white p-6 rounded-lg shadow-md border-l-4 border-indigo-600"
                 data-aos="flip-left"
               >
-                <h3 className="text-xl font-semibold mb-4">For Students</h3>
+                <h3 className="text-xl dark:text-black font-semibold mb-4">For Students</h3>
                 <p className="text-gray-600">
                   We believe every student deserves personalized attention and
                   learning that adapts to modern lifestyles.
@@ -190,7 +190,7 @@ export default function AboutPage() {
                 className="bg-white p-6 rounded-lg shadow-md border-l-4 border-indigo-600"
                 data-aos="flip-right"
               >
-                <h3 className="text-xl font-semibold mb-4">For Tutors</h3>
+                <h3 className="text-xl dark:text-black font-semibold mb-4">For Tutors</h3>
                 <p className="text-gray-600">
                   Great tutors should be easily discoverable and empowered with
                   tools to focus on teaching.
@@ -213,7 +213,7 @@ export default function AboutPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition-shadow border-t-4 border-indigo-600"
+                className="bg-gray-50 dark:text-black p-8 rounded-xl hover:shadow-lg transition-shadow border-t-4 border-indigo-600"
                 data-aos="flip-right"
               >
                 <div className="flex justify-center mb-4">{feature.icon}</div>

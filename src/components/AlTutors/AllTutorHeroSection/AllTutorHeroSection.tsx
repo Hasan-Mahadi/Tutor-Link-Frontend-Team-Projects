@@ -11,8 +11,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-
-import React, { useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import React, { useEffect, useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -51,6 +52,18 @@ const AllTutorHeroSection = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+
+  //this useEffect for animation
+   useEffect(() => {
+   AOS.init({
+     duration: 800,
+     easing: 'ease-in-out',
+     once: false,
+     mirror: true,
+   });
+ }, []);
+
+
   const handleSearchQuery = (
     query: string,
     value: string | number | boolean,
@@ -75,17 +88,20 @@ const AllTutorHeroSection = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-12">
+    <div className="bg-gradient-to-r from-indigo-600 to-blue-800 text-white py-12" data-aos="fade-down">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">
+        <div className="text-center" 
+>
+          <h1 className="text-5xl font-bold mb-4"data-aos="zoom-in" data-aos-delay="200">
             Find the Right Tutor for You
           </h1>
-          <p className="text-xl mb-8">
+          <p className="text-xl mb-8"data-aos="fade-up"
+data-aos-delay="400">
             Connect with expert tutors in any subject, online or in-person
           </p>
           <div className="max-w-xl mx-auto">
-            <div className="flex shadow-lg rounded-lg overflow-hidden">
+            <div className="flex shadow-lg rounded-lg overflow-hidden"data-aos="fade-up"
+data-aos-delay="400">
               <Input
                 type="text"
                 value={nameQuery}
