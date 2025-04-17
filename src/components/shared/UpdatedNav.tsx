@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -7,11 +8,23 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { ThemeToggle } from '../theme-toggle';
 
+
+import { getCurrentUser, logout } from '@/services/AuthService';
+import { useUser } from '@/context/UserContext';
+import { Button } from '../ui/button';
+
+
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-
+  const { user, setIsLoading } = useUser();
   const pathname = usePathname();
+  console.log('User from Nav', user);
+
+  const handleLogout = () => {
+    logout();
+    setIsLoading(true);
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -75,8 +88,9 @@ export default function Navigation() {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex space-x-3 sm:space-x-4">
+
           <Link
-            href="/login-user"
+            href="/login"
             className="px-3 sm:px-4 py-1 sm:py-2 text-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-50 text-sm sm:text-base"
           >
             Login
@@ -87,6 +101,29 @@ export default function Navigation() {
           >
             Sign Up
           </Link>
+
+          {user ? (
+            <Button onClick={handleLogout} variant={'outline'} className="py-5">
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Link
+                href="/login-user"
+                className="px-3 sm:px-4 py-1 sm:py-2 text-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-50 text-sm sm:text-base"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register-student"
+                className="px-3 sm:px-4 py-1 sm:py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-sm sm:text-base"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
+
+
           <div className="-pt-2">
             {' '}
             <ThemeToggle />
@@ -149,8 +186,9 @@ export default function Navigation() {
             </Link>
 
             <div className="flex space-x-3 pt-2">
+
               <Link
-                href="/login-user"
+                href="/login"
                 className="w-1/2 px-4 py-2 text-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-50 text-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -163,6 +201,35 @@ export default function Navigation() {
               >
                 Sign Up
               </Link>
+
+              {user ? (
+                <Button
+                  onClick={handleLogout}
+                  variant={'outline'}
+                  className="py-5"
+                >
+                  Logout
+                </Button>
+              ) : (
+                <>
+                  <Link
+                    href="/login-user"
+                    className="w-1/2 px-4 py-2 text-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-50 text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="w-1/2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+
+
               <div className="-pt-2">
                 {' '}
                 <ThemeToggle />

@@ -214,9 +214,6 @@ export function TeacherRegistrationForm() {
       console.log(error);
       setIsSubmitting(false);
     }
-    // setTimeout(() => {
-    //   setIsSubmitting(false);
-    // }, 2000);
   }
 
   return (
