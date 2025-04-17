@@ -44,6 +44,17 @@ export const registerTeacher = async (userData: FieldValues) => {
   }
 };
 
+<<<<<<< HEAD
+export const loginUser = async (userData:FieldValues)=>{
+    try {
+        const res = await fetch(`${process.env.BACKEND_URL}/auth/login`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify(userData)
+        });
+=======
 export const loginUser = async (userData: FieldValues) => {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
@@ -53,6 +64,7 @@ export const loginUser = async (userData: FieldValues) => {
       },
       body: JSON.stringify(userData),
     });
+>>>>>>> 5200fd5a93d5118f1a117077d495e0cbf5fb7c44
 
     const result = await res.json();
     if (result.success) {
