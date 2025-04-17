@@ -40,11 +40,16 @@ export function LoginForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     console.log('Form submitted with values:', values);
+
     // API call would go here
+
     const res = await loginUser(values);
-    if(res.success){
-      toast.success(res?.data.message);
-      setIsSubmitting(false)
+    if (res.success) {
+      toast.success(res?.message);
+      setIsSubmitting(false);
+    } else {
+      toast.error(res?.message);
+      setIsSubmitting(false);
     }
   }
 
