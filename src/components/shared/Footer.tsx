@@ -70,7 +70,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-indigo-600">
               TutorConnect
             </h3>
             <p className="text-xs sm:text-sm text-gray-400">

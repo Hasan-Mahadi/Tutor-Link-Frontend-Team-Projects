@@ -15,6 +15,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { loginUser } from '@/services/AuthService';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 // Define form schema
 const formSchema = z.object({
@@ -26,6 +29,7 @@ const formSchema = z.object({
 
 export function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,13 +39,21 @@ export function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     console.log('Form submitted with values:', values);
+
     // API call would go here
-    setTimeout(() => {
+
+    const res = await loginUser(values);
+    if (res.success) {
+      toast.success(res?.message);
       setIsSubmitting(false);
-    }, 2000);
+      router.push('/');
+    } else {
+      toast.error(res?.message);
+      setIsSubmitting(false);
+    }
   }
 
   return (

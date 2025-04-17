@@ -12,10 +12,12 @@ const HomePage = () => {
     <div className="container mx-auto space-y-4">
       <HeroSection></HeroSection>
       <KeyFeature></KeyFeature>
-      <Testimonials></Testimonials>
+       <SubjectsCoverSection></SubjectsCoverSection>
+     
       <CTASection></CTASection>
-      <SubjectsCoverSection></SubjectsCoverSection>
+     
       <HowItWorks></HowItWorks>
+       <Testimonials></Testimonials>
       <NewsletterSection></NewsletterSection>
     </div>
   );
