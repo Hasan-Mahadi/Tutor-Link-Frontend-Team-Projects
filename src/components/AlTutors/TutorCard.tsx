@@ -70,8 +70,8 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       <div className="relative">
-        <div className={`h-40`}>
-          <img src={tutor.coverImg} alt="" />
+        <div className={`h-48`}>
+          <img src={tutor.coverImg} className="h-48 w-full object-cover" alt="" />
         </div>
         <div className="absolute -bottom-8 left-4">
           <Avatar className="h-16 w-16 border-4 border-white">
@@ -90,6 +90,7 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
           >
             <Heart
               className={`h-4 w-4 ${
+
                 tutor.averageRating > 4
                   ? "fill-red-500 text-red-500"
                   : "text-gray-400"
@@ -148,7 +149,7 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
             </span>
           </div>
           <Link href={`/browseTutor/${tutor._id}`}>
-            {" "}
+            {' '}
             <Button size="sm">View Profile</Button>
           </Link>
         </div>

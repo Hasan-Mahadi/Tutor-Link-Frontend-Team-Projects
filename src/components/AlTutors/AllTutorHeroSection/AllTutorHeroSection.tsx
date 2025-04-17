@@ -1,10 +1,23 @@
 "use client";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+
+import React, { useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+
+
+
 
 
 
@@ -33,28 +46,30 @@ const subjects = [
 ];
 
 const AllTutorHeroSection = () => {
-  const [nameQuery, setNameQuery] = useState("");
+  const [nameQuery, setNameQuery] = useState('');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const handleSearchQuery = (
     query: string,
-    value: string | number | boolean
+    value: string | number | boolean,
   ) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(query, value.toString());
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    router.push(`${pathname}?${params.toString()}`,
+    //  { scroll: false }
+    );
   };
 
   const handleSearch = () => {
-    if (nameQuery.trim() !== "") {
-      handleSearchQuery("name", nameQuery.trim());
+    if (nameQuery.trim() !== '') {
+      handleSearchQuery('name', nameQuery.trim());
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSearch();
     }
   };

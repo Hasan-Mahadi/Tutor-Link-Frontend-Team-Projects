@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import Link from 'next/link';
+import { ThemeToggle } from '../theme-toggle';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -67,6 +68,9 @@ export default function Navigation() {
           <Link href="/faq" className={navLinkClass('/faq')}>
             FAQ
           </Link>
+          <Link href="/blog" className={navLinkClass('/blog')}>
+            Blog
+          </Link>
         </div>
 
         {/* Desktop Auth Buttons */}
@@ -83,6 +87,10 @@ export default function Navigation() {
           >
             Sign Up
           </Link>
+          <div className="-pt-2">
+            {' '}
+            <ThemeToggle />
+          </div>
         </div>
       </div>
 
@@ -132,9 +140,17 @@ export default function Navigation() {
               FAQ
             </Link>
 
+            <Link
+              href="/blog"
+              className={navMobileLinkClass('/blog')}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Blog
+            </Link>
+
             <div className="flex space-x-3 pt-2">
               <Link
-                href="/login"
+                href="/login-user"
                 className="w-1/2 px-4 py-2 text-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-50 text-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -147,6 +163,10 @@ export default function Navigation() {
               >
                 Sign Up
               </Link>
+              <div className="-pt-2">
+                {' '}
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>
