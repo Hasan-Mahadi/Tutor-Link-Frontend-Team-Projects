@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -8,6 +9,7 @@ import './globals.css';
 import Providers from '@/providers/Providers';
 import ClientToaster from '@/components/ClientToaster/ClientToaster';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from './theme-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,7 +37,7 @@ export default async function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          <ThemeProvider>{children}</ThemeProvider>
           <Toaster position="top-center" richColors />
         </body>
       </Providers>

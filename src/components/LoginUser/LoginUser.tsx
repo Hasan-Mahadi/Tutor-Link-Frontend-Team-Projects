@@ -42,20 +42,12 @@ export function LoginForm() {
     console.log('Form submitted with values:', values);
 
     // API call would go here
-    try {
-      const res = await loginUser(values);
-      console.log(res);
-      if (res?.success) {
-        toast.success(res?.message);
-      } else {
-        toast.error(res?.message);
-      }
-    } catch (err: any) {
-      console.error(err);
-    }
-    setTimeout(() => {
+
+    const res = await loginUser(values);
+    if (res.success) {
+      toast.success(res?.data.message);
       setIsSubmitting(false);
-    }, 2000);
+    }
   }
 
   return (
