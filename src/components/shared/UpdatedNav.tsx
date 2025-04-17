@@ -14,14 +14,13 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const { user, setIsLoading } = useUser();
-  // console.log('User from Nav', user);
+  const pathname = usePathname();
+  console.log('User from Nav', user);
 
   const handleLogout = () => {
     logout();
     setIsLoading(true);
   };
-
-  const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);

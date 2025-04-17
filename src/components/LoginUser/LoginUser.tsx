@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { loginUser } from '@/services/AuthService';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 // Define form schema
 const formSchema = z.object({
@@ -28,6 +29,7 @@ const formSchema = z.object({
 
 export function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,6 +49,7 @@ export function LoginForm() {
     if (res.success) {
       toast.success(res?.message);
       setIsSubmitting(false);
+      router.push('/');
     } else {
       toast.error(res?.message);
       setIsSubmitting(false);
