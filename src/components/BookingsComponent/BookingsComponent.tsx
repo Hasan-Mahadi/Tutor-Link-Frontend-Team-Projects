@@ -15,6 +15,7 @@ import { useUser } from '@/context/UserContext';
 import { getAllStudents } from '@/services/Student';
 import { createBookings } from '@/services/Bookings';
 import { toast } from 'sonner';
+import { TTutors } from '../AlTutors/TutorCard';
 
 type Student = {
   _id: string;
@@ -28,9 +29,11 @@ type Student = {
 export function BookingComponent({
   hourlyRate,
   tutorId,
+  tutor,
 }: {
   hourlyRate: number;
   tutorId: string;
+  tutor: TTutors;
 }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
@@ -179,11 +182,11 @@ export function BookingComponent({
                       <SelectValue placeholder="Select subject" />
                     </SelectTrigger>
                     <SelectContent className="w-full">
-                      <SelectItem value="physics">Physics</SelectItem>
-                      <SelectItem value="math">Mathematics</SelectItem>
-                      <SelectItem value="higher-math">
-                        Higher Mathematics
-                      </SelectItem>
+                      {tutor?.subjects.map((subject, index) => (
+                        <SelectItem value={subject} key={index}>
+                          {subject}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
