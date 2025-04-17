@@ -12,6 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getAllTutors } from "@/services/tutiors";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const subjects = [
   "Physics",
@@ -45,6 +47,18 @@ export function HeroSection() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [tutors, setTutors] = useState([]);
+
+// this useEffect use for animation
+  useEffect(() => {
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: false,
+    mirror: true,
+  });
+}, []);
+
+
 
   useEffect(() => {
     const query: { [key: string]: string[] } = {};
@@ -87,17 +101,20 @@ export function HeroSection() {
   };
 
   return (
-    <div className="relative h-[70vh] sm:h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80')] bg-cover bg-center flex flex-col justify-center items-center text-center">
+    <div className="relative h-[70vh] sm:h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80')] bg-cover bg-center flex flex-col justify-center items-center text-center" data-aos="fade-down">
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 px-4 w-full max-w-4xl">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6" data-aos="zoom-in"
+ data-aos-delay="200">
           Find the Perfect Tutor Anytime, Anywhere
         </h1>
-        <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 px-2">
+        <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 px-2" data-aos="fade-up"
+ data-aos-delay="400">
           Search thousands of verified tutors for any subject or grade.
         </p>
 
-        <div className="bg-white p-4 rounded-lg shadow-xl">
+        <div className="bg-white p-4 rounded-lg shadow-xl" data-aos="fade-up"
+ data-aos-delay="400">
           <div className="flex flex-col md:flex-row gap-2 w-full">
             <Select onValueChange={(value) => setSelectedSubject(value)}>
               <SelectTrigger className="h-12 w-full">
