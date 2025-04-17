@@ -202,7 +202,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-30">
+        <div className="container mx-auto px-8 md:px-30">
           <h2
             className="text-3xl font-bold text-center text-gray-900 mb-12"
             data-aos="flip-left"
@@ -235,7 +235,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-30">
+        <div className="container mx-auto px-8 md:px-30">
           <h2
             className="text-3xl font-bold text-center text-gray-900 mb-12"
             data-aos="flip-left"
@@ -299,7 +299,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 px-30 gap-10">
+          <div className="grid md:grid-cols-2 md:px-30 gap-10">
             {/* Roadmap Card */}
             <div
               className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-white/30 transition-all duration-300 hover:shadow-xl"
