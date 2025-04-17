@@ -339,7 +339,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             </div>
             {/* create review option */}
             <div className="mt-4 flex justify-center items-center">
-              <FeedbackModal  tutorId={tutorId}></FeedbackModal>
+              <FeedbackModal tutorId={tutorId}></FeedbackModal>
             </div>
           </TabsContent>
 
@@ -350,6 +350,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <BookingComponent
               hourlyRate={hourlyRate}
               tutorId={tutorId}
+              tutor={tutor}
             />
           </TabsContent>
         </Tabs>
