@@ -337,7 +337,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             </div>
             {/* create review option */}
             <div className="mt-4 flex justify-center items-center">
-              <FeedbackModal></FeedbackModal>
+              <FeedbackModal  tutorId={tutorId}></FeedbackModal>
             </div>
           </TabsContent>
 

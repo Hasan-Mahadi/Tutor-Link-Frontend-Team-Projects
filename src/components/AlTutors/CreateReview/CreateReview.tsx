@@ -10,22 +10,75 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
+import { useUser } from '@/context/UserContext';
+import { getAllStudents } from '@/services/Student';
+import { createReviews } from '@/services/Reviews';
+import { toast } from 'sonner';
 
-export function FeedbackModal() {
+type Student = {
+  _id: string;
+  user: string;
+  name: string;
+  email: string;
+  gender: string;
+  // Add any other fields you expect
+};
+
+export function FeedbackModal({ tutorId }: { tutorId: string }) {
   const [rating, setRating] = React.useState(0);
   const [hoverRating, setHoverRating] = React.useState(0);
   const [comment, setComment] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
+  const [allStudents, setAllStudents] = React.useState<{
+    data: Student[];
+  } | null>(null);
+  const { user } = useUser();
+  // console.log('user from user Details', user);
+  const currentStudent =
+    allStudents?.data?.filter((student) => student.user === user?.userId) || [];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // console.log({
+  //   currentStudent,
+  //   tutorId,
+  // });
+
+  React.useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const students = await getAllStudents();
+        setAllStudents(students);
+        // console.log('All Students:', students);
+      } catch (error) {
+        console.error('Failed to fetch students:', error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ comment, rating });
+    const handleReviewData = {
+      teacher: tutorId,
+      student: currentStudent[0]?._id,
+      comment,
+      rating,
+    };
 
-    // Here you would typically handle form submission
-    // For example, you might want to:
-    // 1. Validate the form
-    // 2. Send data to an API
-    // 3. Only close on success
+    // console.log(handleReviewData);
+
+    try {
+      const res = await createReviews(handleReviewData);
+      console.log(res);
+      if (res.success) {
+        // window.location.reload();
+        toast.success(res?.message);
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
     // For now, we'll just close the modal after logging
     setIsOpen(false);
@@ -38,7 +91,11 @@ export function FeedbackModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>Leave Reviews</Button>
+        {user?.role === 'student' ? (
+          <Button>Leave Reviews</Button>
+        ) : (
+          <Button disabled>Only Student Can Review</Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
