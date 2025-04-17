@@ -41,6 +41,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
 
   console.log('Tutor Details', tutor);
   const hourlyRate = tutor?.hourlyRate;
+  const tutorId = tutor?._id;
 
   const timeSlots = [
     '9:00 AM - 10:00 AM',
@@ -284,11 +285,9 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                 <CardContent className="space-y-4">
                   {tutor?.reviews?.length ? (
                     <>
-                      {tutor?.reviews
-                        ?.slice(0, 2)
-                        .map((review, index) => (
-                          <ReviewCard key={index} review={review}></ReviewCard>
-                        ))}
+                      {tutor?.reviews?.slice(0, 2).map((review, index) => (
+                        <ReviewCard key={index} review={review}></ReviewCard>
+                      ))}
                     </>
                   ) : (
                     <>
@@ -324,7 +323,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                     .sort(
                       (a, b) =>
                         new Date(b.createdAt).getTime() -
-                        new Date(a.createdAt).getTime(),
+                        new Date(a.createdAt).getTime()
                     )
                     .map((review, index) => (
                       <ReviewCard key={index} review={review} />
@@ -346,7 +345,10 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Book a Session
             </h2>
-            <BookingComponent hourlyRate={hourlyRate}></BookingComponent>
+            <BookingComponent
+              hourlyRate={hourlyRate}
+              tutorId={tutorId}
+            />
           </TabsContent>
         </Tabs>
       </Card>

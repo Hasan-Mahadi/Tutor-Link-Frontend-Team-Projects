@@ -45,7 +45,10 @@ export function LoginForm() {
 
     const res = await loginUser(values);
     if (res.success) {
-      toast.success(res?.data.message);
+      toast.success(res?.message);
+      setIsSubmitting(false);
+    } else {
+      toast.error(res?.message);
       setIsSubmitting(false);
     }
   }

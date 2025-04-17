@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,12 +11,59 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useUser } from '@/context/UserContext';
+import { getAllStudents } from '@/services/Student';
+import { createBookings } from '@/services/Bookings';
+import { toast } from 'sonner';
 
-export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
+type Student = {
+  _id: string;
+  user: string;
+  name: string;
+  email: string;
+  gender: string;
+  // Add any other fields you expect
+};
+
+export function BookingComponent({
+  hourlyRate,
+  tutorId,
+}: {
+  hourlyRate: number;
+  tutorId: string;
+}) {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
   const [subject, setSubject] = useState<string>('');
   const [duration, setDuration] = useState<string>('');
+  const [allStudents, setAllStudents] = useState<{
+    data: Student[];
+  } | null>(null);
+  const { user } = useUser();
+  console.log('user from user Details', user);
+  console.log('allStudents', allStudents);
+
+  const currentStudent =
+    allStudents?.data?.filter((student) => student.user === user?.userId) || [];
+
+  console.log({
+    currentStudent,
+    tutorId,
+  });
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const students = await getAllStudents();
+        setAllStudents(students);
+        // console.log('All Students:', students);
+      } catch (error) {
+        console.error('Failed to fetch students:', error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
 
   const timeSlots = [
     '9:00 AM',
@@ -27,18 +74,35 @@ export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
     '7:00 PM',
   ];
 
-  const handleBookSession = () => {
+  const handleBookSession = async () => {
     const bookingData = {
+      teacher: tutorId,
+      student: currentStudent[0]?._id,
       date: date?.toLocaleDateString(),
       timeSlot: selectedTimeSlot,
       subject,
       duration: `${duration} hour${duration === '1' ? '' : 's'}`,
       price: calculatePrice(Number(duration)),
-      total: `BDT ${calculatePrice(Number(duration))}`,
     };
 
     console.log('Booking Data:', bookingData);
     // Here you would typically send this data to your API
+    try {
+      const res = await createBookings(bookingData);
+      console.log(res);
+      if (res?.success) {
+        toast.success(res?.message);
+        // ✅ Reset form fields
+        setDate(new Date());
+        setSelectedTimeSlot('');
+        setSubject('');
+        setDuration('');
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const calculatePrice = (duration: number) => {
@@ -141,13 +205,21 @@ export function BookingComponent({ hourlyRate }: { hourlyRate: number }) {
                   </Select>
                 </div>
 
-                <Button
-                  className="w-full"
-                  onClick={handleBookSession}
-                  disabled={!date || !selectedTimeSlot || !subject || !duration}
-                >
-                  Confirm Booking ({formatPrice(duration)})
-                </Button>
+                {user?.role === 'student' ? (
+                  <Button
+                    className="w-full"
+                    onClick={handleBookSession}
+                    disabled={
+                      !date || !selectedTimeSlot || !subject || !duration
+                    }
+                  >
+                    Confirm Booking ({formatPrice(duration)})
+                  </Button>
+                ) : (
+                  <Button className="w-full">
+                    Only Student Can Booking a Teacher
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </div>
