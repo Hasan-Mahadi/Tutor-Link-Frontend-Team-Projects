@@ -23,6 +23,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/login-user', '/blog'],
+  matcher: ['/browseTutor/:id'],
 };
- 
