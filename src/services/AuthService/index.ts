@@ -15,9 +15,6 @@ export const registerStudent = async (userData: FieldValues) => {
       body: JSON.stringify(userData),
     });
     const result = await res.json();
-    // if (result.success) {
-    //   (await cookies()).set('accessToken', result.data.accessToken);
-    // }
 
     return result;
   } catch (err: any) {
@@ -34,17 +31,13 @@ export const registerTeacher = async (userData: FieldValues) => {
       body: JSON.stringify(userData),
     });
     const result = await res.json();
-    // if (result.success) {
-    //   (await cookies()).set('accessToken', result.data.accessToken);
-    // }
-
+    
     return result;
   } catch (err: any) {
     return Error(err);
   }
 };
 
-<<<<<<< HEAD
 export const loginUser = async (userData:FieldValues)=>{
     try {
         const res = await fetch(`${process.env.BACKEND_URL}/auth/login`,{
@@ -54,17 +47,6 @@ export const loginUser = async (userData:FieldValues)=>{
             },
             body:JSON.stringify(userData)
         });
-=======
-export const loginUser = async (userData: FieldValues) => {
-  try {
-    const res = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
->>>>>>> 5200fd5a93d5118f1a117077d495e0cbf5fb7c44
 
     const result = await res.json();
     if (result.success) {
@@ -85,4 +67,52 @@ export const getCurrentUser = async () => {
     return decodedData;
   }
   return null;
+};
+
+
+export const logoutUser = async () => {
+  try {
+    (await cookies()).delete('accessToken');
+    return { success: true, message: 'Logout successful' };
+  } catch (err: any) {
+    return { success: false, message: 'Logout failed', error: err.message };
+  }
+};
+
+export const getAllStudents = async () => {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/students`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    const result = await res.json();
+
+    return result;
+  } catch (err: any) {
+    return Error(err);
+  }
+};
+
+export const updateStudent = async (id: string, updatedData: FieldValues) => {
+  const accessToken = (await cookies()).get('accessToken')?.value;
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/students/${id}`, {
+      method: 'PATCH', // or 'PUT' if your backend uses that
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${accessToken}`,
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    const result = await res.json();
+
+    return result;
+  } catch (err: any) {
+    return Error(err);
+  }
 };
