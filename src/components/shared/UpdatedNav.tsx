@@ -4,6 +4,9 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+ 
+ 
+ 
 
 import Link from 'next/link';
 
@@ -14,6 +17,7 @@ import { ThemeToggle } from '../theme-toggle';
 import { getCurrentUser, logout } from '@/services/AuthService';
 
 import { useUser } from '@/context/UserContext';
+import { Button } from '../ui/button';
 
 
 export default function Navigation() {
