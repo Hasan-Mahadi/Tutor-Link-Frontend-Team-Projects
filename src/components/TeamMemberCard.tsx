@@ -16,7 +16,7 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
       <div className="relative h-60 w-full mb-4 rounded-lg overflow-hidden">
         <Image src={member.image} alt={member.name} fill className="" />
       </div>
-      <h3 className="text-xl font-semibold">{member.name}</h3>
+      <h3 className="text-xl font-semibold dark:text-black">{member.name}</h3>
       <p className="text-blue-600 mb-2">{member.role}</p>
       <p className="text-gray-600">{member.bio}</p>
     </div>

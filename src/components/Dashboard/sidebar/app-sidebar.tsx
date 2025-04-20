@@ -43,11 +43,11 @@ const data = {
         },
         {
           title: "Update Profile",
-          url: "/user/dashboard/update-profile",
+          url: "/user/dashboard/update-student-profile",
         },
         {
           title: "Manage Booking",
-          url: "/user/dashboard/manage-booking",
+          url: "/user/dashboard/student-bookings",
         },
       ],
     },
@@ -57,16 +57,16 @@ const data = {
       icon: Bot,
       items: [
         {
-          title: "My Profile",
-          url: "/user/dashboard/my-profile",
+          title: "Teacher Profile",
+          url: "/user/dashboard/teacher-profile",
         },
         {
-          title: "Update Profile",
-          url: "/user/dashboard/update-profile",
+          title: "Update Teacher Profile",
+          url: "/user/dashboard/update-teacher-profile",
         },
         {
           title: "Manage Booking",
-          url: "/user/dashboard/manage-booking",
+          url: "/user/dashboard/teacher-bookings",
         },
         {
           title:"Total Earnings",

@@ -180,7 +180,7 @@ export default function AboutPage() {
                 className="bg-white p-6 rounded-lg shadow-md border-l-4 border-indigo-600"
                 data-aos="flip-left"
               >
-                <h3 className="text-xl font-semibold mb-4">For Students</h3>
+                <h3 className="text-xl dark:text-black font-semibold mb-4">For Students</h3>
                 <p className="text-gray-600">
                   We believe every student deserves personalized attention and
                   learning that adapts to modern lifestyles.
@@ -190,7 +190,7 @@ export default function AboutPage() {
                 className="bg-white p-6 rounded-lg shadow-md border-l-4 border-indigo-600"
                 data-aos="flip-right"
               >
-                <h3 className="text-xl font-semibold mb-4">For Tutors</h3>
+                <h3 className="text-xl dark:text-black font-semibold mb-4">For Tutors</h3>
                 <p className="text-gray-600">
                   Great tutors should be easily discoverable and empowered with
                   tools to focus on teaching.
@@ -202,7 +202,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-30">
+        <div className="container mx-auto px-8 md:px-30">
           <h2
             className="text-3xl font-bold text-center text-gray-900 mb-12"
             data-aos="flip-left"
@@ -213,7 +213,7 @@ export default function AboutPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition-shadow border-t-4 border-indigo-600"
+                className="bg-gray-50 dark:text-black p-8 rounded-xl hover:shadow-lg transition-shadow border-t-4 border-indigo-600"
                 data-aos="flip-right"
               >
                 <div className="flex justify-center mb-4">{feature.icon}</div>
@@ -235,7 +235,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-30">
+        <div className="container mx-auto px-8 md:px-30">
           <h2
             className="text-3xl font-bold text-center text-gray-900 mb-12"
             data-aos="flip-left"
@@ -299,7 +299,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 px-30 gap-10">
+          <div className="grid md:grid-cols-2 md:px-30 gap-10">
             {/* Roadmap Card */}
             <div
               className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-white/30 transition-all duration-300 hover:shadow-xl"

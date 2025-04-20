@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import { useState } from 'react';
@@ -17,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { loginUser } from '@/services/AuthService';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 // Define form schema
 const formSchema = z.object({
@@ -28,6 +30,7 @@ const formSchema = z.object({
 
 export function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,11 +43,17 @@ export function LoginForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     console.log('Form submitted with values:', values);
+
     // API call would go here
+
     const res = await loginUser(values);
-    if(res.success){
-      toast.success(res?.data.message);
-      setIsSubmitting(false)
+    if (res.success) {
+      toast.success(res?.message);
+      setIsSubmitting(false);
+      router.push('/');
+    } else {
+      toast.error(res?.message);
+      setIsSubmitting(false);
     }
   }
 

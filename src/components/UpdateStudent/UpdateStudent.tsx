@@ -30,7 +30,6 @@ import { updateStudent } from '@/services/AuthService';
 
 // Define form schema
 const updateStudentFormSchema = z.object({
-  student: z.object({
     name: z.string().optional(),
     gender: z.enum(['male', 'female', 'other']).optional(),
     dateOfBirth: z.string().optional(),
@@ -44,23 +43,16 @@ const updateStudentFormSchema = z.object({
     profileImg: z.string().url({ message: 'Invalid URL' }).optional(),
     coverImg: z.string().url({ message: 'Invalid URL' }).optional(),
     isDeleted: z.boolean().optional(),
-  }),
 });
 
 
 
-export const UpdateStudentForm=({userId, student})=> {
+export const UpdateStudentForm=({student})=> {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
-
-  // console.log('userId',userId);
-  // console.log('student', student);
-
 
   const form = useForm<z.infer<typeof updateStudentFormSchema>>({
     resolver: zodResolver(updateStudentFormSchema),
     defaultValues: {
-      student: {
         name: student?.name,
         gender: student?.gender,
         dateOfBirth: student?.dateOfBirth,
@@ -72,7 +64,6 @@ export const UpdateStudentForm=({userId, student})=> {
         profileImg: student?.profileImg,
         coverImg: student?.coverImg,
         isDeleted: student?.isDeleted,
-      },
     },
   });
 
@@ -81,7 +72,7 @@ export const UpdateStudentForm=({userId, student})=> {
 
     console.log('values before submit',values);
     // Here you would typically send the data to your API
-    const res = await updateStudent(userId, values);
+    const res = await updateStudent(student._id, values);
     console.log('get res',res);
     if (res.success) {
       setIsSubmitting(false);
@@ -108,7 +99,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Name */}
               <FormField
                 control={form.control}
-                name="student.name"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">Full Name</FormLabel>
@@ -127,7 +118,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Date of Birth */}
               <FormField
                 control={form.control}
-                name="student.dateOfBirth"
+                name="dateOfBirth"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -148,7 +139,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Gender */}
               <FormField
                 control={form.control}
-                name="student.gender"
+                name="gender"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">Gender</FormLabel>
@@ -201,7 +192,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Contact Number */}
               <FormField
                 control={form.control}
-                name="student.contactNo"
+                name="contactNo"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -222,7 +213,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Emergency Contact Number */}
               <FormField
                 control={form.control}
-                name="student.emergencyContactNo"
+                name="emergencyContactNo"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -243,7 +234,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Blood Group */}
               <FormField
                 control={form.control}
-                name="student.bloodGroup"
+                name="bloodGroup"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">Blood Group</FormLabel>
@@ -284,7 +275,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Present Address */}
               <FormField
                 control={form.control}
-                name="student.presentAddress"
+                name="presentAddress"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -305,7 +296,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Permanent Address */}
               <FormField
                 control={form.control}
-                name="student.permanentAddress"
+                name="permanentAddress"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -335,7 +326,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Profile Image URL */}
               <FormField
                 control={form.control}
-                name="student.profileImg"
+                name="profileImg"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -357,7 +348,7 @@ export const UpdateStudentForm=({userId, student})=> {
               {/* Cover Image URL */}
               <FormField
                 control={form.control}
-                name="student.coverImg"
+                name="coverImg"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
@@ -411,27 +402,6 @@ export const UpdateStudentForm=({userId, student})=> {
               'Update'
             )}
           </Button>
-
-          <div className="text-center text-lg text-gray-600 mt-4">
-            <p>
-              Sign in as a Teacher {''}
-              <Link
-                href="/register-teacher"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Create account
-              </Link>
-            </p>
-            <p>
-              Already Have Account? {''}
-              <Link
-                href="/login-user"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Login
-              </Link>
-            </p>
-          </div>
         </form>
       </Form>
     </div>

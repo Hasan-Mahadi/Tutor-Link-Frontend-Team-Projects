@@ -8,7 +8,7 @@ const Profile = async() => {
     const user = await getCurrentUser();
     const students = await getAllStudents();
     const student = students.data?.find(student => student.user === user.userId)
-    console.log('single student',student);
+    // console.log('single student',student);
     return (
         <div>
             <MyProfile student={student}/>

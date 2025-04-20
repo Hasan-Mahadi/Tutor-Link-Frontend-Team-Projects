@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -19,13 +18,7 @@ import {
   Cake,
   ChevronRight,
 } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { TTutors } from '../AlTutors/TutorCard';
@@ -41,6 +34,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
 
   console.log('Tutor Details', tutor);
   const hourlyRate = tutor?.hourlyRate;
+  const tutorId = tutor?._id;
 
   const timeSlots = [
     '9:00 AM - 10:00 AM',
@@ -324,7 +318,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
                     .sort(
                       (a, b) =>
                         new Date(b.createdAt).getTime() -
-                        new Date(a.createdAt).getTime(),
+                        new Date(a.createdAt).getTime()
                     )
                     .map((review, index) => (
                       <ReviewCard key={index} review={review} />
@@ -338,7 +332,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             </div>
             {/* create review option */}
             <div className="mt-4 flex justify-center items-center">
-              <FeedbackModal></FeedbackModal>
+              <FeedbackModal tutorId={tutorId}></FeedbackModal>
             </div>
           </TabsContent>
 
@@ -346,7 +340,11 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Book a Session
             </h2>
-            <BookingComponent hourlyRate={hourlyRate}></BookingComponent>
+            <BookingComponent
+              hourlyRate={hourlyRate}
+              tutorId={tutorId}
+              tutor={tutor}
+            />
           </TabsContent>
         </Tabs>
       </Card>
