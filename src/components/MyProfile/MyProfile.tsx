@@ -1,30 +1,29 @@
-"use client";
+'use client';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
-export const MyProfile=({student}) =>{
-
+export const MyProfile = ({ student }: any) => {
   if (!student) return <p>Loading profile...</p>;
 
   return (
     <div className="p-4 space-y-6">
       {/* Cover Image */}
-      <div className="relative h-40 w-full rounded-lg overflow-hidden shadow">
+      <div className="relative h-72  w-full rounded-lg overflow-hidden shadow">
         <Image
           src={student?.coverImg}
           alt="Cover"
           fill
           className="object-cover"
         />
-        <div className="absolute -bottom-12 left-4">
+        <div className="absolute -bottom-1  left-4">
           <Image
             src={student?.profileImg}
             alt={student?.name}
-            width={96}
+            width={150}
             height={96}
-            className="rounded-full border-4 border-white shadow-lg"
+            className=" border-4   border-white shadow-lg z-10"
           />
         </div>
       </div>
@@ -49,7 +48,7 @@ export const MyProfile=({student}) =>{
               <strong>Emergency Contact:</strong> {student.emergencyContactNo}
             </div>
             <div>
-              <strong>Blood Group:</strong>{" "}
+              <strong>Blood Group:</strong>{' '}
               <Badge variant="outline">{student.bloodGroup}</Badge>
             </div>
             <div>
@@ -63,4 +62,4 @@ export const MyProfile=({student}) =>{
       </Card>
     </div>
   );
-}
+};
