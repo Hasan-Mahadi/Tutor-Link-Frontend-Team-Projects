@@ -1,10 +1,13 @@
-import { authOptions } from '@/utils/authOptions';
+
+import { getCurrentUser } from '@/services/AuthService';
 import { getServerSession } from 'next-auth';
 import Image from 'next/image';
 
 const DashboardPage = async () => {
-  const session = await getServerSession(authOptions);
-  console.log(session?.user?.image);
+  const session = await getServerSession();
+  // const user = await getCurrentUser();
+  // console.log("user", user);
+  
   return (
     <div>
       {session?.user && (

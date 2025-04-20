@@ -6,7 +6,7 @@ const authRoutes = ['/login-user', '/register-student', '/register-teacher'];
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
   const userInfo = await getCurrentUser();
-  console.log('userinfo', userInfo);
+  // console.log('userinfo', userInfo);
 
   if (!userInfo) {
     if (authRoutes.includes(pathname)) {
