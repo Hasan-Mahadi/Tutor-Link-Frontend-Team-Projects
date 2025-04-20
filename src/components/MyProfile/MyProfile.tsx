@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
-export const MyProfile=({student}) =>{
-
+export const MyProfile = ({ student }: any) => {
   if (!student) return <p>Loading profile...</p>;
 
   return (
@@ -24,7 +23,7 @@ export const MyProfile=({student}) =>{
             alt={student?.name}
             width={96}
             height={96}
-            className="rounded-full border-4 border-white shadow-lg"
+            className="rounded-full border-4 border-white shadow-lg z-10"
           />
         </div>
       </div>
@@ -49,7 +48,7 @@ export const MyProfile=({student}) =>{
               <strong>Emergency Contact:</strong> {student.emergencyContactNo}
             </div>
             <div>
-              <strong>Blood Group:</strong>{" "}
+              <strong>Blood Group:</strong>{' '}
               <Badge variant="outline">{student.bloodGroup}</Badge>
             </div>
             <div>
@@ -63,4 +62,4 @@ export const MyProfile=({student}) =>{
       </Card>
     </div>
   );
-}
+};

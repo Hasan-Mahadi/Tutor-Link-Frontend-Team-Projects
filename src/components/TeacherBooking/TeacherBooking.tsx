@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -8,10 +8,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
 
-const TeacherBooking = ({ bookings = [] }) => {
+interface Booking {
+  _id: string;
+  subject: string;
+  studentName: string;
+  date: string;
+  timeSlot: string;
+  duration: string;
+  price: number;
+  status: 'pending' | 'confirmed' | 'com' | 'cancelled';
+}
+
+const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Your Bookings</h1>
@@ -44,21 +55,21 @@ const TeacherBooking = ({ bookings = [] }) => {
                   <TableCell>${booking.price}</TableCell>
                   <TableCell
                     className={`capitalize ${
-                      booking.status === "confirmed"
-                        ? "text-green-600"
-                        : booking.status === "cancelled"
-                        ? "text-red-600"
-                        : "text-yellow-600"
+                      booking.status === 'confirmed'
+                        ? 'text-green-600'
+                        : booking.status === 'cancelled'
+                        ? 'text-red-600'
+                        : 'text-yellow-600'
                     }`}
                   >
                     {booking.status}
                   </TableCell>
                   <TableCell className="space-x-2 text-center">
-                    {booking.status === "pending" ? (
+                    {booking.status === 'pending' ? (
                       <>
                         <Button
                           size="sm"
-                          variant="success"
+                          variant="default"
                           onClick={() => handleConfirmBooking(booking._id)}
                         >
                           Confirm
@@ -72,7 +83,7 @@ const TeacherBooking = ({ bookings = [] }) => {
                         </Button>
                       </>
                     ) : (
-                      "-"
+                      '-'
                     )}
                   </TableCell>
                 </TableRow>
@@ -87,12 +98,12 @@ const TeacherBooking = ({ bookings = [] }) => {
 
 const handleConfirmBooking = async (bookingId: string) => {
   // Add your logic here
-  console.log("Confirm", bookingId);
+  console.log('Confirm', bookingId);
 };
 
 const handleCancelBooking = async (bookingId: string) => {
   // Add your logic here
-  console.log("Cancel", bookingId);
+  console.log('Cancel', bookingId);
 };
 
 export default TeacherBooking;
