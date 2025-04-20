@@ -55,6 +55,16 @@ const StudentBooking = ({ bookings }: any) => {
                   Cancel Booking
                 </button>
               )}
+              {booking.status === 'pending' && (
+                <button className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition">
+                  Pending
+                </button>
+              )}
+              {booking.status === 'completed' && (
+                <button className="mt-2 bg-green-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition">
+                  Completed
+                </button>
+              )}
             </div>
           ))}
         </div>
