@@ -1,6 +1,13 @@
-import React from "react";
+"use client"
+
+import { makePayment } from "@/services/payment";
 
 const StudentBooking = ({ bookings }) => {
+
+  const handlePayment = async (bookingId:string) => {
+     const res = await makePayment(bookingId);
+     console.log('response from payment',res);
+  };
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">
@@ -46,10 +53,24 @@ const StudentBooking = ({ bookings }) => {
 
               {booking.status === "confirmed" && (
                 <button
-                  onClick={() => handleCancelBooking(booking._id)}
+                  onClick={() => handlePayment(booking._id)}
                   className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
                 >
-                  Cancel Booking
+                  Payment
+                </button>
+              )}
+              {booking.status === "pending" && (
+                <button
+                  className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
+                >
+                  Pending
+                </button>
+              )}
+              {booking.status === "cancelled" && (
+                <button
+                  className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
+                >
+                  Cancelled
                 </button>
               )}
             </div>
@@ -58,11 +79,6 @@ const StudentBooking = ({ bookings }) => {
       )}
     </div>
   );
-};
-
-const handleCancelBooking = async (bookingId) => {
-  // Logic to cancel booking via API call to backend
-  console.log("Cancel booking ID:", bookingId);
 };
 
 export default StudentBooking;

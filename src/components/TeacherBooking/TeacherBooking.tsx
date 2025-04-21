@@ -10,8 +10,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { cancelBookingStatus, confirmedBookingStatus } from "@/services/Bookings";
+import { toast } from "sonner";
 
 const TeacherBooking = ({ bookings = [] }) => {
+  
+  const handleConfirmBooking =async(bookingId: string) => {
+    const res =await  confirmedBookingStatus(bookingId);
+    if(res.success){
+      toast.success(res.message)
+    }else{
+      toast.error(res.message)
+    }
+   };
+   
+  const handleCancelBooking = async (bookingId: string) => {
+    const res = await cancelBookingStatus(bookingId);
+     console.log(res);
+   };
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Your Bookings</h1>
@@ -59,6 +75,7 @@ const TeacherBooking = ({ bookings = [] }) => {
                         <Button
                           size="sm"
                           variant="success"
+                          className="cursor-pointer"
                           onClick={() => handleConfirmBooking(booking._id)}
                         >
                           Confirm
@@ -66,6 +83,7 @@ const TeacherBooking = ({ bookings = [] }) => {
                         <Button
                           size="sm"
                           variant="destructive"
+                          className="cursor-pointer"
                           onClick={() => handleCancelBooking(booking._id)}
                         >
                           Cancel
@@ -83,16 +101,6 @@ const TeacherBooking = ({ bookings = [] }) => {
       )}
     </div>
   );
-};
-
-const handleConfirmBooking = async (bookingId: string) => {
-  // Add your logic here
-  console.log("Confirm", bookingId);
-};
-
-const handleCancelBooking = async (bookingId: string) => {
-  // Add your logic here
-  console.log("Cancel", bookingId);
 };
 
 export default TeacherBooking;

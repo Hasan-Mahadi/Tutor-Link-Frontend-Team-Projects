@@ -1,17 +1,16 @@
 
-import { MyProfile } from '@/components/MyProfile/MyProfile';
+import { StudentProfile } from '@/components/StudentProfile/StudentProfile';
 import { getAllStudents, getCurrentUser } from '@/services/AuthService';
 
-import React from 'react';
 
 const Profile = async() => {
     const user = await getCurrentUser();
     const students = await getAllStudents();
     const student = students.data?.find(student => student.user === user.userId)
-    // console.log('single student',student);
+  
     return (
         <div>
-            <MyProfile student={student}/>
+            <StudentProfile student={student}/>
         </div>
     );
 };

@@ -1,6 +1,6 @@
 
 import MyBookings from '@/components/StudentBooking/StudentBooking';
-import { MyProfile } from '@/components/MyProfile/MyProfile';
+import { MyProfile } from '@/components/StudentProfile/StudentProfile';
 import { getAllStudents, getCurrentUser } from '@/services/AuthService';
 import { getAllBookings } from '@/services/Bookings';
 

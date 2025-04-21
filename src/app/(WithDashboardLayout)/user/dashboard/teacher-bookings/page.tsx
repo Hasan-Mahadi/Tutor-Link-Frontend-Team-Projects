@@ -6,9 +6,9 @@ const TeacherBookings = async() => {
     const user = await getCurrentUser();
     const teachers = await getAllTeacher();
 
-    const teacher= teachers.data.find(teacher => teacher.user === user.userId)
-      const bookings = await getSingleTeacherBookings(teacher._id);
-      console.log("student bookings",bookings.data);
+    const teacher= teachers?.data?.find(teacher => teacher.user === user.userId)
+      const bookings = await getSingleTeacherBookings(teacher?._id);
+      console.log("teacher bookings",bookings.data);
    
     return (
         <div>

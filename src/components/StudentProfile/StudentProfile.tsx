@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 
-export const MyProfile=({student}) =>{
+export const StudentProfile=({student}) =>{
 
   if (!student) return <p>Loading profile...</p>;
 

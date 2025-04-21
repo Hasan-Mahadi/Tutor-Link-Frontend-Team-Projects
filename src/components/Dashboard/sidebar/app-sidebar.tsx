@@ -39,14 +39,14 @@ const data = {
       items: [
         {
           title: "My Profile",
-          url: "/user/dashboard/my-profile",
+          url: "/user/dashboard/student-profile",
         },
         {
           title: "Update Profile",
           url: "/user/dashboard/update-student-profile",
         },
         {
-          title: "Manage Booking",
+          title: "My Booking",
           url: "/user/dashboard/student-bookings",
         },
       ],
@@ -57,11 +57,11 @@ const data = {
       icon: Bot,
       items: [
         {
-          title: "Teacher Profile",
+          title: "My Profile",
           url: "/user/dashboard/teacher-profile",
         },
         {
-          title: "Update Teacher Profile",
+          title: "Update Profile",
           url: "/user/dashboard/update-teacher-profile",
         },
         {

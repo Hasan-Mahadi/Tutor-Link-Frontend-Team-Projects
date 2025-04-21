@@ -1,5 +1,6 @@
 'use server';
 
+import { cookies } from 'next/headers';
 import { FieldValues } from 'react-hook-form';
 
 export const createBookings = async (bookingsData: FieldValues) => {
@@ -64,3 +65,39 @@ export const getSingleTeacherBookings = async (id:string) => {
     return Error(err);
   }
 };
+
+export const confirmedBookingStatus = async(bookingId:string)=>{
+  const accessToken = (await cookies()).get('accessToken')?.value;
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/bookings/confirm/${bookingId}`,{
+      method:"PATCH",
+      headers:{
+        'Content-Type':'application/json',
+        Authorization:`${accessToken}`
+      },
+    })
+
+    const result = await res.json();
+    return result;
+  } catch (err:any) {
+    return Error(err)
+  }
+}
+
+export const cancelBookingStatus = async(bookingId:string)=>{
+  const accessToken = (await cookies()).get('accessToken')?.value;
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/bookings/cancel/${bookingId}`,{
+      method:"PATCH",
+      headers:{
+        'Content-Type':'application/json',
+        Authorization:`${accessToken}`
+      },
+    })
+
+    const result = await res.json();
+    return result;
+  } catch (err:any) {
+    return Error(err)
+  }
+}
