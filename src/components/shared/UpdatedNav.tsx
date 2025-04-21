@@ -79,7 +79,7 @@ export default function Navigation() {
             Find Tutors
           </Link>
 
-          <Link href="/user/dashboard/my-profile" className={navLinkClass('/my-profile')}>
+          <Link href="/user/dashboard" className={navLinkClass('/my-profile')}>
             Dashboard
           </Link>
           <Link href="/about" className={navLinkClass('/about')}>

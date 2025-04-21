@@ -70,7 +70,7 @@ const data = {
         },
         {
           title:"Total Earnings",
-          url:"user/dashboard/total-earnings"
+          url:"/user/dashboard/total-earning"
         }
       ],
     },

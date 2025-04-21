@@ -13,7 +13,6 @@ const StudentBooking = ({ bookings }) => {
       <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">
         Your Bookings
       </h1>
-
       {bookings?.length === 0 ? (
         <p className="text-center text-gray-500">No bookings found</p>
       ) : (
