@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   Bot,
   Frame,
@@ -9,7 +9,7 @@ import {
   PieChart,
   Send,
   SquareTerminal,
-} from "lucide-react";
+} from 'lucide-react';
 
 import {
   Sidebar,
@@ -19,88 +19,88 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { NavMain } from "./nav-main";
-import { NavUser } from "./nav-user";
-import Link from "next/link";
+} from '@/components/ui/sidebar';
+import { NavMain } from './nav-main';
+import { NavUser } from './nav-user';
+import Link from 'next/link';
 
 const data = {
   navMain: [
     {
-      title: "Dashboard",
-      url: "/user/dashboard",
+      title: 'Dashboard',
+      url: '/user/dashboard',
       icon: SquareTerminal,
       isActive: true,
     },
     {
-      title: "Student",
-      url: "/user/dashboard/students",
+      title: 'Student',
+      url: '/user/dashboard/students',
       icon: Bot,
       items: [
         {
-          title: "My Profile",
-          url: "/user/dashboard/my-profile",
+          title: 'My Profile',
+          url: '/user/dashboard/my-profile',
         },
         {
-          title: "Update Profile",
-          url: "/user/dashboard/update-student-profile",
+          title: 'Update Profile',
+          url: '/user/dashboard/update-student-profile',
         },
         {
-          title: "Manage Booking",
-          url: "/user/dashboard/student-bookings",
+          title: 'Manage Booking',
+          url: '/user/dashboard/student-bookings',
         },
       ],
     },
     {
-      title: "Teacher",
-      url: "/user/dashboard/teacher",
+      title: 'Teacher',
+      url: '/user/dashboard/teacher',
       icon: Bot,
       items: [
         {
-          title: "Teacher Profile",
-          url: "/user/dashboard/teacher-profile",
+          title: 'Teacher Profile',
+          url: '/user/dashboard/teacher-profile',
         },
         {
-          title: "Update Teacher Profile",
-          url: "/user/dashboard/update-teacher-profile",
+          title: 'Update Teacher Profile',
+          url: '/user/dashboard/update-teacher-profile',
         },
         {
-          title: "Manage Booking",
-          url: "/user/dashboard/teacher-bookings",
+          title: 'Manage Booking',
+          url: '/user/dashboard/teacher-bookings',
         },
         {
-          title:"Total Earnings",
-          url:"user/dashboard/total-earnings"
-        }
+          title: 'Total Earnings',
+          url: '/user/dashboard/total-earnings',
+        },
       ],
     },
   ],
   navSecondary: [
     {
-      title: "Support",
-      url: "#",
+      title: 'Support',
+      url: '#',
       icon: LifeBuoy,
     },
     {
-      title: "Feedback",
-      url: "#",
+      title: 'Feedback',
+      url: '#',
       icon: Send,
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
+      name: 'Design Engineering',
+      url: '#',
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
+      name: 'Sales & Marketing',
+      url: '#',
       icon: PieChart,
     },
     {
-      name: "Travel",
-      url: "#",
+      name: 'Travel',
+      url: '#',
       icon: Map,
     },
   ],

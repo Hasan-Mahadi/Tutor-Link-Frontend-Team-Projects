@@ -1,7 +1,20 @@
+'use client';
+import { makePayment } from '@/services/Bookings';
 import React from 'react';
 
 const StudentBooking = ({ bookings }: any) => {
   // console.log(bookings);
+
+  const handleMakePayment = async (id: string) => {
+    console.log(id);
+    try {
+      const res = await makePayment(id);
+      // console.log(res);
+      if (res.url) {
+        window.location.href = res.url; // Redirect to payment gateway
+      }
+    } catch (error) {}
+  };
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">
@@ -49,10 +62,10 @@ const StudentBooking = ({ bookings }: any) => {
 
               {booking.status === 'confirmed' && (
                 <button
-                  onClick={() => handleCancelBooking(booking._id)}
+                  onClick={() => handleMakePayment(booking._id)}
                   className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
                 >
-                  Cancel Booking
+                  Payment
                 </button>
               )}
               {booking.status === 'pending' && (
@@ -73,9 +86,9 @@ const StudentBooking = ({ bookings }: any) => {
   );
 };
 
-const handleCancelBooking = async (bookingId: string) => {
-  // Logic to cancel booking via API call to backend
-  console.log('Cancel booking ID:', bookingId);
-};
+// const handleCancelBooking = async (bookingId: string) => {
+//   // Logic to cancel booking via API call to backend
+//   console.log('Cancel booking ID:', bookingId);
+// };
 
 export default StudentBooking;

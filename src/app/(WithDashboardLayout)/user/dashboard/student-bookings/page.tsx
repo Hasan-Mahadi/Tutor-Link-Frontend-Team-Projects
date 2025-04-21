@@ -16,7 +16,7 @@ const StudentBookings = async () => {
 
   return (
     <div>
-      <StudentBooking bookings={bookings.data} />
+      <StudentBooking bookings={bookings?.data} />
     </div>
   );
 };
