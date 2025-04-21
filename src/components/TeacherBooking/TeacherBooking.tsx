@@ -10,6 +10,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import {
+  cancelBookingStatus,
+  confirmedBookingStatus,
+} from '@/services/Bookings';
+import { toast } from 'sonner';
 
 interface Booking {
   _id: string;
@@ -19,10 +24,23 @@ interface Booking {
   timeSlot: string;
   duration: string;
   price: number;
-  status: 'pending' | 'confirmed' | 'com' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
 }
 
 const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
+  const handleConfirmBooking = async (bookingId: string) => {
+    const res = await confirmedBookingStatus(bookingId);
+    if (res.success) {
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+  };
+
+  const handleCancelBooking = async (bookingId: string) => {
+    const res = await cancelBookingStatus(bookingId);
+    console.log(res);
+  };
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Your Bookings</h1>
@@ -70,6 +88,7 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
                         <Button
                           size="sm"
                           variant="default"
+                          className="cursor-pointer"
                           onClick={() => handleConfirmBooking(booking._id)}
                         >
                           Confirm
@@ -77,6 +96,7 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
                         <Button
                           size="sm"
                           variant="destructive"
+                          className="cursor-pointer"
                           onClick={() => handleCancelBooking(booking._id)}
                         >
                           Cancel
@@ -94,16 +114,6 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
       )}
     </div>
   );
-};
-
-const handleConfirmBooking = async (bookingId: string) => {
-  // Add your logic here
-  console.log('Confirm', bookingId);
-};
-
-const handleCancelBooking = async (bookingId: string) => {
-  // Add your logic here
-  console.log('Cancel', bookingId);
 };
 
 export default TeacherBooking;
