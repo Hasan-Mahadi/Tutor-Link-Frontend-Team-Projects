@@ -4,9 +4,6 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
- 
- 
- 
 
 import Link from 'next/link';
 
@@ -16,10 +13,6 @@ import { getCurrentUser, logout } from '@/services/AuthService';
 
 import { useUser } from '@/context/UserContext';
 import { Button } from '../ui/button';
-
-
-
-
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,6 +28,7 @@ export default function Navigation() {
 
   useEffect(() => {
     setIsMounted(true);
+    setIsLoading(true);
   }, []);
 
   const navLinkClass = (href: string) =>
@@ -79,9 +73,22 @@ export default function Navigation() {
             Find Tutors
           </Link>
 
-          <Link href="/my-profile" className={navLinkClass('/my-profile')}>
-            My Profile
-          </Link>
+          {user?.role === 'student' && (
+            <Link
+              href="/student/student-profile"
+              className={navLinkClass('/student-profile')}
+            >
+              Dashboard
+            </Link>
+          )}
+          {user?.role === 'teacher' && (
+            <Link
+              href="/teacher/teacher-profile"
+              className={navLinkClass('/teacher-profile')}
+            >
+              Dashboard
+            </Link>
+          )}
           <Link href="/about" className={navLinkClass('/about')}>
             About Us
           </Link>
@@ -96,7 +103,11 @@ export default function Navigation() {
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex space-x-3 sm:space-x-4">
           {user ? (
-            <Button onClick={handleLogout} variant={'outline'} className="py-5">
+            <Button
+              onClick={handleLogout}
+              variant={'outline'}
+              className="py-5 "
+            >
               Logout
             </Button>
           ) : (
@@ -144,13 +155,24 @@ export default function Navigation() {
             >
               Find Tutors
             </Link>
-            <Link
-              href="/my-profile"
-              className={navMobileLinkClass('/my-profile')}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              My Profile
-            </Link>
+            {user?.role === 'student' && (
+              <Link
+                href="/student/student-profile"
+                className={navMobileLinkClass('/student-profile')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            )}
+            {user?.role === 'teacher' && (
+              <Link
+                href="/teacher/teacher-profile"
+                className={navMobileLinkClass('/teacher-profile')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            )}
             <Link
               href="/about"
               className={navMobileLinkClass('/about')}

@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const Student = () => {
-  return (
-    <div>Student</div>
-  )
-}
+const StudentDashboard = () => {
+    return (
+        <div>
+            <h1 className='text-3xl'>Student Dashboard</h1>
+        </div>
+    );
+};
 
-export default Student
+export default StudentDashboard;
