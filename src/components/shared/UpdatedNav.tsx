@@ -75,16 +75,16 @@ export default function Navigation() {
 
           {user?.role === 'student' && (
             <Link
-              href="/user/dashboard/my-profile"
-              className={navLinkClass('/my-profile')}
+              href="/student/student-profile"
+              className={navLinkClass('/student-profile')}
             >
               Dashboard
             </Link>
           )}
           {user?.role === 'teacher' && (
             <Link
-              href="/user/dashboard/teacher-profile"
-              className={navLinkClass('/my-profile')}
+              href="/teacher/teacher-profile"
+              className={navLinkClass('/teacher-profile')}
             >
               Dashboard
             </Link>
@@ -157,8 +157,8 @@ export default function Navigation() {
             </Link>
             {user?.role === 'student' && (
               <Link
-                href="/user/dashboard/my-profile"
-                className={navMobileLinkClass('/my-profile')}
+                href="/student/student-profile"
+                className={navMobileLinkClass('/student-profile')}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Dashboard
@@ -166,8 +166,8 @@ export default function Navigation() {
             )}
             {user?.role === 'teacher' && (
               <Link
-                href="/user/dashboard/teacher-profile"
-                className={navMobileLinkClass('/my-profile')}
+                href="/teacher/teacher-profile"
+                className={navMobileLinkClass('/teacher-profile')}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Dashboard

@@ -23,89 +23,56 @@ import {
 import { NavMain } from './nav-main';
 import { NavUser } from './nav-user';
 import Link from 'next/link';
-const data = {
+import { getCurrentUser } from '@/services/AuthService'; // 🔁 assumes async function to fetch user info
+
+const fullNavData = {
   navMain: [
     {
-      title: 'Dashboard',
-      url: '/user/dashboard',
-      icon: SquareTerminal,
-      isActive: true,
-    },
-    {
       title: 'Student',
-      url: '/user/dashboard/students',
+      role: 'student',
+      url: '/student',
       icon: Bot,
       items: [
-        {
-          title: 'My Profile',
-          url: '/user/dashboard/my-profile',
-        },
-        {
-          title: 'Update Profile',
-          url: '/user/dashboard/update-student-profile',
-        },
-        {
-          title: 'Manage Booking',
-          url: '/user/dashboard/student-bookings',
-        },
+        { title: 'My Profile', url: '/student/student-profile' },
+        { title: 'Update Profile', url: '/student/update-student-profile' },
+        { title: 'Manage Booking', url: '/student/student-bookings' },
       ],
     },
     {
       title: 'Teacher',
-      url: '/user/dashboard/teacher',
+      role: 'teacher',
+      url: '/teacher',
       icon: Bot,
       items: [
-        {
-          title: 'Teacher Profile',
-          url: '/user/dashboard/teacher-profile',
-        },
+        { title: 'Teacher Profile', url: '/teacher/teacher-profile' },
         {
           title: 'Update Teacher Profile',
-          url: '/user/dashboard/update-teacher-profile',
+          url: '/teacher/update-teacher-profile',
         },
-        {
-          title: 'Manage Booking',
-          url: '/user/dashboard/teacher-bookings',
-        },
-        {
-          title: 'Total Earnings',
-          url: '/user/dashboard/total-earnings',
-        },
+        { title: 'Manage Booking', url: '/teacher/teacher-bookings' },
+        { title: 'Total Earnings', url: '/teacher/total-earnings' },
       ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Support',
-      url: '#',
-      icon: LifeBuoy,
-    },
-    {
-      title: 'Feedback',
-      url: '#',
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
     },
   ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [user, setUser] = React.useState<{
+    role: 'student' | 'teacher';
+  } | null>(null);
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    };
+    fetchUser();
+  }, []);
+
+  const filteredNav = fullNavData.navMain.filter(
+    (item) => item.role === user?.role
+  );
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -113,9 +80,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                {/* <div className="flex items-center justify-center">
-                  logo
-                </div> */}
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <h2 className="font-bold text-xl">TutorConnect</h2>
                 </div>
@@ -125,7 +89,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        {user ? (
+          <NavMain items={filteredNav} />
+        ) : (
+          <p className="px-4">Loading...</p>
+        )}
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
