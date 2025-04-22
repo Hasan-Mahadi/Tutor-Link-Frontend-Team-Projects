@@ -3,7 +3,7 @@ export interface IUser {
   name: string;
   email: string;
   isActive?: boolean;
-  role: 'student' | 'tutor';
+  role: 'student' | 'teacher';
   iat?: number;
   exp?: number;
 }
@@ -16,6 +16,6 @@ export type TBooking = {
   timeSlot: string;
   duration: string;
   price: number;
-  status: "pending" | "confirmed" | "completed" | "canceled";
+  status: 'pending' | 'confirmed' | 'completed' | 'canceled';
   paymentStatus?: boolean;
 };

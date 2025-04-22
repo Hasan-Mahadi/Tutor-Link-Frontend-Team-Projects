@@ -1,6 +1,6 @@
 import TeacherBooking from '@/components/TeacherBooking/TeacherBooking';
 import { getAllTeacher, getCurrentUser } from '@/services/AuthService';
-import { getSingleStudentBookings, getSingleTeacherBookings } from '@/services/Bookings';
+import { getSingleTeacherBookings } from '@/services/Bookings';
 
 const TeacherBookings = async() => {
     const user = await getCurrentUser();

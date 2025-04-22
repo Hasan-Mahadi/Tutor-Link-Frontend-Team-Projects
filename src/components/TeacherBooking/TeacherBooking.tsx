@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -13,9 +13,19 @@ import { Button } from "@/components/ui/button";
 import { cancelBookingStatus, confirmedBookingStatus } from "@/services/Bookings";
 import { toast } from "sonner";
 
-const TeacherBooking = ({ bookings = [] }) => {
-  
-  const handleConfirmBooking =async(bookingId: string) => {
+interface Booking {
+  _id: string;
+  subject: string;
+  studentName: string;
+  date: string;
+  timeSlot: string;
+  duration: string;
+  price: number;
+  status: 'pending' | 'confirmed' | 'com' | 'cancelled';
+}
+
+const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
+   const handleConfirmBooking =async(bookingId: string) => {
     const res =await  confirmedBookingStatus(bookingId);
     if(res.success){
       toast.success(res.message)
@@ -23,7 +33,6 @@ const TeacherBooking = ({ bookings = [] }) => {
       toast.error(res.message)
     }
    };
-   
   const handleCancelBooking = async (bookingId: string) => {
     const res = await cancelBookingStatus(bookingId);
      console.log(res);
@@ -60,22 +69,23 @@ const TeacherBooking = ({ bookings = [] }) => {
                   <TableCell>${booking.price}</TableCell>
                   <TableCell
                     className={`capitalize ${
-                      booking.status === "confirmed"
-                        ? "text-green-600"
-                        : booking.status === "cancelled"
-                        ? "text-red-600"
-                        : "text-yellow-600"
+                      booking.status === 'confirmed'
+                        ? 'text-green-600'
+                        : booking.status === 'cancelled'
+                        ? 'text-red-600'
+                        : 'text-yellow-600'
                     }`}
                   >
                     {booking.status}
                   </TableCell>
                   <TableCell className="space-x-2 text-center">
-                    {booking.status === "pending" ? (
+                    {booking.status === 'pending' ? (
                       <>
                         <Button
                           size="sm"
                           variant="success"
                           className="cursor-pointer"
+                          variant="default"
                           onClick={() => handleConfirmBooking(booking._id)}
                         >
                           Confirm
@@ -90,7 +100,7 @@ const TeacherBooking = ({ bookings = [] }) => {
                         </Button>
                       </>
                     ) : (
-                      "-"
+                      '-'
                     )}
                   </TableCell>
                 </TableRow>
