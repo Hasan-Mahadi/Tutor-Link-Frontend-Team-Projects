@@ -20,7 +20,7 @@ const DashboardPage = async () => {
           </h1>
           .l5 c5juh
           <Image
-            src={session?.user?.image}
+            src={session?.user?.image || '/default-image.png'}
             alt="image"
             width={200}
             height={200}
