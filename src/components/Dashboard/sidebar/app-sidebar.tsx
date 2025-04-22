@@ -26,51 +26,51 @@ import Link from 'next/link';
 
 const data = {
   navMain: [
-    {
-      title: 'Dashboard',
-      url: '/user/dashboard',
-      icon: SquareTerminal,
-      isActive: true,
-    },
+    // {
+    //   title: 'Dashboard',
+    //   url: '/user/dashboard',
+    //   icon: SquareTerminal,
+    //   isActive: true,
+    // },
     {
       title: 'Student',
-      url: '/user/dashboard/students',
+      url: '/student',
       icon: Bot,
       items: [
         {
           title: 'My Profile',
-          url: '/user/dashboard/my-profile',
+          url: '/student/student-profile',
         },
         {
           title: 'Update Profile',
-          url: '/user/dashboard/update-student-profile',
+          url: '/student/update-student-profile',
         },
         {
           title: 'Manage Booking',
-          url: '/user/dashboard/student-bookings',
+          url: '/student/student-bookings',
         },
       ],
     },
     {
       title: 'Teacher',
-      url: '/user/dashboard/teacher',
+      url: '/teacher',
       icon: Bot,
       items: [
         {
           title: 'Teacher Profile',
-          url: '/user/dashboard/teacher-profile',
+          url: '/teacher/teacher-profile',
         },
         {
           title: 'Update Teacher Profile',
-          url: '/user/dashboard/update-teacher-profile',
+          url: '/teacher/update-teacher-profile',
         },
         {
           title: 'Manage Booking',
-          url: '/user/dashboard/teacher-bookings',
+          url: '/teacher/teacher-bookings',
         },
         {
           title: 'Total Earnings',
-          url: '/user/dashboard/total-earnings',
+          url: '/teacher/total-earnings',
         },
       ],
     },

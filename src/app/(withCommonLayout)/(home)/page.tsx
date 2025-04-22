@@ -8,6 +8,7 @@ import { Testimonials } from "@/components/Home/Testimonials/Testimonials";
 import React from "react";
 
 const HomePage = () => {
+  // console.log('hello')
   return (
     <div className="container mx-auto space-y-4">
       <HeroSection></HeroSection>
