@@ -82,6 +82,7 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
                   >
                     {booking.status}
                   </TableCell>
+
                   <TableCell className="space-x-2 text-center">
                     {booking.status === 'pending' ? (
                       <>

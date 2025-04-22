@@ -19,6 +19,7 @@ import Link from 'next/link';
 import { loginUser } from '@/services/AuthService';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/context/UserContext';
 
 // Define form schema
 const formSchema = z.object({
@@ -29,8 +30,9 @@ const formSchema = z.object({
 });
 
 export function LoginForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
