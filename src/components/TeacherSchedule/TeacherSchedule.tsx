@@ -27,7 +27,7 @@ interface Booking {
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
 }
 
-const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
+const TeacherSchedule = ({ bookings = [] }: { bookings: Booking[] }) => {
   const handleConfirmBooking = async (bookingId: string) => {
     const res = await confirmedBookingStatus(bookingId);
     if (res.success) {
@@ -43,17 +43,17 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
   };
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Your Bookings</h1>
+      <h1 className="text-2xl font-semibold mb-4">Your Schedule</h1>
 
       {bookings.length === 0 ? (
-        <p className="text-gray-500">No bookings found</p>
+        <p className="text-gray-500">No Schedule found</p>
       ) : (
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Subject</TableHead>
-                <TableHead>Student</TableHead>
+                {/* <TableHead>Student</TableHead> */}
                 <TableHead>Date</TableHead>
                 <TableHead>Time</TableHead>
                 <TableHead>Duration</TableHead>
@@ -66,7 +66,7 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
               {bookings.map((booking) => (
                 <TableRow key={booking._id}>
                   <TableCell>{booking.subject}</TableCell>
-                  <TableCell>{booking.student || "N/A"}</TableCell>
+                  {/* <TableCell>{booking.student}</TableCell> */}
                   <TableCell>{booking.date}</TableCell>
                   <TableCell>{booking.timeSlot}</TableCell>
                   <TableCell>{booking.duration} hrs</TableCell>
@@ -117,4 +117,4 @@ const TeacherBooking = ({ bookings = [] }: { bookings: Booking[] }) => {
   );
 };
 
-export default TeacherBooking;
+export default TeacherSchedule;
