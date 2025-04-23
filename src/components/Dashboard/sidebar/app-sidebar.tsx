@@ -51,6 +51,7 @@ const fullNavData = {
         },
         { title: 'Manage Booking', url: '/teacher/teacher-bookings' },
         { title: 'Total Earnings', url: '/teacher/total-earnings' },
+        { title: 'Schedule', url: '/teacher/schedule' },
       ],
     },
   ],
