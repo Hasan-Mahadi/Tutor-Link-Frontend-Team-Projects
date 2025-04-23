@@ -11,7 +11,7 @@ const TeacherBookings = async () => {
   const teachers = await getAllTeacher();
 
   const teacher = teachers?.data?.find(
-    (teacher: TTutors) => teacher.user === user.userId
+    (teacher: TTutors) => teacher.user === user?.userId
   );
   const bookings = await getSingleTeacherBookings(teacher?._id);
   console.log('teacher bookings', bookings.data);
