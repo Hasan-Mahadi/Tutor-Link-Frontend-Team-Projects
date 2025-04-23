@@ -10,7 +10,7 @@ const StudentBookings = async () => {
     (student: any) => student.user === user?.userId
   );
   //   console.log(student)
-  const bookings: { data: any[] } = await getSingleStudentBookings(student._id);
+  const bookings: { data: any[] } = await getSingleStudentBookings(student?._id);
     console.log('student bookings', bookings.data);
   
 
