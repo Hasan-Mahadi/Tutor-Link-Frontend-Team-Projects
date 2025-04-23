@@ -1,5 +1,5 @@
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-ignore
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -17,14 +17,12 @@ import { getAllTutors } from '@/services/tutiors';
 
 import { SortBy } from '@/components/AlTutors/SortBy';
 
-
-
 type SearchParams = { [key: string]: string[] | undefined };
 
 export default async function TutorsPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: any;
 }) {
   // console.log(await searchParams, "search");
   const query = await searchParams;
@@ -49,12 +47,11 @@ export default async function TutorsPage({
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
               <div className="mb-4 sm:mb-0">
                 {/* <span className="text-sm text-gray-600 dark:text-gray-300"> */}
-                  {/* Showing {tutors.length} tutors */}
+                {/* Showing {tutors.length} tutors */}
                 {/* </span> */}
                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                    Showing {tutors?.length || 0} tutors
-                 </span>
-
+                  Showing {tutors?.length || 0} tutors
+                </span>
               </div>
               <div className="flex items-center space-x-4">
                 <SortBy></SortBy>

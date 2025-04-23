@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
+import { TTutors } from '../AlTutors/TutorCard';
 
-export const TeacherProfile=({teacher}) =>{
-
+export const TeacherProfile = ({ teacher }: { teacher: TTutors }) => {
   if (!teacher) return <p>Loading profile...</p>;
 
   return (
@@ -49,7 +49,7 @@ export const TeacherProfile=({teacher}) =>{
               <strong>Emergency Contact:</strong> {teacher.emergencyContactNo}
             </div>
             <div>
-              <strong>Blood Group:</strong>{" "}
+              <strong>Blood Group:</strong>{' '}
               <Badge variant="outline">{teacher.bloodGroup}</Badge>
             </div>
             <div>
@@ -63,4 +63,4 @@ export const TeacherProfile=({teacher}) =>{
       </Card>
     </div>
   );
-}
+};
