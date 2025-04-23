@@ -19,7 +19,7 @@ export default function Navigation() {
   const [isMounted, setIsMounted] = useState(false);
   const { user, setIsLoading } = useUser();
   const pathname = usePathname();
-  console.log('User from Nav', user);
+  // console.log('User from Nav', user);
 
   const handleLogout = () => {
     logout();
