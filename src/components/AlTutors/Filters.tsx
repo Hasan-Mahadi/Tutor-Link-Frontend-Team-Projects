@@ -75,60 +75,7 @@ export const Districts = [
   'sylhet',
   'tangail',
   'thakurgaon',
-
-  "cumilla",
-  "dinajpur",
-  "dhaka",
-  "faridpur",
-  "feni",
-  "gaibandha",
-  "gazipur",
-  "gopalganj",
-  "habiganj",
-  "jamalpur",
-  "jashore",
-  "jhenaidah",
-  "jhalokathi",
-  "joypurhat",
-  "khagrachari",
-  "khulna",
-  "kishoreganj",
-  "kurigram",
-  "kushtia",
-  "lakshmipur",
-  "lalmonirhat",
-  "madaripur",
-  "magura",
-  "manikganj",
-  "meherpur",
-  "moulvibazar",
-  "munshiganj",
-  "mymensingh",
-  "naogaon",
-  "narail",
-  "narayanganj",
-  "narsingdi",
-  "natore",
-  "netrokona",
-  "nilphamari",
-  "noakhali",
-  "pabna",
-  "panchagarh",
-  "patuakhali",
-  "pirojpur",
-  "rajbari",
-  "rajshahi",
-  "rangamati",
-  "rangpur",
-  "satkhira",
-  "shariatpur",
-  "sherpur",
-  "sirajganj",
-  "sunamganj",
-  "sylhet",
-  "tangail",
-  "thakurgaon",
-]; 
+];
 
 export default function Filters() {
   // Add this near the top inside the Filters component
@@ -139,7 +86,7 @@ export default function Filters() {
 
   const handleSearchQuery = (
     query: string,
-    value: string | number | boolean,
+    value: string | number | boolean
   ) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(query, value.toString());

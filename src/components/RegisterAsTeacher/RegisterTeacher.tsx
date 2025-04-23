@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -28,6 +28,7 @@ import Link from 'next/link';
 import { registerTeacher } from '@/services/AuthService';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/context/UserContext';
 
 // Define form schema
 const formSchema = z.object({
@@ -167,8 +168,17 @@ const districts = [
 ];
 
 export function TeacherRegistrationForm() {
+  const { user } = useUser();
+  const hasRedirected = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    if (user && !hasRedirected.current) {
+      hasRedirected.current = true;
+      toast.error('You Are Already Registered');
+      router.push('/');
+    }
+  }, [user, router]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -575,8 +585,8 @@ export function TeacherRegistrationForm() {
                                           ])
                                         : field.onChange(
                                             field.value?.filter(
-                                              (value) => value !== grade.id,
-                                            ),
+                                              (value) => value !== grade.id
+                                            )
                                           );
                                     }}
                                     className="text-indigo-600 focus:ring-indigo-500"
@@ -628,8 +638,8 @@ export function TeacherRegistrationForm() {
                                           ])
                                         : field.onChange(
                                             field.value?.filter(
-                                              (value) => value !== subject.id,
-                                            ),
+                                              (value) => value !== subject.id
+                                            )
                                           );
                                     }}
                                     className="text-indigo-600 focus:ring-indigo-500"

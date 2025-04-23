@@ -1,33 +1,39 @@
-"use client";
+'use client';
 
-import { ChevronsUpDown, LogOut } from "lucide-react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChevronsUpDown, LogOut } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import { useUser } from "@/context/UserContext";
-import { logoutUser } from "@/services/AuthService";
-
+} from '@/components/ui/sidebar';
+import { useUser } from '@/context/UserContext';
+import { logoutUser } from '@/services/AuthService';
+import { useRouter } from 'next/navigation';
 
 export function NavUser() {
   const { isMobile } = useSidebar();
-  const { user, setIsLoading } = useUser();
+  const { user, setUser, setIsLoading } = useUser();
+  const router = useRouter();
 
+  const handleLogout = async () => {
+    // 1. Clear token or cookie (depends on your AuthService)
+    await logoutUser(); // assume this clears the token from cookies or localStorage
 
-  const handleLogout = () => {
-    logoutUser();
-    setIsLoading(true);
+    // 2. Update context state (optional)
+    setUser(null);
+    setIsLoading(false);
+
+    // 3. Redirect to login
+    router.replace('/login-user');
   };
 
   return (
@@ -52,9 +58,10 @@ export function NavUser() {
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            side={isMobile ? 'bottom' : 'right'}
             align="end"
             sideOffset={4}
           >
@@ -73,7 +80,7 @@ export function NavUser() {
               </div>
             </DropdownMenuLabel>
 
-            <DropdownMenuItem onClick={() => handleLogout()}>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

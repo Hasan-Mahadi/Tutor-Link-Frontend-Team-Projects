@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -27,6 +27,7 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { registerStudent } from '@/services/AuthService';
+import { useUser } from '@/context/UserContext';
 
 // Define form schema
 const formSchema = z.object({
@@ -56,9 +57,19 @@ const formSchema = z.object({
 });
 
 export function StudentRegistrationForm() {
+  const { user } = useUser();
+  const hasRedirected = useRef(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    if (user && !hasRedirected.current) {
+      hasRedirected.current = true;
+      toast.error('You Are Already Registered');
+      router.push('/');
+    }
+  }, [user, router]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

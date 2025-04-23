@@ -6,12 +6,12 @@ import {
   getSingleTeacherBookings,
 } from '@/services/Bookings';
 
-const TeacherBookings = async () => {
+const TeacherSchedule = async () => {
   const user = await getCurrentUser();
   const teachers = await getAllTeacher();
 
   const teacher = teachers?.data?.find(
-    (teacher: TTutors) => teacher.user === user?.userId
+    (teacher: TTutors) => teacher.user === user.userId
   );
   const bookings = await getSingleTeacherBookings(teacher?._id);
   console.log('teacher bookings', bookings.data);
@@ -23,4 +23,4 @@ const TeacherBookings = async () => {
   );
 };
 
-export default TeacherBookings;
+export default TeacherSchedule;
