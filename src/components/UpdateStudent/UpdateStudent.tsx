@@ -30,50 +30,48 @@ import { updateStudent } from '@/services/AuthService';
 
 // Define form schema
 const updateStudentFormSchema = z.object({
-    name: z.string().optional(),
-    gender: z.enum(['male', 'female', 'other']).optional(),
-    dateOfBirth: z.string().optional(),
-    contactNo: z.string().optional(),
-    emergencyContactNo: z.string().optional(),
-    bloodGroup: z
-      .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-      .optional(),
-    presentAddress: z.string().optional(),
-    permanentAddress: z.string().optional(),
-    profileImg: z.string().url({ message: 'Invalid URL' }).optional(),
-    coverImg: z.string().url({ message: 'Invalid URL' }).optional(),
-    isDeleted: z.boolean().optional(),
+  name: z.string().optional(),
+  gender: z.enum(['male', 'female', 'other']).optional(),
+  dateOfBirth: z.string().optional(),
+  contactNo: z.string().optional(),
+  emergencyContactNo: z.string().optional(),
+  bloodGroup: z
+    .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+    .optional(),
+  presentAddress: z.string().optional(),
+  permanentAddress: z.string().optional(),
+  profileImg: z.string().url({ message: 'Invalid URL' }).optional(),
+  coverImg: z.string().url({ message: 'Invalid URL' }).optional(),
+  isDeleted: z.boolean().optional(),
 });
 
-
-
-export const UpdateStudentForm=({student})=> {
+export const UpdateStudentForm = ({ student }: { student: any }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof updateStudentFormSchema>>({
     resolver: zodResolver(updateStudentFormSchema),
     defaultValues: {
-        name: student?.name,
-        gender: student?.gender,
-        dateOfBirth: student?.dateOfBirth,
-        contactNo: student?.contactNo,
-        emergencyContactNo: student?.emergencyContactNo,
-        bloodGroup: student?.bloodGroup,
-        presentAddress: student?.presentAddress,
-        permanentAddress: student?.permanentAddress,
-        profileImg: student?.profileImg,
-        coverImg: student?.coverImg,
-        isDeleted: student?.isDeleted,
+      name: student?.name,
+      gender: student?.gender,
+      dateOfBirth: student?.dateOfBirth,
+      contactNo: student?.contactNo,
+      emergencyContactNo: student?.emergencyContactNo,
+      bloodGroup: student?.bloodGroup,
+      presentAddress: student?.presentAddress,
+      permanentAddress: student?.permanentAddress,
+      profileImg: student?.profileImg,
+      coverImg: student?.coverImg,
+      isDeleted: student?.isDeleted,
     },
   });
 
   async function onSubmit(values: z.infer<typeof updateStudentFormSchema>) {
     setIsSubmitting(true);
 
-    console.log('values before submit',values);
+    console.log('values before submit', values);
     // Here you would typically send the data to your API
     const res = await updateStudent(student._id, values);
-    console.log('get res',res);
+    console.log('get res', res);
     if (res.success) {
       setIsSubmitting(false);
       toast.success(res?.message);
@@ -406,4 +404,4 @@ export const UpdateStudentForm=({student})=> {
       </Form>
     </div>
   );
-}
+};

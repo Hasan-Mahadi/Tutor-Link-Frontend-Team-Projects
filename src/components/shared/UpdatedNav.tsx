@@ -19,7 +19,7 @@ export default function Navigation() {
   const [isMounted, setIsMounted] = useState(false);
   const { user, setIsLoading } = useUser();
   const pathname = usePathname();
-  console.log('User from Nav', user);
+  // console.log('User from Nav', user);
 
   const handleLogout = () => {
     logout();
@@ -215,7 +215,7 @@ export default function Navigation() {
                     Login
                   </Link>
                   <Link
-                    href="/signup"
+                    href="/register-student"
                     className="w-1/2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-center"
                     onClick={() => setMobileMenuOpen(false)}
                   >

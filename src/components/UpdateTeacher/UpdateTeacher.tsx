@@ -27,39 +27,65 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { registerTeacher, updateTeacher } from '@/services/AuthService';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { TTutors } from '../AlTutors/TutorCard';
 
 // Define form schema
 const UpdateTeacherFormSchema = z.object({
-    name: z.string().min(1, { message: 'Name is required' }).optional(),
-    email: z.string().email({ message: 'Invalid email address' }).optional(),
-    gender: z.enum(['male', 'female', 'other']).optional(),
-    dateOfBirth: z.string().min(1, { message: 'Date of birth is required' }).optional(),
-    contactNo: z.string().min(1, { message: 'Contact number is required' }).optional(),
-    emergencyContactNo: z.string().min(1, {
+  name: z.string().min(1, { message: 'Name is required' }).optional(),
+  email: z.string().email({ message: 'Invalid email address' }).optional(),
+  gender: z.enum(['male', 'female', 'other']).optional(),
+  dateOfBirth: z
+    .string()
+    .min(1, { message: 'Date of birth is required' })
+    .optional(),
+  contactNo: z
+    .string()
+    .min(1, { message: 'Contact number is required' })
+    .optional(),
+  emergencyContactNo: z
+    .string()
+    .min(1, {
       message: 'Emergency contact number is required',
-    }).optional(),
-    bloodGroup: z.string().min(1, { message: 'Blood group is required' }).optional(),
-    designation: z.string().min(1, { message: 'Designation is required' }).optional(),
-    bio: z
-      .string()
-      .min(20, { message: 'Bio should be at least 20 characters' }).optional(),
-    grade: z.array(z.string()).min(1, { message: 'Select at least one grade' }).optional(),
-    subjects: z
-      .array(z.string())
-      .min(1, { message: 'Select at least one subject' }).optional(),
-    district: z.string().min(1, { message: 'District is required' }).optional(),
-    hourlyRate: z.number().min(0, { message: 'Hourly rate must be positive' }).optional(),
-    availability: z.boolean().optional(),
-    presentAddress: z
-      .string()
-      .min(1, { message: 'Present address is required' }).optional(),
-    permanentAddress: z
-      .string()
-      .min(1, { message: 'Permanent address is required' }).optional(),
-    profileImg: z.string().url({ message: 'Invalid URL' }).optional(),
-    coverImg: z.string().url({ message: 'Invalid URL' }).optional(),
-    isDeleted: z.boolean().optional().optional(),
-  });
+    })
+    .optional(),
+  bloodGroup: z
+    .string()
+    .min(1, { message: 'Blood group is required' })
+    .optional(),
+  designation: z
+    .string()
+    .min(1, { message: 'Designation is required' })
+    .optional(),
+  bio: z
+    .string()
+    .min(20, { message: 'Bio should be at least 20 characters' })
+    .optional(),
+  grade: z
+    .array(z.string())
+    .min(1, { message: 'Select at least one grade' })
+    .optional(),
+  subjects: z
+    .array(z.string())
+    .min(1, { message: 'Select at least one subject' })
+    .optional(),
+  district: z.string().min(1, { message: 'District is required' }).optional(),
+  hourlyRate: z
+    .number()
+    .min(0, { message: 'Hourly rate must be positive' })
+    .optional(),
+  availability: z.boolean().optional(),
+  presentAddress: z
+    .string()
+    .min(1, { message: 'Present address is required' })
+    .optional(),
+  permanentAddress: z
+    .string()
+    .min(1, { message: 'Permanent address is required' })
+    .optional(),
+  profileImg: z.string().url({ message: 'Invalid URL' }).optional(),
+  coverImg: z.string().url({ message: 'Invalid URL' }).optional(),
+  isDeleted: z.boolean().optional().optional(),
+});
 
 const grades = [
   { id: 'Preschool', label: 'Preschool' },
@@ -160,30 +186,30 @@ const districts = [
   'thakurgaon',
 ];
 
-export function UpdateTeacherForm({teacher}) {
+export function UpdateTeacherForm({ teacher }: { teacher: any }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof UpdateTeacherFormSchema>>({
     resolver: zodResolver(UpdateTeacherFormSchema),
     defaultValues: {
-        name: teacher?.name,
-        gender: teacher?.gender,
-        dateOfBirth: teacher?.dateOfBirth,
-        contactNo: teacher?.contactNo,
-        emergencyContactNo: teacher?.emergencyContactNo,
-        bloodGroup: teacher?.bloodGroup,
-        designation: teacher?.designation,
-        bio: teacher?.bio,
-        grade: teacher?.grade,
-        subjects: teacher?.subjects,
-        district: teacher?.district,
-        hourlyRate: teacher?.hourlyRate,
-        availability: teacher?.availability,
-        presentAddress: teacher?.presentAddress,
-        permanentAddress: teacher?.permanentAddress,
-        profileImg: teacher?.profileImg,
-        coverImg: teacher?.coverImg,
-        isDeleted: teacher?.isDeleted,
+      name: teacher?.name,
+      gender: teacher?.gender,
+      dateOfBirth: teacher?.dateOfBirth,
+      contactNo: teacher?.contactNo,
+      emergencyContactNo: teacher?.emergencyContactNo,
+      bloodGroup: teacher?.bloodGroup,
+      designation: teacher?.designation,
+      bio: teacher?.bio,
+      grade: teacher?.grade,
+      subjects: teacher?.subjects,
+      district: teacher?.district,
+      hourlyRate: teacher?.hourlyRate,
+      availability: teacher?.availability,
+      presentAddress: teacher?.presentAddress,
+      permanentAddress: teacher?.permanentAddress,
+      profileImg: teacher?.profileImg,
+      coverImg: teacher?.coverImg,
+      isDeleted: teacher?.isDeleted,
     },
   });
 
@@ -192,7 +218,7 @@ export function UpdateTeacherForm({teacher}) {
     console.log('Form submitted with values:', values);
     // Here you would typically send the data to your API
     try {
-      const res = await updateTeacher(teacher._id,values);
+      const res = await updateTeacher(teacher._id, values);
       console.log('response from register teacher', res);
       if (res.success) {
         setIsSubmitting(false);
@@ -207,10 +233,7 @@ export function UpdateTeacherForm({teacher}) {
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white rounded-xl shadow-xl">
       <div className="text-center mb-8">
-        
-        <h2 className="text-2xl font-semibold text-gray-800">
-          Update Teacher
-        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800">Update Teacher</h2>
       </div>
 
       <Form {...form}>
@@ -242,7 +265,7 @@ export function UpdateTeacherForm({teacher}) {
               />
 
               {/* Email */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
@@ -259,7 +282,7 @@ export function UpdateTeacherForm({teacher}) {
                     <FormMessage className="text-xs" />
                   </FormItem>
                 )}
-              />
+              /> */}
 
               {/* Gender */}
               <FormField
@@ -553,13 +576,13 @@ export function UpdateTeacherForm({teacher}) {
                                     onCheckedChange={(checked: boolean) => {
                                       return checked
                                         ? field.onChange([
-                                            ...field.value??[],
+                                            ...(field.value ?? []),
                                             grade.id,
                                           ])
                                         : field.onChange(
                                             field.value?.filter(
-                                              (value) => value !== grade.id,
-                                            ),
+                                              (value) => value !== grade.id
+                                            )
                                           );
                                     }}
                                     className="text-indigo-600 focus:ring-indigo-500"
@@ -606,13 +629,13 @@ export function UpdateTeacherForm({teacher}) {
                                     onCheckedChange={(checked: boolean) => {
                                       return checked
                                         ? field.onChange([
-                                            ...field.value??[],
+                                            ...(field.value ?? []),
                                             subject.id,
                                           ])
                                         : field.onChange(
                                             field.value?.filter(
-                                              (value) => value !== subject.id,
-                                            ),
+                                              (value) => value !== subject.id
+                                            )
                                           );
                                     }}
                                     className="text-indigo-600 focus:ring-indigo-500"
