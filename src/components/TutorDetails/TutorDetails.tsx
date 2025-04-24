@@ -68,7 +68,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
     day: 'numeric',
   });
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl bg-white text-black">
       {/* Header with back button */}
       <div className="mb-6">
         <Button variant="link" className="px-0" onClick={() => router.back()}>
@@ -78,7 +78,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
       </div>
 
       {/* Main Profile Card */}
-      <Card>
+      <Card className='bg-white text-black'>
         {/* Cover Image */}
         <div className=" md:h-[400px] bg-gray-200 relative">
           <img
@@ -229,7 +229,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Subjects Taught */}
-              <Card>
+              <Card className='bg-white text-black'>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <BookOpen className="text-blue-500 mr-2 h-5 w-5" />
@@ -265,7 +265,7 @@ export default function TutorProfile({ tutor }: { tutor: TTutors }) {
               </Card>
 
               {/* Reviews Section */}
-              <Card>
+              <Card className='bg-white text-black'>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Star className="text-yellow-500 mr-2 h-5 w-5 fill-yellow-500" />

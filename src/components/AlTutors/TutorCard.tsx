@@ -1,9 +1,9 @@
 // Removed duplicate import
-import { Badge } from "@/components/ui/badge";
-import { Heart } from "lucide-react";
-import Link from "next/link";
+import { Badge } from '@/components/ui/badge';
+import { Heart } from 'lucide-react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
 export interface TTutors {
   grade: any[];
@@ -68,10 +68,14 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+    <div className="bg-white text-black rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       <div className="relative">
         <div className={`h-48`}>
-          <img src={tutor.coverImg} className="h-48 w-full object-cover" alt="" />
+          <img
+            src={tutor.coverImg}
+            className="h-48 w-full object-cover"
+            alt=""
+          />
         </div>
         <div className="absolute -bottom-8 left-4">
           <Avatar className="h-16 w-16 border-4 border-white">
@@ -90,11 +94,9 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
           >
             <Heart
               className={`h-4 w-4 ${
-
                 tutor.averageRating > 4
-                  ? "fill-red-500 text-red-500"
-                  : "text-gray-400"
-              
+                  ? 'fill-red-500 text-red-500'
+                  : 'text-gray-400'
               }`}
             />
           </Button>
@@ -104,15 +106,13 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
         <div className="flex justify-between items-start">
           <div>
             <h3 className="font-bold text-lg">{tutor.name}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              {tutor.bio}
+            <p className="text-sm text-gray-700">
+              {tutor.bio?.split(' ').slice(0, 10).join(' ')}
+              {tutor.bio?.split(' ').length > 10 && '...'}
             </p>
           </div>
           {tutor.availability && (
-            <Badge
-              variant="secondary"
-              className="bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-200"
-            >
+            <Badge variant="secondary" className="bg-green-50 text-green-700 ">
               {tutor.availability}
             </Badge>
           )}
@@ -120,7 +120,7 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
 
         <div className="flex items-center mt-2">
           <div className="flex text-yellow-400">{renderStars()}</div>
-          <span className="text-sm text-gray-600 dark:text-gray-300 ml-1">
+          <span className="text-sm text-gray-700 ml-1">
             {tutor.averageRating?.toFixed(1)} ({tutor.reviews.length} reviews)
           </span>
         </div>
@@ -128,29 +128,35 @@ export default function TutorCard({ tutor }: { tutor: TTutors }) {
         <div className="mt-3">
           <div className="flex flex-wrap gap-1">
             {tutor.subjects?.map((subject, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
+              <Badge
+                key={index}
+                variant="outline"
+                className="text-xs bg-white text-gray-700 dark:border-gray-600"
+              >
                 {subject}
               </Badge>
             ))}
           </div>
         </div>
 
-        <p className="text-sm text-gray-600 dark:text-gray-300 mt-3 line-clamp-2">
+        <p className="text-sm text-gray-600  mt-3 line-clamp-2">
           {/* {tutor.} */}
         </p>
 
         <div className="flex justify-between items-center mt-4">
           <div>
-            <span className="font-bold text-primary">
+            <span className="font-bold  text-gray-700">
               BDT {tutor.hourlyRate}/hr
             </span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 ml-1 capitalize">
+            <span className="text-xs text-gray-700  ml-1 capitalize">
               {tutor.district}
             </span>
           </div>
           <Link href={`/browseTutor/${tutor._id}`}>
             {' '}
-            <Button size="sm">View Profile</Button>
+            <Button className="bg-gray-900 text-white" size="sm">
+              View Profile
+            </Button>
           </Link>
         </div>
       </div>

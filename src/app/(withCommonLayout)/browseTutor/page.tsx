@@ -29,7 +29,7 @@ export default async function TutorsPage({
   const { data: tutors } = await getAllTutors(query);
   console.log(tutors);
   return (
-    <div className="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <div className="bg-gray-50 text-gray-800 ">
       {/* Hero Section */}
       <AllTutorHeroSection></AllTutorHeroSection>
 
@@ -44,12 +44,12 @@ export default async function TutorsPage({
           {/* Main Content Area */}
           <div className="md:w-3/4 lg:w-4/5">
             {/* Sort and View Options */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
+            <div className="bg-white text-black rounded-lg shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
               <div className="mb-4 sm:mb-0">
                 {/* <span className="text-sm text-gray-600 dark:text-gray-300"> */}
                 {/* Showing {tutors.length} tutors */}
                 {/* </span> */}
-                <span className="text-sm text-gray-600 dark:text-gray-300">
+                <span className="text-sm text-gray-600">
                   Showing {tutors?.length || 0} tutors
                 </span>
               </div>

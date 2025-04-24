@@ -10,7 +10,7 @@ const ReviewCard = ({ review }: { review: any }) => {
   });
 
   return (
-    <Card className="border rounded-2xl shadow-sm">
+    <Card className="border rounded-2xl shadow-sm bg-white text-black">
       <CardContent className="p-4 space-y-2">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2 text-yellow-400">
