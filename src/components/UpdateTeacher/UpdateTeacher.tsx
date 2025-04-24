@@ -265,7 +265,7 @@ export function UpdateTeacherForm({ teacher }: { teacher: any }) {
               />
 
               {/* Email */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
@@ -282,7 +282,7 @@ export function UpdateTeacherForm({ teacher }: { teacher: any }) {
                     <FormMessage className="text-xs" />
                   </FormItem>
                 )}
-              />
+              /> */}
 
               {/* Gender */}
               <FormField

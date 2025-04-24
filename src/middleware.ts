@@ -54,7 +54,7 @@ export const middleware = async (request: NextRequest) => {
 
 export const config = {
   matcher: [
-    '/browseTutor/:id*',
+    // '/browseTutor/:id*',
     '/login-user',
     '/register-student',
     '/register-teacher',

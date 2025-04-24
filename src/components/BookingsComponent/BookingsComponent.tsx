@@ -88,7 +88,7 @@ export function BookingComponent({
       price: calculatePrice(Number(duration)),
     };
 
-    console.log('Booking Data:', bookingData);
+    // console.log('Booking Data:', bookingData);
     // Here you would typically send this data to your API
     try {
       const res = await createBookings(bookingData);
@@ -133,7 +133,7 @@ export function BookingComponent({
   };
 
   return (
-    <Card>
+    <Card className="bg-white text-black">
       <CardContent className="p-2 md:p-6">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Calendar */}
@@ -168,7 +168,7 @@ export function BookingComponent({
               ))}
             </div>
 
-            <Card>
+            <Card className="bg-white text-black">
               <CardHeader>
                 <CardTitle>Session Details</CardTitle>
               </CardHeader>

@@ -94,12 +94,12 @@ export default function Filters() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 sticky top-4">
+    <div className="bg-white  rounded-lg shadow-sm p-4 sticky top-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-lg">Filters</h2>
         <Button
           variant="link"
-          className="text-primary hover:underline p-0 h-auto"
+          className="text-gray-600 hover:underline p-0 h-auto"
           onClick={() => router.push(`${pathname}`, { scroll: false })}
         >
           Reset All
@@ -225,7 +225,7 @@ export default function Filters() {
 
       {/* Console Log Button */}
       <Button
-        className="mt-4 w-full"
+        className="mt-4 w-full bg-gray-900 text-white hover:bg-gray-700"
         onClick={() => console.log(searchParams.toString())}
       >
         Apply Filters

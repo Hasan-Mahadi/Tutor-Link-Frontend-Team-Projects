@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from '@/components/ui/button';
@@ -15,13 +15,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import React, { useEffect, useState } from 'react';
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-
-
-
-
-
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const subjects = [
   'Physics',
@@ -52,26 +46,25 @@ const AllTutorHeroSection = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-
   //this useEffect for animation
-   useEffect(() => {
-   AOS.init({
-     duration: 800,
-     easing: 'ease-in-out',
-     once: false,
-     mirror: true,
-   });
- }, []);
-
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: true,
+    });
+  }, []);
 
   const handleSearchQuery = (
     query: string,
-    value: string | number | boolean,
+    value: string | number | boolean
   ) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(query, value.toString());
-    router.push(`${pathname}?${params.toString()}`,
-    //  { scroll: false }
+    router.push(
+      `${pathname}?${params.toString()}`
+      //  { scroll: false }
     );
   };
 
@@ -88,20 +81,28 @@ const AllTutorHeroSection = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-600 to-blue-800 text-white py-12" data-aos="fade-down">
+    <div
+      className="bg-gradient-to-r from-indigo-600 to-blue-800 text-white py-12"
+      data-aos="fade-down"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center" 
->
-          <h1 className="text-5xl font-bold mb-4"data-aos="zoom-in" data-aos-delay="200">
+        <div className="text-center">
+          <h1
+            className="text-5xl font-bold mb-4"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
             Find the Right Tutor for You
           </h1>
-          <p className="text-xl mb-8"data-aos="fade-up"
-data-aos-delay="400">
+          <p className="text-xl mb-8" data-aos="fade-up" data-aos-delay="400">
             Connect with expert tutors in any subject, online or in-person
           </p>
           <div className="max-w-xl mx-auto">
-            <div className="flex shadow-lg rounded-lg overflow-hidden"data-aos="fade-up"
-data-aos-delay="400">
+            <div
+              className="flex shadow-lg rounded-lg overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <Input
                 type="text"
                 value={nameQuery}
@@ -110,7 +111,10 @@ data-aos-delay="400">
                 placeholder="Search by tutor name"
                 className="flex-grow bg-white px-4 py-3 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-none border-0 text-gray-800"
               />
-              <Button className="px-6 py-3 rounded-none" onClick={handleSearch}>
+              <Button
+                className="px-6 py-3 rounded-none bg-gray-900 text-white"
+                onClick={handleSearch}
+              >
                 <i className="fas fa-search mr-2"></i> Search
               </Button>
             </div>
